@@ -1,0 +1,30 @@
+@startuml
+
+
+node "Web Browser" as webBrowser <<device>> {
+    component "Patient UI" as patientUI <<user interface>>
+}
+
+node "Laptop" as laptop <<device>> {
+    component "Medical File Management" as medicalFileManagement <<user interface>>
+}
+node "electronic card reader" as electronicCardReader <<device>>
+
+node "RAMQ system" as ramq <<system>> {
+    component "RAMQ UI" as ramqUI <<software>>
+}
+
+node "Backend" as backend <<software>> {
+    component "code" as code <<software>>
+    component "database" as database <<database>>
+}
+
+laptop -down- electronicCardReader
+
+backend -down- webBrowser
+backend -down- laptop
+
+backend -down- ramq
+
+
+@enduml
