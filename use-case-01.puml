@@ -1,0 +1,24 @@
+@startuml use-case
+
+left to right direction
+skinparam packageStyle rect
+actor "User" as user <<abstract>>
+actor "Patient" as patient
+actor "Doctor" as doctor
+actor "Health professional" as health_professional
+actor "RAMQ" as ramq
+rectangle "Use Case" {
+  user <|-- patient
+  user <|-- doctor
+  user <|-- health_professional
+  user -- (Access Patient File)
+  doctor -- (Modify Patient File)
+  patient -- (Modify Coordinates in File)
+  (Modify Coordinates in File) .> (Modify Patient File) : <<extend>>
+  ramq -- (Create Patient File)
+  (Archive Modification) .> (Modify Patient File) : <<include>>
+  ramq -- (Reconstruct File from Modification)
+  ramq -- (Reconstruct File at Date)
+}
+
+@enduml
