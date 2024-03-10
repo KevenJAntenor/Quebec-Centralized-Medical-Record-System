@@ -1,0 +1,16 @@
+image: debian:latest
+
+stages:
+  - build
+
+before_script:
+  - apt-get update -qq && apt-get install -y make plantuml
+
+build:
+  stage: build
+  script:
+    - cd plantUml
+    - make
+  artifacts:
+    paths:
+      - plantUml/
