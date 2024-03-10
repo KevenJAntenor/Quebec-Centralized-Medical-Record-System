@@ -1,0 +1,40 @@
+@startuml system-architecture
+
+package "Presentation Layer" {
+    [Patient Interface]
+    [Medical Records Management Software]
+}
+
+package "Business Layer" {
+    [PatientController]
+    [MedicalRecordController]
+    [AuthenticationController]
+    [Business Logic]
+}
+
+package "Persistence Layer" {
+    [MedicalRecordService]
+    [PatientService]
+    [Database Access]
+}
+
+database "Database Layer" {
+    folder "RAMQ Database" {
+        [Patients Table]
+        [MedicalRecords Table]
+    }
+}
+
+[Patient Interface] --> [PatientController]
+[Patient Interface] --> [MedicalRecordController]
+[PatientController] --> [Business Logic]
+[MedicalRecordController] --> [Business Logic]
+[AuthenticationController] --> [Business Logic]
+[Business Logic] --> [MedicalRecordService]
+[Business Logic] --> [PatientService]
+[MedicalRecordService] --> [Database Access]
+[PatientService] --> [Database Access]
+[Database Access] --> [Patients Table]
+[Database Access] --> [MedicalRecords Table]
+
+@enduml
