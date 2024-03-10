@@ -1,0 +1,38 @@
+@startuml system-architecture
+
+package "Adapter Layer" {
+    [Database Adapter]
+    [User Interface Adapter]
+    [Doctor Interface Adapter]
+}
+
+package "Domain Layer" {
+    [Patient Port]
+    [MedicalRecord Port]
+    [Doctor Port]
+    [Database Port]
+    [Business Logic]
+}
+
+[User Interface] --> [User Interface Adapter]
+[Doctor Interface] --> [Doctor Interface Adapter]
+
+database "Database Layer" {
+    folder "RAMQ Database" {
+        [Patients Table]
+        [MedicalRecords Table]
+    }
+}
+
+[User Interface Adapter] --> [Patient Port]
+[User Interface Adapter] --> [MedicalRecord Port]
+[Doctor Interface Adapter] --> [Doctor Port]
+[Database Adapter] --> [Database Port]
+[Patient Port] --> [Business Logic]
+[MedicalRecord Port] --> [Business Logic]
+[Doctor Port] --> [Business Logic]
+[Business Logic] --> [Database Port]
+[Database Port] --> [Database Adapter]
+[Database Adapter] --> [Database Layer]
+
+@enduml

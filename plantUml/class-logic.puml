@@ -1,0 +1,69 @@
+@startuml
+
+package "logic"{
+
+class Patient {
+  -lastName: String
+  -firstName: String
+  -dateOfBirth: Date
+  -gender: String
+  -parents: String
+  -cityOfBirth: String
+  -healthInsuranceNumber: String
+}
+
+class Coordinates {
+  -adress: String
+  -phones: List<String>
+  -email: String
+}
+
+class MedicalHistory {
+  -diagnostic: String
+  -treatement: String
+  -treatingDoctor: Doctor
+  -beginningOfIllness: Date
+  -endOfIllness: Date
+}
+
+class MedicalVisit {
+  -establishement: String
+  -doctor: Doctor
+  -dateOfVisit: Date
+  -diagnostic: String
+  -treatement: String
+  -summary: String
+  -notes: List<String>
+}
+
+class MedicalFile {
+  -id: String
+}
+
+class Doctor {
+  -firstName: String
+  -lastName: String
+}
+
+class Modification {
+  -dateOfModification: Date
+  -author: Medecin
+  -ModifiedFields: List<String>
+  -oldValues: List<String>
+  -newValues: List<String>
+}
+}
+
+' medical file has a patient and a list of medical visits and medical history
+Patient "1" *-- "1" Coordinates
+
+MedicalFile "1" *-- "1" Patient
+MedicalFile "1" *-- "0..*" MedicalVisit
+MedicalFile "1" *-- "0..*" MedicalHistory
+
+MedicalVisit "1" o-- "1" Doctor
+MedicalHistory "1" o-- "1" Doctor
+Modification "1" o-- "1" Doctor
+
+
+@enduml

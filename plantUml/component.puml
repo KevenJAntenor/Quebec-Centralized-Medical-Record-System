@@ -1,0 +1,5 @@
+@startuml
+
+component "Empty" as empty
+
+@enduml
