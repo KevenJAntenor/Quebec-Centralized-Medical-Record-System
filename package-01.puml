@@ -1,0 +1,74 @@
+@startuml
+
+left to right direction
+
+package "Adapter" {
+  [Svelte Patient Adapter]
+  [Svelte Doctor Adapter]
+  [Svelte RAMQ Adapter]
+  [SQLite3 Patient Adapter]
+  [SQLite3 File Adapter]
+  [SQLite3 Archive Adapter]
+}
+
+package "Domain" {
+  package "Logic" {
+    [Create Patient]
+    [Access Patient]
+    [Modify Patient]
+    [Modify Coordinates]
+    [Archive Modification]
+    [Reconstruct From Modification]
+    [Reconstruct From Date]
+  }
+
+  package "Ports" {
+    [Interface Patient Port]
+    [Interface Doctor Port]
+    [Interface RAMQ Port]
+    [Database Patient Port]
+    [Database File Port]
+    [Database Archive Port]
+  }
+}
+
+[Create Patient] - [Interface Patient Port]
+[Create Patient] - [Database Patient Port]
+[Interface Patient Port] - [Svelte Patient Adapter]
+[Database Patient Port] - [SQLite3 Patient Adapter]
+
+[Access Patient] - [Interface Patient Port]
+[Access Patient] - [Database Patient Port]
+[Interface Patient Port] - [Svelte Patient Adapter]
+[Database Patient Port] - [SQLite3 Patient Adapter]
+
+[Modify Patient] - [Interface Patient Port]
+[Modify Patient] - [Database Patient Port]
+[Interface Patient Port] - [Svelte Patient Adapter]
+[Database Patient Port] - [SQLite3 Patient Adapter]
+
+[Modify Coordinates] - [Interface Patient Port]
+[Modify Coordinates] - [Database Patient Port]
+[Interface Patient Port] - [Svelte Patient Adapter]
+[Database Patient Port] - [SQLite3 Patient Adapter]
+
+[Modify Patient] - [Archive Modification]
+[Archive Modification] - [Database Archive Port]
+[Database Archive Port] - [SQLite3 Archive Adapter]
+
+[Modify Coordinates] - [Archive Modification]
+[Archive Modification] - [Database Archive Port]
+[Database Archive Port] - [SQLite3 Archive Adapter]
+
+[Svelte RAMQ Adapter] - [Interface RAMQ Port]
+[Interface RAMQ Port] - [Reconstruct From Modification]
+[Reconstruct From Modification] - [Database Archive Port]
+[Database Archive Port] - [SQLite3 Archive Adapter]
+
+[Svelte RAMQ Adapter] - [Interface RAMQ Port]
+[Interface RAMQ Port] - [Reconstruct From Date]
+[Reconstruct From Date] - [Database Archive Port]
+[Database Archive Port] - [SQLite3 Archive Adapter]
+
+
+@enduml
