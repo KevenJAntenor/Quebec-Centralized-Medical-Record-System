@@ -1,22 +1,21 @@
 @startuml system-architecture
 
-package "Presentation Layer" {
-    [Patient Interface]
-    [Medical Records Management Software]
+package "Adapter Layer" {
+    [Database Adapter]
+    [User Interface Adapter]
+    [Doctor Interface Adapter]
 }
 
-package "Business Layer" {
-    [PatientController]
-    [MedicalRecordController]
-    [AuthenticationController]
+package "Domain Layer" {
+    [Patient Port]
+    [MedicalRecord Port]
+    [Doctor Port]
+    [Database Port]
     [Business Logic]
 }
 
-package "Persistence Layer" {
-    [MedicalRecordService]
-    [PatientService]
-    [Database Access]
-}
+[User Interface] --> [User Interface Adapter]
+[Doctor Interface] --> [Doctor Interface Adapter]
 
 database "Database Layer" {
     folder "RAMQ Database" {
@@ -25,16 +24,15 @@ database "Database Layer" {
     }
 }
 
-[Patient Interface] --> [PatientController]
-[Patient Interface] --> [MedicalRecordController]
-[PatientController] --> [Business Logic]
-[MedicalRecordController] --> [Business Logic]
-[AuthenticationController] --> [Business Logic]
-[Business Logic] --> [MedicalRecordService]
-[Business Logic] --> [PatientService]
-[MedicalRecordService] --> [Database Access]
-[PatientService] --> [Database Access]
-[Database Access] --> [Patients Table]
-[Database Access] --> [MedicalRecords Table]
+[User Interface Adapter] --> [Patient Port]
+[User Interface Adapter] --> [MedicalRecord Port]
+[Doctor Interface Adapter] --> [Doctor Port]
+[Database Adapter] --> [Database Port]
+[Patient Port] --> [Business Logic]
+[MedicalRecord Port] --> [Business Logic]
+[Doctor Port] --> [Business Logic]
+[Business Logic] --> [Database Port]
+[Database Port] --> [Database Adapter]
+[Database Adapter] --> [Database Layer]
 
 @enduml
