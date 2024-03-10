@@ -12,7 +12,7 @@
 
 **Disponibilités:** Les lundis, de 9h à 18h
 
-**Forces, Faiblesses et Compétences Techniques:** Fort en Java, faible en Python
+**Forces, Faiblesses et Compétences Techniques:** Fort en Java et Backend
 
 ---
 
