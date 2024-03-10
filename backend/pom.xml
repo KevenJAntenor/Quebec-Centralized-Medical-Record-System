@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>equipe9-inf5153-h2024-projet</artifactId>
+    <artifactId>backend</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
