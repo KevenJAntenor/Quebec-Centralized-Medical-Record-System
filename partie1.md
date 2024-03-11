@@ -60,6 +60,29 @@ This class diagram represents only the domain model of the application. It does 
 
 TODO: Add sequence diagrams for each use case
 
+createMedicalFile
+![Sequence Diagram](./plantUml/createMedicalFile.png)
+
+accessMedicalFile
+![Sequence Diagram](./plantUml/accessMedicalFile.png)
+
+modifyCoordinates
+![Sequence Diagram](./plantUml/modifyCoordinates.png)
+
+modifyMedicalFile and archiveModification
+![Sequence Diagram](./plantUml/modifyMedicalFile.png)
+
+HTTP Codes are not included in the reconstruction sequence diagrams
+
+reconstructMedicalFileFromModification
+![Sequence Diagram](./plantUml/reconstructMedicalFileFromModification.png)
+
+reconstructMedicalFileFromDate
+![Sequence Diagram](./plantUml/reconstructMedicalFileFromDate.png)
+
+getModifications
+![Sequence Diagram](./plantUml/getModifications.png)
+
 ## Package Diagrams
 <!-- (Insert package diagrams here and indicate the classes contained in the packages) -->
 
