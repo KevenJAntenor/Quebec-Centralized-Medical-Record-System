@@ -1,0 +1,30 @@
+@startuml modifyMedicalFile
+
+participant "Doctor" as Doctor
+participant "System" as System
+participant "Database" as Database
+participant "Archive" as Archive
+
+Doctor -> System: Send request to modify Medical File
+activate System
+System -> System: Validate Doctor's credentials
+alt Doctor's credentials are valid
+    System -> System: Validate modifications
+    alt Modifications are valid
+        System -> Database: Modify Medical File
+        activate Database
+        Database --> System: Confirm modification of Medical File
+        System -> Archive: Archive modification
+        activate Archive
+        Archive --> System: Confirm archiving
+        deactivate Archive
+        System --> Doctor: Send "200 OK" response
+    else Modifications are not valid
+        System --> Doctor: Send "400 Bad Request" response
+    end
+else Doctor's credentials are not valid
+    System --> Doctor: Send "403 Forbidden" response
+end
+deactivate System
+
+@enduml

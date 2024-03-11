@@ -1,6 +1,21 @@
-@startuml
+@startuml createMedicalFile
 
-participant "User" as U
+participant "RAMQ" as RAMQ
+participant "System" as System
+participant "Database" as Database
 
+RAMQ -> System: Send request to create Medical File
+activate System
+System -> System: Validate Medical File
+alt File is valid
+    System -> Database: Create new Medical File
+    activate Database
+    Database --> System: Confirm creation of Medical File
+    deactivate Database
+    System --> RAMQ: Send "201" confirmation code
+else File is not valid
+    System --> RAMQ: Send "400 Bad Request" response
+end
+deactivate System
 
 @enduml

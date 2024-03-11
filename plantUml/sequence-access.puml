@@ -1,0 +1,25 @@
+@startuml accessMedicalFile
+
+participant "User" as User
+participant "System" as System
+participant "Database" as Database
+
+User -> System: Send request to access Medical File
+activate System
+alt File code is valid
+    System -> System: Validate File code
+    System -> Database: Retrieve Medical File
+    activate Database
+    alt File is available
+        Database --> System: Return Medical File
+        System --> User: Send Medical File with "200 OK" response
+    else File is not available
+        System --> User: Send "404 Not Found" response
+    end
+    deactivate Database
+else File code is not valid
+    System --> User: Send "400 Bad Request" response
+end
+deactivate System
+
+@enduml
