@@ -11,14 +11,15 @@ rectangle "Use Case" {
   user <|-- patient
   user <|-- doctor
   user <|-- health_professional
-  user -- (Access Patient File)
-  doctor -- (Modify Patient File)
+  user -- (Access Medical File)
+  doctor -- (Modify Medical File)
   patient -- (Modify Coordinates in File)
-  (Modify Coordinates in File) .> (Modify Patient File) : <<extend>>
-  ramq -- (Create Patient File)
-  (Archive Modification) .> (Modify Patient File) : <<include>>
+  (Modify Coordinates in File) .> (Modify Medical File) : <<extend>>
+  ramq -- (Create Medical File)
+  (Archive Modification) .> (Modify Medical File) : <<include>>
   ramq -- (Reconstruct File from Modification)
-  ramq -- (Reconstruct File at Date)
+  ramq -- (Reconstruct File from Date)
+  ramq -- (Retrieve List of Modifications)
 }
 
 @enduml
