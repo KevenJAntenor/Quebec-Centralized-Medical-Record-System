@@ -2,32 +2,35 @@
 
 left to right direction
 
-package "Adapter" {
-  [Svelte Patient Adapter]
-  [Svelte Doctor Adapter]
-  [Svelte RAMQ Adapter]
-  [SQLite3 Medical File Adapter]
-  [SQLite3 Archive Adapter]
-}
+package "com" {
+  package "santeConnect"{
+    package "Adapter" {
+      [Svelte Patient Adapter]
+      [Svelte Doctor Adapter]
+      [Svelte RAMQ Adapter]
+      [SQLite3 Medical File Adapter]
+      [SQLite3 Archive Adapter]
+    }
 
-package "Domain" {
-  package "Logic" {
-    [Create Medical File]
-    [Access Medical File]
-    [Modify Medical File]
-    [Modify Coordinates]
-    [Archive Modification]
-    [Reconstruct From Modification]
-    [Reconstruct From Date]
+    package "Domain" {
+      package "Logic" {
+        [Create Medical File]
+        [Access Medical File]
+        [Modify Medical File]
+        [Modify Coordinates]
+        [Archive Modification]
+        [Reconstruct From Modification]
+        [Reconstruct From Date]
+      }
+
+      package "Port" {
+        [Interface Patient Port]
+        [Interface Doctor Port]
+        [Interface RAMQ Port]
+        [Database Medical File Port]
+        [Database Archive Port]
+      }
+    }
   }
-
-  package "Port" {
-    [Interface Patient Port]
-    [Interface Doctor Port]
-    [Interface RAMQ Port]
-    [Database Medical File Port]
-    [Database Archive Port]
-  }
 }
-
 @enduml

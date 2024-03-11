@@ -1,0 +1,17 @@
+@startuml getModifications
+
+participant "RAMQ" as RAMQ
+participant "System" as System
+participant "Archive" as Archive
+
+RAMQ -> System: Send request to get list of modifications for a certain Medical File
+activate System
+System -> Archive: Retrieve list of modifications for a certain Medical File
+activate Archive
+Archive --> System: Return list of modifications
+deactivate Archive
+System --> RAMQ: Send list of modifications with "200 OK" response
+
+deactivate System
+
+@enduml

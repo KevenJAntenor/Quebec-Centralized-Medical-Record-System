@@ -20,9 +20,19 @@ Technologies for backend are:
 
 Java dependencies (managed by Maven) are: INCOMPLETE
 
-- gson (for JSON serialization and deserialization)
 - spring-boot (for REST API)
 - junit (for testing)
+- JWT (for JSON Web Tokens)
+
+http request codes : NOT COMPLETE 
+
+- 200 : OK (for GET, PUT, DELETE)
+- 201 : Created (for POST)
+
+- 400 : Bad Request (when the request is not valid by client)
+- 403 : Forbidden (when the client is not authorized to access the resource)
+- 404 : Not Found (when the resource is not found)
+
 
 ## Frontend
 

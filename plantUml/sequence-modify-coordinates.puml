@@ -1,0 +1,26 @@
+@startuml modifyCoordinates
+
+participant "Patient" as Patient
+participant "System" as System
+participant "Database" as Database
+
+Patient -> System: Send request to modify coordinates
+activate System
+System -> System: Validate Patient's credentials
+alt Patient's credentials are valid
+    System -> System: Validate new coordinates
+    alt New coordinates are valid
+        System -> Database: Update Patient's coordinates
+        activate Database
+        Database --> System: Confirm update of coordinates
+        deactivate Database
+        System --> Patient: Send "200 OK" response
+    else New coordinates are not valid
+        System --> Patient: Send "400 Bad Request" response
+    end
+else Patient's credentials are not valid
+    System --> Patient: Send "403 Forbidden" response
+end
+deactivate System
+
+@enduml
