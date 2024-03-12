@@ -35,8 +35,8 @@ together{
     -diagnostic: String
     -treatement: String
     -treatingDoctor: Doctor
-    -beginningOfIllness: Date
-    -endOfIllness: Date
+    -beginningOfIllness: Optional<Date>
+    -endOfIllness: Optional<Date>
   }
 
   class MedicalVisit {
@@ -44,10 +44,10 @@ together{
     -establishement: String
     -doctor: Doctor
     -dateOfVisit: Date
-    -diagnostic: String
-    -treatement: String
+    -diagnostic: Optional<String>
+    -treatement: Optional<String>
     -summary: String
-    -notes: List<String>
+    -notes: String
   }
 }
 
