@@ -1,25 +1,26 @@
-@startuml modifyCoordinates
+@startuml
 
 participant "Patient" as Patient
 participant "System" as System
 participant "Database" as Database
 
-Patient -> System: Send request to modify coordinates
+Patient -> System: modifyCoordinates()
 activate System
-System -> System: Validate Patient's credentials
+System -> System: validatePatientCredentials(credentials)
 alt Patient's credentials are valid
-    System -> System: Validate new coordinates
-    alt New coordinates are valid
-        System -> Database: Update Patient's coordinates
+    System -> System: validateNewCoordites(newCoordinates)
+    alt newCoordinates are valid
+        System -> Database: updateUserCoordinates(newCoordinates)
         activate Database
-        Database --> System: Confirm update of coordinates
+        Database --> Database: patchUser(newCoordinates)
+        Database --> System: User
         deactivate Database
-        System --> Patient: Send "200 OK" response
+        System --> Patient: makeResponse(User, "200 OK")
     else New coordinates are not valid
-        System --> Patient: Send "400 Bad Request" response
+        System --> Patient: makeResponse("400 Bad Request")
     end
 else Patient's credentials are not valid
-    System --> Patient: Send "403 Forbidden" response
+    System --> Patient: makeResponse("403 Forbidden")
 end
 deactivate System
 
