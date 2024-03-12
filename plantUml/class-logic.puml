@@ -22,9 +22,8 @@ together{
 
 
   class Coordinates {
-    -adress: String
+    -address: String
     -phones: List<String>
-    -email: String
   }
 
   class MedicalFile {
