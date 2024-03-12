@@ -75,11 +75,11 @@ MedicalFile "1" *-- "1" Patient
 MedicalFile "1" *-- "0..*" MedicalVisit
 MedicalFile "1" *-- "0..*" MedicalHistory
 
-MedicalVisit "1" o-- "1" Doctor
-MedicalHistory "1" o-- "1" Doctor
-Modification "1" o-- "1" Doctor
+MedicalVisit "0..*" o-- "1" Doctor
+MedicalHistory "0..*" o-- "1" Doctor
+Modification "0..*" o-- "1" Doctor
 
-MedicalFile "1" *-- "0..*" Modification
+MedicalFile "1" -- "0..*" Modification
 
 
 @enduml
