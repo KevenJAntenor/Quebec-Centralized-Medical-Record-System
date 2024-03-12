@@ -3,3 +3,6 @@
 
 # ignore IntelliJ folder
 .idea/
+
+# ignore target folder
+target/

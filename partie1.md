@@ -90,7 +90,8 @@ getModifications
 
 
 ## Component Diagram
-(Insert component diagram here)
+<!-- (Insert component diagram here) -->
+![Component Diagram](./plantUml/component.png)
 
 ## Deployment Diagram
 A ameliorer
