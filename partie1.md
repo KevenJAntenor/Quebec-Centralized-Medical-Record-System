@@ -1,104 +1,91 @@
 # SantéConnect
 
+## Présentation
+
+SantéConnect est un système de gestion de dossiers médicaux comprenant un portail web et mobile pour les patients, une application installée pour les médecins et les professionnels de la santé et un portail API pour la RAMQ.
+L'application est conçue pour fournir un dossier médical centralisé aux patients du Québec.
+Les dossiers médicaux sont créés par la RAMQ, et sont accessibles par le patient et le médecin.
+La RAMQ envoie une demande au système pour créer un dossier médical pour un patient qui a été enregistré dans le système de la RAMQ.
+Les médecins peuvent ajouter des visites médicales, des traitements médicaux et modifier toute information nécessaire dans le dossier médical.
+Les patients peuvent consulter leur dossier médical et mettre à jour leurs coordonnées si nécessaire.
+La RAMQ peut également consulter les modifications apportées par le médecin et le patient, et reconstituer le dossier médical si nécessaire.
+
 ## Table of Contents
 
-1. [Architectural Design](#architectural-design)
-2. [Use Case Diagrams](#use-case-diagrams)
-3. [Class Diagrams](#class-diagrams)
-4. [Sequence Diagrams](#sequence-diagrams)
-5. [Package Diagrams](#package-diagrams)
-6. [Component Diagram](#component-diagram)
-7. [Deployment Diagram](#deployment-diagram)
-8. [GRASP Patterns Justification](#grasp-patterns-justification)
+1. [Conception Architecturale](#conception-architecturale)
+2. [Diagrammes de Cas d'Utilisation](#diagrammes-de-cas-dutilisation)
+3. [Diagrammes de Classes](#diagrammes-de-classes)
+4. [Diagrammes de Sequence](#diagrammes-de-sequence)
+5. [Diagrammes de Paquetage](#diagrammes-de-paquetage)
+6. [Diagramme de Composants](#diagramme-de-composants)
+7. [Diagramme de Deploiement](#diagramme-de-deploiement)
+8. [Justification des Modeles GRASP](#justification-des-modeles-grasp)
 
-## Note
+## Conception Architecturale
 
-The PlantUml code is located in the `plantUml` directory. Locating the code in a separate directory allows for better organization and easier access to the diagrams.
+![Conception Architecturale](./misc/images/system-architecture.png)
 
-The architecure diagram image is located in the `misc/images` directory. plantUml was not used for this diagram, as it does not support the creation of such diagrams.
+L'architecture hexagonale divise l'ensemble du programme en quatre espaces :
 
-## Introduction
+1. Les systèmes externes, y compris les navigateurs web, les bases de données et les autres services informatiques.
+2. Les adaptateurs mettent en œuvre les API spécifiques requises par les systèmes externes, par exemple, un adaptateur Svelte pour le navigateur web et un adaptateur SQLite3 pour la base de données.
+3. Les ports sont l'abstraction de ce dont notre application a besoin de la part du système externe.
+4. Le modèle de domaine contient la logique de notre application, sans les détails du système externe, la logique est une traduction des cas d'utilisation en code.
 
-SantéConnect is a medical file management system containing a web and mobile protal for patients, an installed applicaton for doctors and healthcare professional and an API portal for RAMQ.
+L'architecture hexagonale est basée sur le principe de l'inversion de la dépendance, qui stipule que les modules de haut niveau ne doivent pas dépendre des modules de bas niveau, mais doivent dépendre des abstractions. Ce principe garantit que le modèle du domaine est indépendant des systèmes externes et que les systèmes externes sont indépendants du modèle du domaine.
+Cette architecture permet également de tester le modèle du domaine indépendamment des systèmes externes et de tester les systèmes externes indépendamment du modèle du domaine.
 
-The application is designed to provide a centralized medical file for patients in Quebec.
+## Diagrammes de Cas d'Utilisation
 
-Medical Files are created by the RAMQ, and are accessible by the patient and the doctor.
-The RAMQ send a request to the system to create a medical file for a patient that has been registered in the RAMQ system.
-Doctors can add medical visists, medical treatments, and modify any necessary information in the medical file.
-Patients can view their medical file, and update their coordinates when necessary.
-The RAMQ can also look through the modifications made by the doctor and the patient, and reconstruct the medical file if necessary.
+![Diagrammes de Cas d'Utilisation](./plantUml/use-case.png)
 
-## Architectural Design
-<!-- (Insert architectural design diagram here and explain the different components of the system and their interactions) -->
-![System Architecture](./misc/images/system-architecture.png)
+## Diagrammes de Classes
 
-The hexagonal architecture divides the whole program into four spaces:
+![Diagrammes de Classes](./plantUml/class-logic.png)
 
-1. External systems, including web browsers, databases, and other computing services
-2. Adapters implement the specific APIs required by the external systems, for example, a Svelte adapter for the web browser, and a SQLite3 adapter for the database
-3. Ports are the abstraction of what our application needs from the external system
-4. The domain model contains our application logic, free of external system details, the logic is a translation of the use cases into code
+Ce diagramme de classes représente uniquement le modèle de domaine de l'application. Il n'inclut pas les classes utilisées pour interagir avec les systèmes externes, tels que la base de données, le navigateur web et l'API de la RAMQ.
 
-
-
-
-## Use Case Diagrams
-<!-- (Insert use case diagrams here and explain the functionalities of the system) -->
-<!-- ADD PUML -->
-![Use Case Diagram](./plantUml/use-case.png)
-
-## Class Diagrams
-<!-- (Insert class diagrams here and explain the domain concepts) -->
-This class diagram represents only the domain model of the application. It does not include the classes that are used to interact with the external systems, such as the database, the web browser, and the RAMQ API.
-
-![Class Diagram](./plantUml/class-logic.png)
-
-
-## Sequence Diagrams
-<!-- (Insert sequence diagrams here and show the interactions between the classes for each use case) -->
-
-TODO: Add sequence diagrams for each use case
+## Diagrammes de Sequence
 
 createMedicalFile
-![Sequence Diagram](./plantUml/createMedicalFile.png)
+![Diagrammes de Séquence](./plantUml/createMedicalFile.png)
 
 accessMedicalFile
-![Sequence Diagram](./plantUml/accessMedicalFile.png)
+![Diagrammes de Séquence](./plantUml/accessMedicalFile.png)
 
 modifyCoordinates
-![Sequence Diagram](./plantUml/modifyCoordinates.png)
+![Diagrammes de Séquence](./plantUml/modifyCoordinates.png)
 
 modifyMedicalFile and archiveModification
-![Sequence Diagram](./plantUml/modifyMedicalFile.png)
+![Diagrammes de Séquence](./plantUml/modifyMedicalFile.png)
 
 HTTP Codes are not included in the reconstruction sequence diagrams
 
 reconstructMedicalFileFromModification
-![Sequence Diagram](./plantUml/reconstructMedicalFileFromModification.png)
+![Diagrammes de Séquence](./plantUml/reconstructMedicalFileFromModification.png)
 
 reconstructMedicalFileFromDate
-![Sequence Diagram](./plantUml/reconstructMedicalFileFromDate.png)
+![Diagrammes de Séquence](./plantUml/reconstructMedicalFileFromDate.png)
 
 getModifications
-![Sequence Diagram](./plantUml/getModifications.png)
+![Diagrammes de Séquence](./plantUml/getModifications.png)
 
-## Package Diagrams
-<!-- (Insert package diagrams here and indicate the classes contained in the packages) -->
+## Diagrammes de Paquetage
 
-![Package Diagram](./plantUml/package.png)
+![Diagrammes de Paquetage](./plantUml/package.png)
 
+## Diagramme de Composants
 
-## Component Diagram
-<!-- (Insert component diagram here) -->
-![Component Diagram](./plantUml/component.png)
+![Diagramme de Composants](./plantUml/component.png)
 
-## Deployment Diagram
+## Diagramme de Deploiement
+
 A ameliorer
-![Deployment Diagram](./plantUml/deployment.png)
 
-## GRASP Patterns Justification
-<!-- (Justify each responsibility of the classes by a GRASP pattern. Document a justification for each public method and a justification for the creation of instances of a class) -->
+![Diagramme de Déploiement](./plantUml/deployment.png)
+
+## Justification des Modeles GRASP
+
 Patron GRASP | Justification
 --- | ---
 Faible couplage | Grâce à l'architecture hexagonale, l'implémentaiton de l'application est indépendante des détails de l'interface utilisateur, de la base de données et des autres services externes. Cela permet de changer les détails de l'implémentation sans affecter le reste du système. Cela permet également de tester les composants de l'application indépendamment des services externes.
@@ -106,3 +93,8 @@ Contrôleur | Le contrôleur est responsable de la gestion des requêtes HTTP et
 Forte Cohésion | Les classes sont conçues pour avoir une seule responsabilité. Par exemple, la classe `Patient` est responsable de la gestion des informations du patient, et la classe `MedicalFile` est responsable de la gestion des informations du dossier médical. Cela permet de faciliter la maintenance et l'évolution du système.
 Indirection | Les classes de l'application ne dépendent pas des détails de l'implémentation des services externes. Par exemple, la classe `Patient` ne dépend pas de la manière dont les informations du patient sont stockées dans la base de données. Cela permet de changer les détails de l'implémentation sans affecter le reste du système.
 Protégé de variations | Les composants de l'application sont protégés des variations dans les services externes. Par exemple, si le système de gestion de base de données est changé, les classes de l'application n'ont pas besoin d'être modifiées. Cela permet de faciliter la maintenance et l'évolution du système.
+
+## Note
+
+Le code PlantUml est situé dans le répertoire `plantUml`. Le fait de placer le code dans un répertoire séparé permet une meilleure organisation et un accès plus facile aux diagrammes.
+L'image du diagramme architecure est située dans le répertoire `misc/images`. plantUml n'a pas été utilisé pour ce diagramme, car il ne permet pas la création de tels diagrammes.
