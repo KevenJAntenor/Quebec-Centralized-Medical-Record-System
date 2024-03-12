@@ -1,5 +1,7 @@
 # Équipe
 
+### Chef d'equipe: Youenn Pierre-Justin PIEY78070308
+
 ## Membre 1
 
 **Nom et Prénom:** Dominique Elias
