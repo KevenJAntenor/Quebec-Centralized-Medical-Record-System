@@ -1,20 +1,25 @@
-@startuml createMedicalFile
+@startuml 
 
 participant "RAMQ" as RAMQ
 participant "System" as System
 participant "Database" as Database
 
-RAMQ -> System: Send request to create Medical File
+RAMQ -> System: sendPatientInformation(patientInformation)
 activate System
-System -> System: Validate Medical File
-alt File is valid
-    System -> Database: Create new Medical File
+System -> System: validatePatientInformation(patientInformation)
+alt Information is valid
+    System -> Database: createMedicalFile(Information)
+    Database -> Database: insertIntoTable(Information)
+    Database -> System: File
     activate Database
-    Database --> System: Confirm creation of Medical File
+    alt File Not Created
+        System --> RAMQ: makeResponse("400 Bad Request")
     deactivate Database
-    System --> RAMQ: Send "201" confirmation code
-else File is not valid
-    System --> RAMQ: Send "400 Bad Request" response
+    else File Created
+        System --> RAMQ: makeResponse(File, "201")
+    end
+else Information is not valid
+    System --> RAMQ: makeResponse("400 Bad Request")
 end
 deactivate System
 
