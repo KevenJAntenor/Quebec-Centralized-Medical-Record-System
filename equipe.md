@@ -34,17 +34,17 @@
 
 ## Membre 3
 
-**Nom et Prénom:** John Doe
+**Nom et Prénom:** Youenn Pierre-Justin
 
-**Code Permanent:** JD123456
+**Code Permanent:** PIEY78070308
 
-**Adresse Courriel:** johndoe@example.com
+**Adresse Courriel:** pierre_justin.youenn@courrier.uqam.ca
 
-**Meilleur moyen de communication:** Courriel, johndoe@example.com
+**Meilleur moyen de communication:** Courriel, pierre_justin.youenn@courrier.uqam.ca
 
-**Disponibilités:** Du lundi au vendredi, de 9h à 17h
+**Disponibilités:** Mardi et Mercredi, de 15h à 20h
 
-**Forces, Faiblesses et Compétences Techniques:** Fort en Java, faible en Python, compétent en développement web
+**Forces, Faiblesses et Compétences Techniques:** Fort en Fullstack, mauvais en UI-UX
 
 ---
 
