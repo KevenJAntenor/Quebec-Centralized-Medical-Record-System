@@ -1,4 +1,4 @@
-@startuml getModifications
+@startuml
 
 participant "RAMQ" as RAMQ
 participant "System" as System

@@ -1,29 +1,28 @@
-@startuml modifyMedicalFile
+@startuml
 
 participant "Doctor" as Doctor
 participant "System" as System
 participant "Database" as Database
-participant "Archive" as Archive
 
-Doctor -> System: Send request to modify Medical File
+activate Doctor
+Doctor -> System: modifyMedicalFile(file, Modifications)
 activate System
-System -> System: Validate Doctor's credentials
+System -> System: validateCredentials(credentials)
 alt Doctor's credentials are valid
-    System -> System: Validate modifications
+    System -> System: validateChanges(Modifications)
     alt Modifications are valid
-        System -> Database: Modify Medical File
+        System -> Database: modifyMedicalFile(file, Modifications)
         activate Database
-        Database --> System: Confirm modification of Medical File
-        System -> Archive: Archive modification
-        activate Archive
-        Archive --> System: Confirm archiving
-        deactivate Archive
-        System --> Doctor: Send "200 OK" response
+        Database --> Database: patchFile(file, Modifications)
+        Database --> System: File
+        System -> Database: archiveModification(file, Modifications)
+        Database --> System: Modifications
+        System --> Doctor: makeResponse(Modifications, "200 OK")
     else Modifications are not valid
-        System --> Doctor: Send "400 Bad Request" response
+        System --> Doctor: makeResponse("400 Bad Request")
     end
 else Doctor's credentials are not valid
-    System --> Doctor: Send "403 Forbidden" response
+    System --> Doctor: makeResponse("403 Forbidden")
 end
 deactivate System
 

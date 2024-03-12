@@ -1,5 +1,51 @@
 @startuml
+package "Medical Record System" {
+  [Patient Interface] as PatientUI
+  [Doctor Interface] as DoctorUI
+  [Medical Record Management] as MRManagement
+  [RAMQ Interface] as RAMQUI
+  [Archive System] as Archive
+  
+  database "Centralized Database" {
+    [Patient Records] as PatientRecords
+    [Medical Visits] as MedicalVisits
+    [Medical History] as MedicalHistory
+  }
 
-component "Empty" as empty
+  MRManagement --> PatientRecords : read/write
+  MRManagement --> MedicalVisits : read/write
+  MRManagement --> MedicalHistory : read/write
+  
+  PatientUI ..> MRManagement : << use >>
+  DoctorUI ..> MRManagement : << use >>
+  RAMQUI ..> MRManagement : << use >>
+
+  Archive ..> MRManagement : << use >>
+
+  [Authentication Service] as AuthService
+  AuthService ..> DoctorUI : validate credentials
+  AuthService ..> PatientUI : validate credentials
+  AuthService ..> RAMQUI : validate credentials
+}
+
+package "Doctor's Office" {
+  [Workstation] as Workstation
+  Workstation ..> DoctorUI : << use >>
+}
+
+package "Patient's Device" {
+  [Web Browser] as WebBrowser
+  [Mobile App] as MobileApp
+  WebBrowser ..> PatientUI : << use >>
+  MobileApp ..> PatientUI : << use >>
+}
+
+package "RAMQ System" {
+  [RAMQ Computer] as RAMQComp
+  RAMQComp ..> RAMQUI : << use >>
+  RAMQComp --> Archive : access archives
+}
+
+RAMQComp --> [Electronic Card Reader]
 
 @enduml
