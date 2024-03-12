@@ -1,22 +1,21 @@
-@startuml reconstructMedicalFileFromModification
+@startuml
 
 participant "RAMQ" as RAMQ
 participant "System" as System
 participant "Database" as Database
-participant "Archive" as Archive
 
-RAMQ -> System: Send request to reconstruct Medical File from a certain modification
+activate RAMQ
+RAMQ -> System: resetFileToModification(file, modification)
 activate System
-System -> Database: Retrieve current Medical File
+System -> Database: getFile(file)
 activate Database
-Database --> System: Return current Medical File
-deactivate Database
-System -> Archive: Retrieve certain modification
-activate Archive
-Archive --> System: Return certain modification
+Database -> System: File
+System -> Database: getModification(file)
+Database --> System: Modification
 deactivate Archive
-System -> System: Reconstruct Medical File from certain modification
-System --> RAMQ: Send reconstructed Medical File
+System -> System: reconstructAndSaveMedicalFileFromModification(File, Modification)
+System -> RAMQ: MedicalFile
+System --> RAMQ: makeResponse(MedicalFile, "200 OK")
 
 deactivate System
 

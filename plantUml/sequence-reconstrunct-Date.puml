@@ -1,23 +1,23 @@
-@startuml reconstructMedicalFileFromDate
+@startuml
 
 participant "RAMQ" as RAMQ
 participant "System" as System
 participant "Database" as Database
-participant "Archive" as Archive
 
-RAMQ -> System: Send request to reconstruct Medical File from a certain date
+activate RAMQ
+RAMQ -> System: resetFileToDate(file, date)
 activate System
-System -> Database: Retrieve current Medical File
+System -> Database: getFile(file)
 activate Database
-Database --> System: Return current Medical File
-deactivate Database
-System -> Archive: Retrieve all modifications up to a certain date
-activate Archive
-Archive --> System: Return all modifications
+Database -> System: File
+System -> Database: getAllModificationsAfterDate(file, date)
+Database --> System: Modifications
 deactivate Archive
-System -> System: Reconstruct Medical File using current file and modifications
-System --> RAMQ: Send reconstructed Medical File
+System -> System: reconstructAndSaveMedicalFileFromModifications(File, Modifications)
+System -> RAMQ: MedicalFile
+System --> RAMQ: makeResponse(MedicalFile, "200 OK")
 
 deactivate System
 
 @enduml
+
