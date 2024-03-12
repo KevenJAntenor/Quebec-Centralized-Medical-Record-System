@@ -18,17 +18,17 @@
 
 ## Membre 2
 
-**Nom et Prénom:** Jane Doe
+**Nom et Prénom:** Emil Surkhaev
 
-**Code Permanent:** JD654321
+**Code Permanent:** SURE89080008
 
-**Adresse Courriel:** janedoe@example.com
+**Adresse Courriel:** surkhaev.emil@courrier.uqam.ca
 
-**Meilleur moyen de communication:** Texto, 123-456-7890
+**Meilleur moyen de communication:** Courriel, surkhaev.emil@courrier.uqam.ca
 
 **Disponibilités:** Du lundi au vendredi, de 10h à 18h
 
-**Forces, Faiblesses et Compétences Techniques:** Fort en Python, faible en Java, compétente en développement de bases de données
+**Forces, Faiblesses et Compétences Techniques:** Fort en C++ et Backend
 
 ---
 
