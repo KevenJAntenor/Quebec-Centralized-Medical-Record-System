@@ -48,26 +48,33 @@ Ce diagramme de classes représente uniquement le modèle de domaine de l'applic
 ## Diagrammes de Sequence
 
 createMedicalFile
+
 ![Diagrammes de Séquence](./plantUml/createMedicalFile.png)
 
 accessMedicalFile
+
 ![Diagrammes de Séquence](./plantUml/accessMedicalFile.png)
 
 modifyCoordinates
+
 ![Diagrammes de Séquence](./plantUml/modifyCoordinates.png)
 
 modifyMedicalFile and archiveModification
+
 ![Diagrammes de Séquence](./plantUml/modifyMedicalFile.png)
 
 HTTP Codes are not included in the reconstruction sequence diagrams
 
 reconstructMedicalFileFromModification
+
 ![Diagrammes de Séquence](./plantUml/reconstructMedicalFileFromModification.png)
 
 reconstructMedicalFileFromDate
+
 ![Diagrammes de Séquence](./plantUml/reconstructMedicalFileFromDate.png)
 
 getModifications
+
 ![Diagrammes de Séquence](./plantUml/getModifications.png)
 
 ## Diagrammes de Paquetage
