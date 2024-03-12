@@ -92,6 +92,9 @@ getModifications
 ## Component Diagram
 (Insert component diagram here)
 
+
+Le diagramme de composants illustre un système informatique médical où une base de données centrale est interfacée par des modules distincts pour les patients, les médecins, et la RAMQ, garantissant une gestion cohérente et sécurisée des dossiers médicaux. Les interactions sont régulées par un service d'authentification, assurant que seuls les utilisateurs autorisés peuvent accéder ou modifier les données médicales. L'architecture facilite une vision complète et actualisée de l'état de santé du patient, améliorant ainsi la qualité des soins.
+
 ## Deployment Diagram
 A ameliorer
 ![Deployment Diagram](./plantUml/deployment.png)
