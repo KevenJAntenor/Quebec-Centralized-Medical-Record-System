@@ -52,14 +52,14 @@
 
 ## Membre 4
 
-**Nom et Prénom:** John Doe
+**Nom et Prénom:** Keven Jude Anténor
 
-**Code Permanent:** JD123456
+**Code Permanent:** ANTK08129003
 
-**Adresse Courriel:** johndoe@example.com
+**Adresse Courriel:** antenor.keven_jude@courrier.uqam.ca
 
-**Meilleur moyen de communication:** Courriel, johndoe@example.com
+**Meilleur moyen de communication:** Courriel, antenor.keven_jude@courrier.uqam.ca
 
-**Disponibilités:** Du lundi au vendredi, de 9h à 17h
+**Disponibilités:** Mardi et Jeudi, de 13h à 17h
 
-**Forces, Faiblesses et Compétences Techniques:** Fort en Java, faible en Python, compétent en développement web
+**Forces, Faiblesses et Compétences Techniques:** Fort en Java, C et C++, Faiblesses Backend, 
