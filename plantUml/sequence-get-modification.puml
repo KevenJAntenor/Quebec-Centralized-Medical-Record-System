@@ -2,15 +2,20 @@
 
 participant "RAMQ" as RAMQ
 participant "System" as System
-participant "Archive" as Archive
+participant "Database" as Database
 
-RAMQ -> System: Send request to get list of modifications for a certain Medical File
-activate System
-System -> Archive: Retrieve list of modifications for a certain Medical File
-activate Archive
-Archive --> System: Return list of modifications
-deactivate Archive
-System --> RAMQ: Send list of modifications with "200 OK" response
+RAMQ -> System: getFileModifications(healthInsuranceNumber)
+System -> System: validateFile(healthInsuranceNumber)
+alt File is valid
+    activate System
+    System -> Database: getModifications(healthInsuranceNumber)
+    activate Database
+    Database --> System: Modifications
+    deactivate Database
+    System --> RAMQ: makeResponse(Modifications, "200 OK")
+    else File is not valid
+        System --> RAMQ: makeResponse("400 Bad Request")
+    end
 
 deactivate System
 
