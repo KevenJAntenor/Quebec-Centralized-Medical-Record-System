@@ -49,33 +49,33 @@ Ce diagramme de classes représente uniquement le modèle de domaine de l'applic
 
 createMedicalFile
 
-![Diagrammes de Séquence](./plantUml/createMedicalFile.png)
+![Diagrammes de Séquence](./plantUml/sequence-create.png)
 
 accessMedicalFile
 
-![Diagrammes de Séquence](./plantUml/accessMedicalFile.png)
+![Diagrammes de Séquence](./plantUml/sequence-access.png)
 
 modifyCoordinates
 
-![Diagrammes de Séquence](./plantUml/modifyCoordinates.png)
+![Diagrammes de Séquence](./plantUml/sequence-modify-coordinates.png)
 
 modifyMedicalFile and archiveModification
 
-![Diagrammes de Séquence](./plantUml/modifyMedicalFile.png)
+![Diagrammes de Séquence](./plantUml/sequence-modify.png)
 
 HTTP Codes are not included in the reconstruction sequence diagrams
 
 reconstructMedicalFileFromModification
 
-![Diagrammes de Séquence](./plantUml/reconstructMedicalFileFromModification.png)
+![Diagrammes de Séquence](./plantUml/sequence-reconstruct-Modification.png)
 
 reconstructMedicalFileFromDate
 
-![Diagrammes de Séquence](./plantUml/reconstructMedicalFileFromDate.png)
+![Diagrammes de Séquence](./plantUml/sequence-reconstrunct-Date.png)
 
 getModifications
 
-![Diagrammes de Séquence](./plantUml/getModifications.png)
+![Diagrammes de Séquence](./plantUml/sequence-get-modification.png)
 
 ## Diagrammes de Paquetage
 
