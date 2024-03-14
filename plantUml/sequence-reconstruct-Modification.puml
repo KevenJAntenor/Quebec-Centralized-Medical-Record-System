@@ -2,21 +2,26 @@
 
 participant "RAMQ" as RAMQ
 participant "System" as System
-participant "Database" as Database
+participant "Medical File Database" as MedicalFileDatabase
+participant "Modification Archive Database" as ModificationArchiveDatabase
 
 activate RAMQ
-RAMQ -> System: resetFileToModification(file, modification)
+RAMQ -> System: reconstructFileToModification(file, modification)
 activate System
-System -> Database: getFile(file)
-activate Database
-Database -> System: File
-System -> Database: getModification(file)
-Database --> System: Modification
-deactivate Archive
-System -> System: reconstructAndSaveMedicalFileFromModification(File, Modification)
-System -> RAMQ: MedicalFile
-System --> RAMQ: makeResponse(MedicalFile, "200 OK")
-
+System -> MedicalFileDatabase: getMedicalFile(file)
+activate MedicalFileDatabase
+alt File Found
+    MedicalFileDatabase --> System: MedicalFile
+    System -> ModificationArchiveDatabase: getFileModifications(modifications)
+    ModificationArchiveDatabase --> System: modifications
+    System -> System : getModificationsUpTo(modifications, modification)
+    System -> System : revertMedicalFile(medicalFile, modifications)
+    System -> RAMQ: makeResponse(medicalFile, "200 OK")
+else File Not Found
+    MedicalFileDatabase --> System: "File Not Found"
+    System -> RAMQ: makeResponse("404 Not Found")
+end
+deactivate MedicalFileDatabase
 deactivate System
 
 @enduml
