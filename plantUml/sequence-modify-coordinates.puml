@@ -1,0 +1,27 @@
+@startuml
+
+participant "Patient" as Patient
+participant "System" as System
+participant "Database" as Database
+
+Patient -> System: modifyCoordinates()
+activate System
+System -> System: validatePatientCredentials(credentials)
+alt Patient's credentials are valid
+    System -> System: validateNewCoordites(newCoordinates)
+    alt newCoordinates are valid
+        System -> Database: updateUserCoordinates(newCoordinates)
+        activate Database
+        Database --> Database: patchUser(newCoordinates)
+        Database --> System: User
+        deactivate Database
+        System --> Patient: makeResponse(User, "200 OK")
+    else New coordinates are not valid
+        System --> Patient: makeResponse("400 Bad Request")
+    end
+else Patient's credentials are not valid
+    System --> Patient: makeResponse("403 Forbidden")
+end
+deactivate System
+
+@enduml

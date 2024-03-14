@@ -1,6 +1,28 @@
-@startuml
+@startuml 
 
-participant "User" as U
+participant "RAMQ" as RAMQ
+participant "System" as System
+participant "Database" as Database
 
+RAMQ -> System: sendPatientInformation(patientInformation)
+activate System
+System -> System: validatePatientInformation(patientInformation)
+alt Information is valid
+    System -> Database: createMedicalFile(Information)
+    activate Database
+    alt Unique Constraint Violation
+    Database -> Database: insertIntoTable(Information)
+
+        Database --> System: "Unique Constraint Violation"
+        System --> RAMQ: makeResponse("409 Conflict")
+    else File Created
+        Database --> System: File
+        System --> RAMQ: makeResponse(File, "201")
+    end
+    deactivate Database
+else Information is not valid
+    System --> RAMQ: makeResponse("400 Bad Request")
+end
+deactivate System
 
 @enduml

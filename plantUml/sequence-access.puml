@@ -1,0 +1,26 @@
+@startuml
+
+participant "User" as User
+participant "System" as System
+participant "Database" as Database
+
+User -> System: getMedicalFile(healthInsuranceCode)
+activate System
+System -> System: validateCode(healthInsuranceCode)
+alt File code is valid
+    System -> Database: getMedicalFile()
+    activate Database
+    alt File is available
+        Database --> System: medical_file
+        System --> User: makeResponse(medical_file, "200 OK")
+    else File is not available
+        Database --> System: None
+        System --> User: makeResponse("404 Not Found")
+    end
+    deactivate Database
+else File code is not valid
+    System --> User: makeResponse("400 Bad Request")
+end
+deactivate System
+
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+
+participant "RAMQ" as RAMQ
+participant "System" as System
+participant "Modification Archive Database" as Database
+participant "Medical File Database" as MedicalDatabase
+
+activate RAMQ
+RAMQ -> System: reconstructFileFromDate(healthInsuranceNumber, date)
+activate System
+System -> MedicalDatabase: checkFileExists(healthInsuranceNumber)
+activate MedicalDatabase
+alt File Exists
+    MedicalDatabase -> System: File
+    System -> Database: getAllModificationsAfterDate(date)
+    Database --> System: Modifications
+    System -> System: revertMedicalFile(File, Modifications)
+    System --> RAMQ: makeResponse(MedicalFile, "200 OK")
+else File Does Not Exist
+    MedicalDatabase --> System: "File not found"
+    System --> RAMQ: makeResponse("404 Not Found")
+end
+
+
+deactivate System
+
+@enduml
+

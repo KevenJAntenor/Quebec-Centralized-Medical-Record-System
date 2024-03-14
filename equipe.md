@@ -1,5 +1,7 @@
 # Équipe
 
+### Chef d'equipe: Youenn Pierre-Justin PIEY78070308
+
 ## Membre 1
 
 **Nom et Prénom:** Dominique Elias
@@ -18,46 +20,46 @@
 
 ## Membre 2
 
-**Nom et Prénom:** Jane Doe
+**Nom et Prénom:** Emil Surkhaev
 
-**Code Permanent:** JD654321
+**Code Permanent:** SURE89080008
 
-**Adresse Courriel:** janedoe@example.com
+**Adresse Courriel:** surkhaev.emil@courrier.uqam.ca
 
-**Meilleur moyen de communication:** Texto, 123-456-7890
+**Meilleur moyen de communication:** Courriel, surkhaev.emil@courrier.uqam.ca
 
 **Disponibilités:** Du lundi au vendredi, de 10h à 18h
 
-**Forces, Faiblesses et Compétences Techniques:** Fort en Python, faible en Java, compétente en développement de bases de données
+**Forces, Faiblesses et Compétences Techniques:** Fort en C++ et Backend
 
 ---
 
 ## Membre 3
 
-**Nom et Prénom:** John Doe
+**Nom et Prénom:** Youenn Pierre-Justin
 
-**Code Permanent:** JD123456
+**Code Permanent:** PIEY78070308
 
-**Adresse Courriel:** johndoe@example.com
+**Adresse Courriel:** pierre_justin.youenn@courrier.uqam.ca
 
-**Meilleur moyen de communication:** Courriel, johndoe@example.com
+**Meilleur moyen de communication:** Courriel, pierre_justin.youenn@courrier.uqam.ca
 
-**Disponibilités:** Du lundi au vendredi, de 9h à 17h
+**Disponibilités:** Mardi et Mercredi, de 15h à 20h
 
-**Forces, Faiblesses et Compétences Techniques:** Fort en Java, faible en Python, compétent en développement web
+**Forces, Faiblesses et Compétences Techniques:** Fort en Fullstack, mauvais en UI-UX
 
 ---
 
 ## Membre 4
 
-**Nom et Prénom:** John Doe
+**Nom et Prénom:** Keven Jude Anténor
 
-**Code Permanent:** JD123456
+**Code Permanent:** ANTK08129003
 
-**Adresse Courriel:** johndoe@example.com
+**Adresse Courriel:** antenor.keven_jude@courrier.uqam.ca
 
-**Meilleur moyen de communication:** Courriel, johndoe@example.com
+**Meilleur moyen de communication:** Courriel, antenor.keven_jude@courrier.uqam.ca
 
-**Disponibilités:** Du lundi au vendredi, de 9h à 17h
+**Disponibilités:** Mardi et Jeudi, de 13h à 17h
 
-**Forces, Faiblesses et Compétences Techniques:** Fort en Java, faible en Python, compétent en développement web
+**Forces, Faiblesses et Compétences Techniques:** Fort en Java, C et C++, Faiblesses Backend, 
