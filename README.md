@@ -11,8 +11,25 @@ import the backend folder as a maven project in IntelliJ.
 
 ### TODO how to run the backend
 
-- (docker to build database container)
-- mvn spring-boot:run
+First step is to create databases and tables.
+For now we have two databases, one for production and one for testing.
+
+to create the databases and tables :
+
+- cd backend/sql
+- chmod u+x deploy-database.sh
+- ./deploy-database.sh
+
+this (for now) creates medical_file.db in backend, and an exact db inside of backend/src/test/resources/db
+
+to run spring-boot application, you can use the following commands: (Which open on port 8080, make sure it is not used by another application)
+This doesnt do anything for now, but it will start the server.
+
+- ./mvnw clean spring-boot:run
+
+to run the tests (must setup databses before), you can use the following commands:
+
+- ./mvnw clean test
 
 ### Java dependencies (managed by Maven) are: INCOMPLETE
 
