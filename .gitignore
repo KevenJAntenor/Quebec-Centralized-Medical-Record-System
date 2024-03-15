@@ -7,3 +7,6 @@
 # ignore target folder
 target/
 
+# ignore maven 
+.mvn/
+
