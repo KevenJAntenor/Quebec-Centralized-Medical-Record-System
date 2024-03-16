@@ -28,6 +28,9 @@ medicalFile1_get=$(curl -s -X GET http://localhost:8080/api/medicalFiles/$medica
 
 if [ "$medicalFile1" == "$medicalFile1_get" ]; then
   echo "Verification successful: The posted and retrieved medical files are equal."
+  echo "Posted medical file: $medicalFile1"
+    echo "Retrieved medical file: $medicalFile1_get"
+    
 else
   echo "Verification failed: The posted and retrieved medical files are not equal."
 fi
@@ -43,10 +46,12 @@ fi
 
 #check if posted patient is equal to the linked patient in the medical file
 patient_linked=$(echo $medicalFile1_get | jq -r '._links.patient.href')
-get_patient=$(curl -s -X GET $patient_linked http://localhost:8080/api/patients)
+get_patient=$(curl -s -X GET "$patient_linked")
 
 if [ "$get_patient" == "$patient" ]; then
   echo "Verification successful: The posted patient is equal to the linked patient in the medical file."
+    echo "Posted patient: $patient"
+    echo "Linked patient: $patient_linked"
 else
   echo "Verification failed: The posted patient is not equal to the linked patient in the medical file."
   echo "Posted patient: $patient"
