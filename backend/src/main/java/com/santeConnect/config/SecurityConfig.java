@@ -1,5 +1,6 @@
 package com.santeConnect.config;
 
+import com.santeConnect.AuthEntryPoint;
 import com.santeConnect.AuthentificationFilter;
 import com.santeConnect.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -25,11 +26,15 @@ public class SecurityConfig {
 
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthentificationFilter authentificationFilter;
+    private final AuthEntryPoint exceptionHandler;
 
-    public SecurityConfig(UserDetailsServiceImpl userDetailsService, AuthentificationFilter authentificationFilter) {
+    public SecurityConfig(UserDetailsServiceImpl userDetailsService, AuthentificationFilter authentificationFilter, AuthEntryPoint exceptionHandler) {
         this.userDetailsService = userDetailsService;
         this.authentificationFilter = authentificationFilter;
+        this.exceptionHandler = exceptionHandler;
     }
+
+
 
     public void configureGlobal (AuthenticationManagerBuilder auth)
             throws Exception{
@@ -67,7 +72,9 @@ public class SecurityConfig {
                                 "/login")
                                 .permitAll().anyRequest().authenticated())
                 .addFilterBefore(authentificationFilter,
-                        UsernamePasswordAuthenticationFilter.class);
+                        UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling((exceptionHandling) -> exceptionHandling.
+                        authenticationEntryPoint(exceptionHandler));
 
         return http.build();
     }
