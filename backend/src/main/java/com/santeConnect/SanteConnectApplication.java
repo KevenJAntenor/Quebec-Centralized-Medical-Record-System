@@ -2,8 +2,10 @@ package com.santeConnect;
 
 import com.santeConnect.domain.entities.MedicalFile;
 import com.santeConnect.domain.entities.Patient;
-import com.santeConnect.repository.PatientRepository;
-import com.santeConnect.repository.MedicalFileRepository;
+import com.santeConnect.domain.users.AppUser;
+import com.santeConnect.repository.entities.PatientRepository;
+import com.santeConnect.repository.entities.MedicalFileRepository;
+import com.santeConnect.repository.users.AppUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -17,13 +19,18 @@ public class SanteConnectApplication implements CommandLineRunner {
 
 	private static final Logger logger = LoggerFactory.getLogger(SanteConnectApplication.class);
 
-	private MedicalFileRepository medicalFileRepository;
+	private final MedicalFileRepository medicalFileRepository;
 
-	private PatientRepository patientRepository;
+	private final PatientRepository patientRepository;
 
-	public SanteConnectApplication(MedicalFileRepository medicalFileRepository, PatientRepository patientRepository) {
+	private final AppUserRepository appUserRepository;
+
+	public SanteConnectApplication(MedicalFileRepository medicalFileRepository,
+								   PatientRepository patientRepository,
+								   AppUserRepository appUserRepository) {
 		this.medicalFileRepository = medicalFileRepository;
 		this.patientRepository = patientRepository;
+		this.appUserRepository = appUserRepository;
 	}
 
 	public static void main(String[] args) {
@@ -32,8 +39,7 @@ public class SanteConnectApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// Add owner objects and save these to db
-// Create the first Patient object
+
 		Patient patient1 = new Patient();
 		patient1.setLastName("Doe");
 		patient1.setFirstName("John");
@@ -70,5 +76,13 @@ public class SanteConnectApplication implements CommandLineRunner {
 			logger.info("Medical File ID: {}, Insurance Number: {}, Patient ID: {}, Patient Name: {} {}", medicalFile.getId(), medicalFile.getInsuranceNumber(), medicalFile.getPatient().getId(), medicalFile.getPatient().getFirstName(), medicalFile.getPatient().getLastName());
 		}
 
+		// Username user, password: user
+		appUserRepository.save(new AppUser("user",
+				"$2a$10$NVM0n8ElaRgg7zWO1CxUdei7vWoPg91Lz2aYavh9.f9q0e4bRadue",
+				"USER"));
+
+		appUserRepository.save(new AppUser("admin",
+				"$2a$10$8cjz47bjbR4Mn8GMg9IZx.vyjhLXR/SKKMSZ9.mP9vpMu0ssKi8GW",
+				"ADMIN"));
 	}
 }

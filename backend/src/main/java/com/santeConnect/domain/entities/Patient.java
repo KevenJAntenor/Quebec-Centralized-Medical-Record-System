@@ -6,7 +6,7 @@ import lombok.*;
 //@ToString
 @Getter
 @Setter
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "patient")
@@ -40,4 +40,16 @@ public class Patient {
     // @ManyToOne
     // @JoinColumn(name = "coordinate_id")
     // private Coordinate coordinate;
+
+
+    public Patient(String lastName, String firstName, String dateOfBirth, String gender, String knownParent1, String knownParent2, String cityOfBirth) {
+        super();
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.knownParent1 = knownParent1;
+        this.knownParent2 = knownParent2;
+        this.cityOfBirth = cityOfBirth;
+    }
 }

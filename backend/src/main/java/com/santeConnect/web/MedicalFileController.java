@@ -1,7 +1,7 @@
 package com.santeConnect.web;
 
 import com.santeConnect.domain.entities.MedicalFile;
-import com.santeConnect.repository.MedicalFileRepository;
+import com.santeConnect.repository.entities.MedicalFileRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

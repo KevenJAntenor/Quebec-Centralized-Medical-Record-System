@@ -6,7 +6,7 @@ import lombok.*;
 //@ToString
 @Getter
 @Setter
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "medical_file")
@@ -21,4 +21,10 @@ public class MedicalFile {
 
     @OneToOne
     private Patient patient;
+
+    public MedicalFile(String insuranceNumber, Patient patient) {
+        super();
+        this.insuranceNumber = insuranceNumber;
+        this.patient = patient;
+    }
 }
