@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 //@RepositoryRestResource(path="ToChangeNameInRestApi")
-@Repository
+//@Repository
 public interface IMedicalFileRepository extends CrudRepository<MedicalFile, Long> {
 
     List<MedicalFile> findMedicalFileByInsuranceNumber(@Param("insurance_number") String insuranceNumber);

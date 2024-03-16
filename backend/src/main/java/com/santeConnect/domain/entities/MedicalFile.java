@@ -20,6 +20,6 @@ public class MedicalFile {
     private String insuranceNumber;
 
     @OneToOne
-    @JoinColumn(name = "patient_ID")
+    @JoinColumn(name = "patient")
     private Patient patient;
 }

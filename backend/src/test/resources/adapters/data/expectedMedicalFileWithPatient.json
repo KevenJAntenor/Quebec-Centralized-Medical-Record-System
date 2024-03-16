@@ -1,9 +1,0 @@
-{
-  "medical_file": [
-    {
-      "id": 1,
-      "insurance_number": "123456",
-      "patient_id": "1"
-    }
-  ]
-}
