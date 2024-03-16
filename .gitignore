@@ -10,3 +10,5 @@ target/
 # ignore maven 
 .mvn/
 
+# ignore generated medical_file.db
+medical_file.db
