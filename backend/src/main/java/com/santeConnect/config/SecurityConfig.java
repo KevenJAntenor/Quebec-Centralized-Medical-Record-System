@@ -77,6 +77,11 @@ public class SecurityConfig {
                         authorizeHttpRequests.requestMatchers(HttpMethod.POST,
                                 "/login")
                                 .permitAll().anyRequest().authenticated())
+                // TO define roles endpoint
+//                .authorizeHttpRequests((authorizeHttpRequests) ->
+//                        authorizeHttpRequests.requestMatchers("/admin/**").hasRole
+//                                        ("ADMIN").requestMatchers("/user/**").hasRole("USER")
+//                                .anyRequest().authenticated())
                 .addFilterBefore(authentificationFilter,
                         UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling((exceptionHandling) -> exceptionHandling.
