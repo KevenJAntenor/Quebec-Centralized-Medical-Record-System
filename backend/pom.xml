@@ -64,7 +64,15 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+<!--        Starter for exposing Spring Data repositories over REST using Spring Data REST and Spring MVC-->
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-rest -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+            <version>3.2.3</version>
+        </dependency>
 
+        
     </dependencies>
 
     <build>
