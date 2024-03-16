@@ -3,7 +3,7 @@ package com.santeConnect.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@ToString
+//@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,6 +20,5 @@ public class MedicalFile {
     private String insuranceNumber;
 
     @OneToOne
-    @JoinColumn(name = "patient")
     private Patient patient;
 }
