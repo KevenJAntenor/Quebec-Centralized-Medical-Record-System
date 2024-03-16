@@ -43,7 +43,7 @@ fi
 
 #check if posted patient is equal to the linked patient in the medical file
 patient_linked=$(echo $medicalFile1_get | jq -r '._links.patient.href')
-get_patient=$(curl -s -X GET $patient_linked)
+get_patient=$(curl -s -X GET $patient_linked http://localhost:8080/api/patients)
 
 if [ "$get_patient" == "$patient" ]; then
   echo "Verification successful: The posted patient is equal to the linked patient in the medical file."
