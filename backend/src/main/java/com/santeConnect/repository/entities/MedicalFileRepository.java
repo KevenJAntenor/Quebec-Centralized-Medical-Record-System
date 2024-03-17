@@ -4,9 +4,9 @@ import com.santeConnect.domain.entities.MedicalFile;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+import java.util.Optional;
 
 //@RepositoryRestResource(path="ToChangeNameInRestApi")
 public interface MedicalFileRepository extends CrudRepository<MedicalFile, Long> {
-    List<MedicalFile> findMedicalFileByInsuranceNumber(@Param("insurance_number") String insuranceNumber);
+    Optional<MedicalFile> findMedicalFileByInsuranceNumber(@Param("insurance_number") String insuranceNumber);
 }
