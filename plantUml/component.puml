@@ -1,51 +1,56 @@
 @startuml
-package "Medical Record System" {
-  [Patient Interface] as PatientUI
-  [Doctor Interface] as DoctorUI
-  [Medical Record Management] as MRManagement
-  [RAMQ Interface] as RAMQUI
-  [Archive System] as Archive
-  
-  database "Centralized Database" {
-    [Patient Records] as PatientRecords
-    [Medical Visits] as MedicalVisits
-    [Medical History] as MedicalHistory
-  }
+' Define the interface for patient interaction
+interface "Interface Patient" as PatientUI
 
-  MRManagement --> PatientRecords : read/write
-  MRManagement --> MedicalVisits : read/write
-  MRManagement --> MedicalHistory : read/write
-  
-  PatientUI ..> MRManagement : << use >>
-  DoctorUI ..> MRManagement : << use >>
-  RAMQUI ..> MRManagement : << use >>
+' Define the interface for doctor interaction
+interface "Interface Médecin" as DoctorUI
 
-  Archive ..> MRManagement : << use >>
-
-  [Authentication Service] as AuthService
-  AuthService ..> DoctorUI : validate credentials
-  AuthService ..> PatientUI : validate credentials
-  AuthService ..> RAMQUI : validate credentials
+' Define the main component managing medical records
+component "Gestion des Dossiers Médicaux" as MRManagement {
+  ' Define the port for medical data collection
+  port "collectData" as CollectDataPort
 }
 
-package "Doctor's Office" {
-  [Workstation] as Workstation
-  Workstation ..> DoctorUI : << use >>
+' Define the database component
+database "Base de Données Centralisée" as Database
+
+' Connect interfaces and components
+PatientUI - CollectDataPort : use
+DoctorUI - CollectDataPort : use
+
+' Define the component for the RAMQ system
+component "Système RAMQ" as RAMQSystem {
+  ' Define the port for RAMQ data management
+  port "manageRAMQData" as ManageRAMQDataPort
 }
 
-package "Patient's Device" {
-  [Web Browser] as WebBrowser
-  [Mobile App] as MobileApp
-  WebBrowser ..> PatientUI : << use >>
-  MobileApp ..> PatientUI : << use >>
+' Define the component for archiving modifications
+component "Système d'Archivage" as ArchiveSystem {
+  ' Define the port for archiving data
+  port "archiveData" as ArchiveDataPort
 }
 
-package "RAMQ System" {
-  [RAMQ Computer] as RAMQComp
-  RAMQComp ..> RAMQUI : << use >>
-  RAMQComp --> Archive : access archives
-}
+' Show relationships between components and database
+MRManagement -down-> Database : lecture/écriture
+RAMQSystem -down-> Database : lecture/écriture
 
-RAMQComp --> [Electronic Card Reader]
+' Show relationships for archiving data
+ArchiveSystem -left-> MRManagement : archive les modifications
+RAMQSystem -left-> ArchiveSystem : reconstruit le dossier
+
+' You can add details about patient and doctor workstations if needed
+component "Poste de Travail Médecin" as DoctorWorkstation
+component "Application Patient" as PatientApp
+
+' Show interactions between the user interfaces and workstations
+PatientUI <-down-> PatientApp : utilise
+DoctorUI <-down-> DoctorWorkstation : utilise
+
+' Display the relationships
+DoctorWorkstation -down-> MRManagement : utilise
+PatientApp -down-> MRManagement : utilise
+
+' Display the relationship between RAMQ system and archive system
+RAMQSystem -down-> ArchiveSystem : utilise
 
 @enduml
