@@ -63,7 +63,9 @@ modifyMedicalFile and archiveModification
 
 ![Diagrammes de Séquence](./plantUml/sequence-modify.png)
 
-HTTP Codes are not included in the reconstruction sequence diagrams
+getModifications
+
+![Diagrammes de Séquence](./plantUml/sequence-get-modification.png)
 
 reconstructMedicalFileFromModification
 
@@ -73,9 +75,7 @@ reconstructMedicalFileFromDate
 
 ![Diagrammes de Séquence](./plantUml/sequence-reconstrunct-Date.png)
 
-getModifications
 
-![Diagrammes de Séquence](./plantUml/sequence-get-modification.png)
 
 ## Diagrammes de Paquetage
 

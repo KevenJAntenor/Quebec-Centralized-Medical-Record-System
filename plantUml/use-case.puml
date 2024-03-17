@@ -7,7 +7,7 @@ actor "Patient" as patient
 actor "Doctor" as doctor
 actor "Health professional" as health_professional
 actor "RAMQ" as ramq
-actor "System" as sys
+
 rectangle "Dossier santé" {
   user <|-- patient
   user <|-- doctor
@@ -17,11 +17,15 @@ rectangle "Dossier santé" {
   patient -- (Modify Coordinates in File)
   (Modify Coordinates in File) .> (Modify Medical File) : <<extend>>
   (Archive Modification) .> (Modify Medical File) : <<include>>
-  sys -up- (Archive Modification)
-  sys -- (Create Medical File)
-  ramq -- (Reconstruct File from Modification)
-  ramq -- (Reconstruct File from Date)
+
+together {
   ramq -- (Retrieve List of Modifications)
+
+  (Retrieve List of Modifications) .> (Reconstruct File from Modification) : <<extend>>
+}
+  ramq -- (Reconstruct File from Date)
+  ramq -- (Create Medical File)
+
 }
 
 @enduml

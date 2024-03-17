@@ -2,20 +2,31 @@
 
 participant "RAMQ" as RAMQ
 participant "System" as System
-participant "Database" as Database
+participant "Medical File Database" as MedicalDatabase
+participant "Modification Archive Database" as Database
 
 RAMQ -> System: getFileModifications(healthInsuranceNumber)
 System -> System: validateFile(healthInsuranceNumber)
-alt File is valid
+alt healthInsuranceNumber is valid
     activate System
-    System -> Database: getModifications(healthInsuranceNumber)
-    activate Database
-    Database --> System: Modifications
-    deactivate Database
-    System --> RAMQ: makeResponse(Modifications, "200 OK")
-    else File is not valid
-        System --> RAMQ: makeResponse("400 Bad Request")
+    System -> MedicalDatabase: checkFileExists(healthInsuranceNumber)
+    activate MedicalDatabase
+    alt File Exists
+        MedicalDatabase --> System: "File Exists"
+        deactivate MedicalDatabase
+        System -> Database: getModifications(healthInsuranceNumber)
+        activate Database
+        Database --> System: Modifications
+        deactivate Database
+        System --> RAMQ: makeResponse(Modifications, "200 OK")
+    else File Not Found
+        MedicalDatabase --> System: "File Not Found"
+        deactivate MedicalDatabase
+        System --> RAMQ: makeResponse("404 Not Found")
     end
+else healthInsuranceNumber is not valid
+    System --> RAMQ: makeResponse("400 Bad Request")
+end
 
 deactivate System
 
