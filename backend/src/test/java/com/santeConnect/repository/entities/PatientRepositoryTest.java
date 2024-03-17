@@ -18,7 +18,15 @@ public class PatientRepositoryTest {
 
         repository.save(patient);
         assertThat(repository.findByFirstName("Alice").isPresent()).isTrue();
+        assertThat(repository.findByFirstName("Random").isEmpty()).isTrue();
+    }
 
+    @Test
+    void deletePatient() {
+        Patient patient = new Patient("Smiths", "Alice", "1985-12-01", "Female", "Robert Smith", "Susan Smith", "Los Angeles");
+        repository.save(patient);
+        repository.delete(patient);
+        assertThat(repository.findByFirstName("Alice").isEmpty()).isTrue();
     }
 
 

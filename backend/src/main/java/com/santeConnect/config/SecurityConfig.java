@@ -69,6 +69,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf((csrf) -> csrf.disable()).cors(withDefaults())
+                .authorizeHttpRequests((authorizeHttpRequests) ->
+                        authorizeHttpRequests.anyRequest().permitAll());
+/** enable when frontend is done
         http.csrf((csrf) -> csrf.disable())
                 .cors(withDefaults())
                 .sessionManagement((sessionManagement) -> sessionManagement.
@@ -86,7 +90,7 @@ public class SecurityConfig {
                         UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling((exceptionHandling) -> exceptionHandling.
                         authenticationEntryPoint(exceptionHandler));
-
+*/
         return http.build();
     }
 
