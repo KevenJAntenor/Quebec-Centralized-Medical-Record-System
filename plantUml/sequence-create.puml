@@ -3,21 +3,24 @@
 participant "RAMQ" as RAMQ
 participant "System" as System
 participant "Database" as Database
+participant "MedicalFile" as MedFile
 
 RAMQ -> System: sendPatientInformation(patientInformation)
 activate System
 System -> System: validatePatientInformation(patientInformation)
 alt Information is valid
-    System -> Database: createMedicalFile(Information)
+    System -> MedFile: new(patientInformation)
+    activate MedFile
+    System -> Database: createMedicalFile(MedicalFile)
     activate Database
     alt Unique Constraint Violation
-    Database -> Database: insertIntoTable(Information)
-
+        Database -> Database: insertIntoTable(patientInformation, MedicalFile)
         Database --> System: "Unique Constraint Violation"
         System --> RAMQ: makeResponse("409 Conflict")
     else File Created
-        Database --> System: File
-        System --> RAMQ: makeResponse(File, "201")
+        Database -> Database: insertIntoTable(patientInformation, MedicalFile)
+        System --> RAMQ: makeResponse(MedicalFile, "201")
+        deactivate MedFile
     end
     deactivate Database
 else Information is not valid

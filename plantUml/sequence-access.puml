@@ -3,6 +3,7 @@
 participant "User" as User
 participant "System" as System
 participant "Database" as Database
+participant "MedicalFile" as MedFile
 
 User -> System: getMedicalFile(healthInsuranceCode)
 activate System
@@ -12,7 +13,10 @@ alt File code is valid
     activate Database
     alt File is available
         Database --> System: medical_file
-        System --> User: makeResponse(medical_file, "200 OK")
+        System --> MedFile: new(medical_file)
+        activate MedFile
+        System --> User: makeResponse(MedicalFile, "200 OK")
+        deactivate MedFile
     else File is not available
         Database --> System: None
         System --> User: makeResponse("404 Not Found")

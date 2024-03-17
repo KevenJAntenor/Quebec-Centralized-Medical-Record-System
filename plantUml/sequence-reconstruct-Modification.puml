@@ -11,12 +11,18 @@ activate System
 System -> MedicalFileDatabase: getMedicalFile(file)
 activate MedicalFileDatabase
 alt File Found
-    MedicalFileDatabase --> System: MedicalFile
+    MedicalFileDatabase --> System: medicalFile
+    System --> MedicalFile: new(medicalFile)
+    activate MedicalFile
     System -> ModificationArchiveDatabase: getFileModifications(modifications)
     ModificationArchiveDatabase --> System: modifications
-    System -> System : getModificationsUpTo(modifications, modification)
+    System -> Modification: new(modification)
+    activate Modification
+    System -> System : getModificationsUpTo(Modification)
     System -> System : revertMedicalFile(medicalFile, modifications)
     System -> RAMQ: makeResponse(medicalFile, "200 OK")
+    deactivate Modification
+    deactivate MedicalFile
 else File Not Found
     MedicalFileDatabase --> System: "File Not Found"
     System -> RAMQ: makeResponse("404 Not Found")
