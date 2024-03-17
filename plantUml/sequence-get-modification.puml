@@ -12,8 +12,8 @@ System -> System: validateFile(healthInsuranceNumber)
 alt healthInsuranceNumber is valid
     System -> MedicalDatabase: checkFileExists(healthInsuranceNumber)
     activate MedicalDatabase
+    MedicalDatabase --> System: "File Exists"
     alt File Exists
-        MedicalDatabase --> System: "File Exists"
         deactivate MedicalDatabase
         System -> Database: getModifications(healthInsuranceNumber)
         activate Database
