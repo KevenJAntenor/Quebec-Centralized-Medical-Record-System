@@ -3,21 +3,29 @@
 participant "Doctor" as Doctor
 participant "System" as System
 participant "Database" as Database
+participant "MedicalFile" as MedFile
 
 activate Doctor
 Doctor -> System: modifyMedicalFile(file, Modifications)
 activate System
 System -> System: validateCredentials(credentials)
 alt Doctor's credentials are valid
-    System -> System: validateChanges(Modifications)
+    System -> Modification: new(Modifications)
+    activate Modification
+    Modification -> Modification: validateChanges()
+    Modification -> System: AreModificationValid 
     alt Modifications are valid
-        System -> Database: modifyMedicalFile(file, Modifications)
+        System -> MedFile: new(file)
+        activate MedFile
+        System -> Database: modifyMedicalFile(MedicalFile, Modification)
         activate Database
-        Database --> Database: patchFile(file, Modifications)
-        Database --> System: File
-        System -> Database: archiveModification(file, Modifications)
-        Database --> System: Modifications
-        System --> Doctor: makeResponse(Modifications, "200 OK")
+        Database --> Database: patchFile(MedicalFile, Modifications)
+        Database --> System: MedicalFile
+        System -> Database: archiveModification(MedicalFile, Modification)
+        Database --> System: Modification
+        deactivate Modification
+        System --> Doctor: makeResponse(MedicalFile, "200 OK")
+        deactivate MedFile
     else Modifications are not valid
         System --> Doctor: makeResponse("400 Bad Request")
     end

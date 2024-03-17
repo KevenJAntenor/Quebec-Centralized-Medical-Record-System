@@ -12,12 +12,21 @@ System -> MedicalDatabase: checkFileExists(healthInsuranceNumber)
 activate MedicalDatabase
 alt File Exists
     MedicalDatabase -> System: File
+    System -> MedicalFile: new(File)
+    activate MedicalFile
     System -> Database: getAllModificationsAfterDate(date)
+    activate Database
     Database --> System: Modifications
+    System -> Modification: new(Modifications)
+    activate Modification
     System -> System: revertMedicalFile(File, Modifications)
     System --> RAMQ: makeResponse(MedicalFile, "200 OK")
+    deactivate MedicalFile
+    deactivate Modification
+    deactivate Database
 else File Does Not Exist
     MedicalDatabase --> System: "File not found"
+    deactivate MedicalDatabase
     System --> RAMQ: makeResponse("404 Not Found")
 end
 
