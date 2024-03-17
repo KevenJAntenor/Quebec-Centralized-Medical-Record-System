@@ -14,13 +14,13 @@ alt Information is valid
     System -> Database: createMedicalFile(MedicalFile)
     activate Database
     alt Unique Constraint Violation
-    Database -> Database: insertIntoTable(Information)
-
+        Database -> Database: insertIntoTable(patientInformation, MedicalFile)
         Database --> System: "Unique Constraint Violation"
         System --> RAMQ: makeResponse("409 Conflict")
     else File Created
-        deactivate MedFile
+        Database -> Database: insertIntoTable(patientInformation, MedicalFile)
         System --> RAMQ: makeResponse(MedicalFile, "201")
+        deactivate MedFile
     end
     deactivate Database
 else Information is not valid
