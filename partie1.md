@@ -2,6 +2,20 @@
 
 ## Présentation
 
+### Équipe 9
+
+- Dominique Elias ELID14019800
+- Emil Surkhaev SURE89080008
+- Youenn Pierre-Justin PIEY78070308
+- Keven Jude Anténor ANTK08129003
+
+### Informations du cours
+
+- **Cours :** INF5153 groupe 30
+- **Titre :** Génie logiciel: conception
+- **Professeur :** Gnagnely Serge Dogny
+- **Date :** 17 mars 2024
+
 SantéConnect est un système de gestion de dossiers médicaux comprenant un portail web et mobile pour les patients, une application installée pour les médecins et les professionnels de la santé et un portail API pour la RAMQ.
 L'application est conçue pour fournir un dossier médical centralisé aux patients du Québec.
 Les dossiers médicaux sont créés par la RAMQ, et sont accessibles par le patient et le médecin.
