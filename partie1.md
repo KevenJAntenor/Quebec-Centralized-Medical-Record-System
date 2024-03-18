@@ -47,35 +47,46 @@ Ce diagramme de classes représente uniquement le modèle de domaine de l'applic
 
 ## Diagrammes de Sequence
 
-createMedicalFile
+CreateMedicalFile
+
+Ici, la RAMQ communique avec le systeme afin d'ajouter un dossier medical d'un utilisateur venant de s'inscrire a la RAMQ. 
+La RAMQ envoie donc les informations de l'utilisateur au system qui va s'occuper de valider ses informatinos puis de creer un nouvel utilisateur et l'ajouter a la base de données
 
 ![Diagrammes de Séquence](./plantUml/sequence-create.png)
 
-accessMedicalFile
+AccessMedicalFile
+
+Ici, l'utilisateur veut acceder a un dossier medical. Il envoie donc une requete au system qui va verifier si le dossier medicale est present. Selon si tout est valide, l'utilisateur recoit le fichier correctement ou alors il recoit un message d'erreur
 
 ![Diagrammes de Séquence](./plantUml/sequence-access.png)
 
-modifyCoordinates
+ModifyCoordinates
+
+Lorsqu'un patient souhaite modifier ses coordonnées, il lance une requete au system qui va valider la connexion du patient ainsi que ces coordonnes puis va ensoite retourner les informations du patient modifier ou alors un message d'erreur si la requete n'est pas valide
 
 ![Diagrammes de Séquence](./plantUml/sequence-modify-coordinates.png)
 
-modifyMedicalFile and archiveModification
+ModifyMedicalFile and archiveModification
+
+Ici, le docteur souhaite modifier le dossier medical d'un patient. Le system verifie que les informations du docteurs sont valides et que les changements sont valides puis si c'est correct, le fichier medical est modifier et les modifications faites sont archivees. 
+Dans le cas ou se serait invalide, le system retourne un message d'erreur a l'utilisateur
 
 ![Diagrammes de Séquence](./plantUml/sequence-modify.png)
 
-getModifications
+GetModifications
+Ici, la ramq souhaite recuperer certains modifications associees a un dossier. Le system va verifier que le dossier existe puis envoyer les modifications a la ramq. Dans le cas ou le fichier n'existe pas ou le numero d'assurance social est invalide, il lui retourne un message d'erreur.
 
 ![Diagrammes de Séquence](./plantUml/sequence-get-modification.png)
 
-reconstructMedicalFileFromModification
+ReconstructMedicalFileFromModification
+La RAMQ a la possibilite de reconstruire un fichier a partir d'une modifications passee. Ici, le system recupere le fichier medical ainsi que les modifications faite depuis la modification choisie par la RAMQ. Ensuite le system revert les changements effectues depuis cette date et retourne le nouveau dossier modifier.
 
 ![Diagrammes de Séquence](./plantUml/sequence-reconstruct-Modification.png)
 
 reconstructMedicalFileFromDate
+La RAMQ a aussi la possibilite de reconstruire un fichier a partir d'une date. Ici, le system recupere le fichier medical ainsi que les modifications faite depuis cette date. Ensuite le system revert les changements effectues depuis cette date et retourne le nouveau dossier modifier.
 
 ![Diagrammes de Séquence](./plantUml/sequence-reconstrunct-Date.png)
-
-
 
 ## Diagrammes de Paquetage
 
