@@ -1,3 +1,5 @@
+image: maven:latest
+
 stages:
   - build
   - test
