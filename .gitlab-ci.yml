@@ -1,0 +1,15 @@
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - cd backend
+    - ./mvnw clean package
+
+test:
+  stage: test
+  script:
+    - cd backend
+    - ./mvnw test
