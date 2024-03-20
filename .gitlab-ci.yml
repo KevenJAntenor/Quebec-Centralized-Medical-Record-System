@@ -1,6 +1,6 @@
 stages:
-  - build_backend
-  - test_backend
+  - build
+  - test
 
 build_backend:
     stage: build
