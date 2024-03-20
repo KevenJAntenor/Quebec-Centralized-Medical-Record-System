@@ -1,17 +1,6 @@
 stages:
   - build_backend
-  - test_frontend
-
-build_backend:
-    stage: build
-    image: maven:3.8.4-openjdk-17
-    script:
-        - cd backend
-        - chmod +x mvnw
-        - ./mvnw clean package -X
-        - ls -la target
-    artifacts:
-        paths:
+  - test_backend
 
 build_backend:
     stage: build
