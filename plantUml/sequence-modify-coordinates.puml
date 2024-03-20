@@ -8,11 +8,13 @@ Patient -> System: modifyCoordinates()
 activate System
 System -> System: validatePatientCredentials(credentials)
 alt Patient's credentials are valid
-    System -> System: validateNewCoordites(newCoordinates)
+    System -> Coordinates: new(newCoordinates)
+    Coordinates -> Coordinates: validateNewCoordites(newCoordinates)
+    Coordinates -> System: NewCoordinatesValid
     alt newCoordinates are valid
-        System -> Database: updateUserCoordinates(newCoordinates)
+        System -> Database: updateUserCoordinates(Coordinates)
         activate Database
-        Database --> Database: patchUser(newCoordinates)
+        Database --> Database: patchUser(Coordinates)
         Database --> System: User
         deactivate Database
         System --> Patient: makeResponse(User, "200 OK")
