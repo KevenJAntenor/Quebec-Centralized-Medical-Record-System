@@ -21,10 +21,11 @@ one sqlite database is used for production, and an h2 database, is used for test
 ### Java dependencies (managed by Maven) are: 
 
 - spring-boot (for REST API)
+- springdoc-openapi-ui (for OpenAPI documentation)
+- hibernate (for ORM)
 - junit (for testing)
 - mockito (for mocking)
 - JWT (for JSON Web Tokens)
 - sqlite-jdbc (for database)
-- database Rider (for testing database)
-- sonarqube (for code quality)
-- Fuzzing (for black box testing)
+- lombok (for less boilerplate code)
+- h2 (for databse in-memory testing)
