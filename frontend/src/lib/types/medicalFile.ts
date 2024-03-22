@@ -1,6 +1,9 @@
+import type { Patient } from "./patient";
+
 export type MedicalFile = {
     id?: number;
     insuranceNumber?: string;
-    // TODO: Add more fields (patient and lists of medical records and visits)
+    patient?: Patient;
+    // TODO: Add more fields (lists of medical records and visits)
   }
   

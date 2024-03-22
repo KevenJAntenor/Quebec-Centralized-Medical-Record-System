@@ -7,15 +7,19 @@
   
   <div class="row desktop">
     <div class="column">
-      <Item name="Id" value={medicalFile?.id} />
-      <Item name="InsuranceNumber" value={medicalFile?.insuranceNumber} />
+      <Item name="Insurance Number" value={medicalFile?.insuranceNumber} />
+      <Item name="Patient First Name" value={medicalFile?.patient?.firstName} />
+      <Item name="Patient Last Name" value={medicalFile?.patient?.lastName} />
+      <Item name="Date of Birth" value={medicalFile?.patient?.dateOfBirth} />
     </div>
 
   </div>
   
   <div class="column mobile">
-    <Item name="Id" value={medicalFile?.id} />
     <Item name="InsuranceNumber" value={medicalFile?.insuranceNumber} />
+    <Item name="Patient First Name" value={medicalFile?.patient?.firstName} />
+    <Item name="Patient Last Name" value={medicalFile?.patient?.lastName} />
+    <Item name="Date of Birth" value={medicalFile?.patient?.dateOfBirth} />
   </div>
   
   <style>
