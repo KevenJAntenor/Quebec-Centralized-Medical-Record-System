@@ -37,12 +37,10 @@ public class Patient {
     @Column(name = "city_of_birth")
     private String cityOfBirth;
 
-    // @ManyToOne
-    // @JoinColumn(name = "coordinate_id")
-    // private Coordinate coordinate;
+    @OneToOne
+    private Coordinate coordinate;
 
-
-    public Patient(String lastName, String firstName, String dateOfBirth, String gender, String knownParent1, String knownParent2, String cityOfBirth) {
+    public Patient(String lastName, String firstName, String dateOfBirth, String gender, String knownParent1, String knownParent2, String cityOfBirth, Coordinate coordinate) {
         super();
         this.lastName = lastName;
         this.firstName = firstName;
@@ -51,5 +49,6 @@ public class Patient {
         this.knownParent1 = knownParent1;
         this.knownParent2 = knownParent2;
         this.cityOfBirth = cityOfBirth;
+        this.coordinate = coordinate;
     }
 }
