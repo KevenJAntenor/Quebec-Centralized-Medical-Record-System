@@ -9,6 +9,7 @@ build_backend:
     image: maven:3.8.4-openjdk-17
     script:
         - cd backend
+        - mvn -N io.takari:maven:wrapper
         - chmod +x mvnw
         - ./mvnw clean package -X
         - ls -la target
