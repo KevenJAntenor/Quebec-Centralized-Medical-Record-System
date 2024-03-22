@@ -5,6 +5,17 @@ import the backend folder as a maven project in IntelliJ (or any other IDE)
 
 ### how to run the backend
 
+You must have maven installed on your machine.
+to creat the spring-boot executable file run with maven:
+```sh
+mvn -N io.takari:maven:wrapper
+```
+
+Ensure that the wrapper is executable:
+```sh
+chmod +x mvnw
+```
+
 to start spring-boot application:
 ```sh
 ./mvnw clean spring-boot:run
