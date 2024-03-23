@@ -6,24 +6,15 @@ import the backend folder as a maven project in IntelliJ (or any other IDE)
 ### how to run the backend
 
 You must have maven installed on your machine.
-to creat the spring-boot executable file run with maven:
-```sh
-mvn -N io.takari:maven:wrapper
-```
-
-Ensure that the wrapper is executable:
-```sh
-chmod +x mvnw
-```
 
 to start spring-boot application:
 ```sh
-./mvnw clean spring-boot:run
+mvn spring-boot:run
 ```
 
 tp run the tests:
 ```sh
-./mvnw clean verify
+mvn clean verify
 ```
 
 database is created automatically when running spring-boot application.
@@ -40,3 +31,7 @@ one sqlite database is used for production, and an h2 database, is used for test
 - sqlite-jdbc (for database)
 - lombok (for less boilerplate code)
 - h2 (for databse in-memory testing)
+
+### OpenAPI documentation
+
+The OpenAPI documentation is available at [swagger-ui](http://localhost:8080/swagger-ui.html)
