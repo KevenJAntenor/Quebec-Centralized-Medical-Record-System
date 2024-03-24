@@ -3,6 +3,8 @@ package com.santeConnect.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 //@ToString
 @Getter
 @Setter
@@ -21,6 +23,9 @@ public class MedicalFile {
 
     @OneToOne
     private Patient patient;
+
+    @OneToMany
+    private List<MedicalVisit> medicalVisitList;
 
     public MedicalFile(String insuranceNumber, Patient patient) {
         super();
