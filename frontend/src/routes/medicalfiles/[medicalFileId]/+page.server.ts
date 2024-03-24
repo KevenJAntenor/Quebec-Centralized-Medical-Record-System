@@ -7,7 +7,7 @@ import { fail, redirect } from '@sveltejs/kit';
 // @ts-ignore
 export const load: PageServerLoad = async ({ fetch, params }) => {
     const { medicalFileId } = params;
-    const res = await fetch(`${API_URL}/api/medicalFiles/${medicalFileId}`, {
+    const res = await fetch(`${API_URL}/medical-files/${medicalFileId}`, {
         credentials: 'include',
     });
     return {
