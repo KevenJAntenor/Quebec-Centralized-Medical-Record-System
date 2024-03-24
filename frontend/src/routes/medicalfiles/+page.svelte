@@ -105,7 +105,11 @@
   <Body>
     {#each medicalFiles as medicalFile (medicalFile.id)}
       <Row>
-        <Cell>{medicalFile.insuranceNumber}</Cell>
+        <Cell>
+          <a href={`/medicalfiles/${medicalFile.id}`}>
+          {medicalFile.insuranceNumber}
+          </a>
+        </Cell>
         <Cell>{getFullName(medicalFile)}</Cell>
         <Cell>{medicalFile.patient.coordinate.email}</Cell>
         <Cell>{medicalFile.patient.coordinate.personalPhoneNumber}</Cell>
