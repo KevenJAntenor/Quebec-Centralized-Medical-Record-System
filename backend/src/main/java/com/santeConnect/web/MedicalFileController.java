@@ -14,7 +14,7 @@ public class MedicalFileController {
         this.repository = repository;
     }
 
-    @GetMapping("medicalFiles")
+    @GetMapping("medical-files")
     public Iterable<MedicalFile> getMedicalFiles() {
         return repository.findAll();
     }
