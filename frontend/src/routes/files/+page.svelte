@@ -1,7 +1,7 @@
 <script lang="ts">
     import MedicalFileInfo from '$lib/components/medical-file-info.svelte';
     import type { PageData } from './$types';
-  
+
     export let data: PageData;
   
     $: ({ medicalFiles } = data);
@@ -13,9 +13,14 @@
   
 <section>
     <h1>Medical Files</h1>
-    {#each medicalFiles as medicalFile (medicalFile.id)}
-        <MedicalFileInfo {medicalFile} />
-    {/each}
+    
+    {#if medicalFiles.length === 0}
+        <p>No medical files in records.</p>
+    {:else}
+        {#each medicalFiles as medicalFile (medicalFile.id)}
+            <MedicalFileInfo {medicalFile} />
+        {/each}
+    {/if}
 </section>
   
   <style>
