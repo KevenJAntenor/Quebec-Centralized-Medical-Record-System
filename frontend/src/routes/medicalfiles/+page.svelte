@@ -1,15 +1,6 @@
 <script lang="ts">
 	  import type { MedicalFile } from '$lib/types/medicalFile';
     import type { PageData } from './$types';
-
-    export let data: PageData;
-  
-    $: ({ medicalFiles } = data);
-
-    const getFullName = (medicalFile: MedicalFile) => {
-        return `${medicalFile.patient?.firstName} ${medicalFile.patient?.lastName}`;
-    }
-
     import DataTable, {
     Head,
     Body,
@@ -17,8 +8,33 @@
     Cell,
     Label,
     SortValue,
+    Pagination,
   } from '@smui/data-table';
   import IconButton from '@smui/icon-button';
+  // import { Label } from '@smui/common';
+  import Select, { Option } from '@smui/select';
+
+  let rowsPerPage = 10;
+  let currentPage = 0;
+
+  $: start = currentPage * rowsPerPage;
+  $: end = Math.min(start + rowsPerPage, medicalFiles.length);
+  $: slice = medicalFiles.slice(start, end);
+  $: lastPage = Math.max(Math.ceil(medicalFiles.length / rowsPerPage) - 1, 0);
+
+  $: if (currentPage > lastPage) {
+    currentPage = lastPage;
+  }
+
+  export let data: PageData;
+  
+    $: ({ medicalFiles } = data);
+
+    const getFullName = (medicalFile: MedicalFile) => {
+        return `${medicalFile.patient?.firstName} ${medicalFile.patient?.lastName}`;
+    }
+
+
 
   let sort: keyof MedicalFile = 'id';
   let sortDirection: Lowercase<keyof typeof SortValue> = 'ascending';
@@ -96,6 +112,48 @@
       </Row>
     {/each}
   </Body>
+  <Pagination slot="paginate">
+    <svelte:fragment slot="rowsPerPage">
+      <Label>Rows Per Page</Label>
+      <Select variant="outlined" bind:value={rowsPerPage} noLabel>
+        <Option value={10}>10</Option>
+        <Option value={25}>25</Option>
+        <Option value={100}>100</Option>
+      </Select>
+    </svelte:fragment>
+    <svelte:fragment slot="total">
+      {start + 1}-{end} of {medicalFiles.length}
+    </svelte:fragment>
+
+    <IconButton
+      class="material-icons"
+      action="first-page"
+      title="First page"
+      on:click={() => (currentPage = 0)}
+      disabled={currentPage === 0}>first_page</IconButton
+    >
+    <IconButton
+      class="material-icons"
+      action="prev-page"
+      title="Prev page"
+      on:click={() => currentPage--}
+      disabled={currentPage === 0}>chevron_left</IconButton
+    >
+    <IconButton
+      class="material-icons"
+      action="next-page"
+      title="Next page"
+      on:click={() => currentPage++}
+      disabled={currentPage === lastPage}>chevron_right</IconButton
+    >
+    <IconButton
+      class="material-icons"
+      action="last-page"
+      title="Last page"
+      on:click={() => (currentPage = lastPage)}
+      disabled={currentPage === lastPage}>last_page</IconButton
+    >
+  </Pagination>
 </DataTable>
 
   <style>
