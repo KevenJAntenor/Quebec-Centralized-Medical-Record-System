@@ -98,7 +98,7 @@ let sort: keyof MedicalVisit = 'id';
     treatment: '',
   };
 
-  interface formDataMedicalVisit extends FormData, trainerFields {
+  interface formDataMedicalVisit extends FormData, medicalVisitFields {
         success: boolean;
         message: string;
     };
@@ -209,7 +209,7 @@ let sort: keyof MedicalVisit = 'id';
       </Row>
     </Head>
     <Body>
-      {#each medicalVisitList as medicalVisit (medicalVisit.id)}
+      {#each slice as medicalVisit (medicalVisit.id)}
         <Row>
           <Cell>
             <a href={`/medicalfiles/${medicalFile.id}/${medicalVisit.id}`}>

@@ -14,6 +14,10 @@
   // import { Label } from '@smui/common';
   import Select, { Option } from '@smui/select';
 
+  export let data: PageData;
+  
+    $: ({ medicalFiles } = data);
+
   let rowsPerPage = 10;
   let currentPage = 0;
 
@@ -25,10 +29,6 @@
   $: if (currentPage > lastPage) {
     currentPage = lastPage;
   }
-
-  export let data: PageData;
-  
-    $: ({ medicalFiles } = data);
 
     const getFullName = (medicalFile: MedicalFile) => {
         return `${medicalFile.patient?.firstName} ${medicalFile.patient?.lastName}`;
@@ -103,7 +103,7 @@
     </Row>
   </Head>
   <Body>
-    {#each medicalFiles as medicalFile (medicalFile.id)}
+    {#each slice as medicalFile (medicalFile.id)}
       <Row>
         <Cell>
           <a href={`/medicalfiles/${medicalFile.id}`}>
