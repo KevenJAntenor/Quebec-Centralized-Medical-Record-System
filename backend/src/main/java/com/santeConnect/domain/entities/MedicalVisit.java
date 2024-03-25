@@ -1,5 +1,6 @@
 package com.santeConnect.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,6 +34,7 @@ public class MedicalVisit {
 
     private String notes;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "medical_file_id")
     private MedicalFile medicalFile;

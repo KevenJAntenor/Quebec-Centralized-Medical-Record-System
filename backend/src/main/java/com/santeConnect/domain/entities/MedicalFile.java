@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 //@ToString
 @Getter
 @Setter
@@ -24,6 +26,7 @@ public class MedicalFile {
     @OneToOne
     private Patient patient;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "medicalFile")
     private List<MedicalVisit> medicalVisitList;
 
