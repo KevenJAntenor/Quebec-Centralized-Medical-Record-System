@@ -79,7 +79,7 @@
   bind:sort
   bind:sortDirection
   on:SMUIDataTable:sorted={handleSort}
-  table$aria-label="User list"
+  table$aria-label="Medical File list"
   style="width: 100%;"
 >
   <Head>
