@@ -6,3 +6,6 @@
 
 # ignore target folder
 target/
+
+# ignore generated medical_file.db
+medical_file.db

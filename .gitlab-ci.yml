@@ -1,0 +1,25 @@
+image: maven:latest
+
+stages:
+  - build
+  - test
+
+build_backend:
+    stage: build
+    image: maven:3.8.4-openjdk-17
+    script:
+        - cd backend
+        - mvn clean package -DskipTests
+        - ls -la target
+    artifacts:
+        paths:
+            - backend/target/*.jar
+
+test_backend:
+    stage: test
+    image: maven:3.8.4-openjdk-17
+    script:
+        - cd backend
+        - mvn clean test
+
+
