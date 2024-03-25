@@ -1,0 +1,11 @@
+{
+	"/": [
+		"src/routes/+page.server.ts"
+	],
+	"/medicalfiles": [
+		"src/routes/medicalfiles/+page.server.ts"
+	],
+	"/medicalfiles/[medicalFileId]": [
+		"src/routes/medicalfiles/[medicalFileId]/+page.server.ts"
+	]
+}
