@@ -7,7 +7,7 @@
     Body,
     Row,
     Cell,
-    Label,
+    // Label,
     SortValue,
     Pagination,
   } from '@smui/data-table';
@@ -16,6 +16,10 @@
   // import { Label } from '@smui/common';
   import Select, { Option } from '@smui/select';
 // import type { PageData } from './$types';
+import Button, { Label } from '@smui/button';
+
+
+export let form: formDataTrainer;
 
 export let data: PageServerData;
 
@@ -36,6 +40,11 @@ let rowsPerPage = 10;
     currentPage = lastPage;
   }
 
+  $: if (medicalVisitList.length > rowsPerPage) {
+    currentPage = 1;
+  } else {
+    currentPage = 0;
+  }
 
 
 
@@ -73,6 +82,58 @@ let sort: keyof MedicalVisit = 'id';
     medicalVisitList = medicalVisitList;
 }
 
+    interface medicalVisitFields {
+    establishment: string;
+    doctor: string;
+    dateOfVisit: string;
+    diagnostic: string;
+    treatment: string;
+    };
+
+  const formData: medicalVisitFields = {
+    establishment: '',
+    doctor: '',
+    dateOfVisit: '',
+    diagnostic: '',
+    treatment: '',
+  };
+
+  interface formDataMedicalVisit extends FormData, trainerFields {
+        success: boolean;
+        message: string;
+    };
+
+    let establishment = '';
+  let doctor = '';
+  let dateOfVisit = '';
+  let diagnostic = '';
+  let treatment = '';
+  let summary = '';
+  let notes = '';
+
+  async function submitForm() {
+    const id = medicalFile.id;
+    const medicalVisit = { establishment, doctor, dateOfVisit, diagnostic, treatment, summary, notes };
+    const response = await fetch(`http://localhost:8080/medical-files/${id}/medical-visits`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(medicalVisit)
+    });
+    if (!response.ok) {
+      console.error('Failed to create medical visit', await response.text());
+      return;
+    }
+      // Fetch the updated MedicalFile
+  const updatedMedicalFileResponse = await fetch(`http://localhost:8080/medical-files/${id}`);
+  if (!updatedMedicalFileResponse.ok) {
+    console.error('Failed to fetch updated MedicalFile', await updatedMedicalFileResponse.text());
+    return;
+  }
+
+  // Update the medicalFile variable
+  medicalFile = await updatedMedicalFileResponse.json();
+  }
+
 </script>
 
     <svelte:head>
@@ -87,9 +148,33 @@ let sort: keyof MedicalVisit = 'id';
         </Paper>
         <Paper>
           <Title>Medical Visit List</Title>
+          <Content>
+        
+            </Content>
         </Paper>
 
 
+        <div class="new">
+            <div class="top-section">
+              <h3>Add new medical visit</h3>
+              <!-- <Button color="secondary" variant="raised">
+                <Label>Add Medical Visit</Label>
+              </Button>   -->
+            </div>
+            <div class="container">
+              <form on:submit|preventDefault={submitForm}>
+                <input bind:value={establishment} placeholder="Establishment" />
+                <input bind:value={doctor} placeholder="Doctor" />
+                <input bind:value={dateOfVisit} placeholder="Date of Visit" />
+                <input bind:value={diagnostic} placeholder="Diagnostic" />
+                <input bind:value={treatment} placeholder="Treatment" />
+                <input bind:value={summary} placeholder="Summary" />
+                <input bind:value={notes} placeholder="Notes" />
+                <button type="submit">Add Medical Visit</button>
+              </form>
+            </div>
+            </div>
+      
 
     <DataTable
     sortable
@@ -185,6 +270,6 @@ let sort: keyof MedicalVisit = 'id';
   <Paper>
     <Title>Medical History List</Title>
     </Paper>
-    
+
 
 </div>
