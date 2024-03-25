@@ -3,6 +3,10 @@ package com.santeConnect.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 //@ToString
 @Getter
 @Setter
@@ -21,6 +25,10 @@ public class MedicalFile {
 
     @OneToOne
     private Patient patient;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "medicalFile", cascade = CascadeType.ALL)
+    private List<MedicalVisit> medicalVisitList;
 
     public MedicalFile(String insuranceNumber, Patient patient) {
         super();

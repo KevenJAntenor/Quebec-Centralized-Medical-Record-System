@@ -1,3 +1,5 @@
+import type { Coordinate } from './coordinate';
+
 export type Patient = {
     id?: number;
     lastName?: string;
@@ -7,5 +9,5 @@ export type Patient = {
     knownParent1?: string;
     knownParent2?: string;
     cityOfBirth?: string;
+    coordinate?: Coordinate;
   }
-  
