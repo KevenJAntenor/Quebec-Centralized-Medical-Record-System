@@ -33,6 +33,10 @@ public class MedicalVisit {
 
     private String notes;
 
+    @ManyToOne
+    @JoinColumn(name = "medical_file_id")
+    private MedicalFile medicalFile;
+
     public MedicalVisit(String establishment, String doctor, String dateOfVisit, String diagnostic, String treatment, String summary, String notes) {
         this.establishment = establishment;
         this.doctor = doctor;

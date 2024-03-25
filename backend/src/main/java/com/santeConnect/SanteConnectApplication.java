@@ -60,12 +60,6 @@ public class SanteConnectApplication implements CommandLineRunner {
 		MedicalVisit visit3 = new MedicalVisit("Establishment 3", "Doctor 3", "2022-03-01", "Diagnostic 3", "Treatment 3", "Summary 3", "Notes 3");
 		MedicalVisit visit4 = new MedicalVisit("Establishment 4", "Doctor 4", "2022-04-01", "Diagnostic 4", "Treatment 4", "Summary 4", "Notes 4");
 
-		List<MedicalVisit> medicalVisits1 = Arrays.asList(visit1, visit2);
-		List<MedicalVisit> medicalVisits2 = Arrays.asList(visit3, visit4);
-
-		medicalVisitRepository.saveAll(medicalVisits1);
-		medicalVisitRepository.saveAll(medicalVisits2);
-
 		Coordinate coordinate1 = new Coordinate();
 		coordinate1.setAddress("2020 Rue Saint-Urbain, Montréal, QC H2X 4E1, Canada");
 		coordinate1.setPersonalPhoneNumber("+1(514)123-1234");
@@ -105,16 +99,30 @@ public class SanteConnectApplication implements CommandLineRunner {
 		MedicalFile medicalFile1 = new MedicalFile();
 		medicalFile1.setInsuranceNumber("ABCD12345678");
 		medicalFile1.setPatient(patient1);
-		medicalFile1.setMedicalVisitList(medicalVisits1);
 
-		medicalFileRepository.save(medicalFile1);
 
 		MedicalFile medicalFile2 = new MedicalFile();
 		medicalFile2.setInsuranceNumber("BCDE12345678");
 		medicalFile2.setPatient(patient2);
+
+		visit1.setMedicalFile(medicalFile1);
+		visit2.setMedicalFile(medicalFile1);
+		visit3.setMedicalFile(medicalFile2);
+		visit4.setMedicalFile(medicalFile2);
+
+		List<MedicalVisit> medicalVisits1 = Arrays.asList(visit1, visit2);
+		List<MedicalVisit> medicalVisits2 = Arrays.asList(visit3, visit4);
+
+		medicalFile1.setMedicalVisitList(medicalVisits1);
 		medicalFile2.setMedicalVisitList(medicalVisits2);
 
+
+		medicalFileRepository.save(medicalFile1);
 		medicalFileRepository.save(medicalFile2);
+
+		medicalVisitRepository.saveAll(medicalVisits1);
+		medicalVisitRepository.saveAll(medicalVisits2);
+
 
 //		 Fetch all cars and log to console
 		for (MedicalFile medicalFile : medicalFileRepository.findAll()) {

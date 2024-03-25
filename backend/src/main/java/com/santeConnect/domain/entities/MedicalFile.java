@@ -24,7 +24,7 @@ public class MedicalFile {
     @OneToOne
     private Patient patient;
 
-    @OneToMany
+    @OneToMany(mappedBy = "medicalFile")
     private List<MedicalVisit> medicalVisitList;
 
     public MedicalFile(String insuranceNumber, Patient patient) {
