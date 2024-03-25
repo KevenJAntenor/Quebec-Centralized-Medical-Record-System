@@ -19,6 +19,7 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
+		"@smui/button": "^7.0.0-beta.18",
 		"@smui/data-table": "^7.0.0-beta.18",
 		"@smui/paper": "^7.0.0-beta.18",
 		"@sveltejs/adapter-auto": "^3.0.0",
