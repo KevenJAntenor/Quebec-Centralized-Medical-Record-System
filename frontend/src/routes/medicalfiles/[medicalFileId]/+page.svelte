@@ -83,6 +83,12 @@
         medicalVisitList = medicalVisitList;
     }
 
+    let showModal = false;
+
+    function toggleModal() {
+        showModal = !showModal;
+    }
+
     interface medicalVisitFields {
         establishment: string;
         doctor: string;
@@ -178,12 +184,6 @@
         // Update the medicalFile variable
         medicalFile = await updatedMedicalFileResponse.json();
     }
-
-    let showModal = false;
-
-    function toggleModal() {
-        showModal = !showModal;
-}
 </script>
 
 <svelte:head>
@@ -211,11 +211,7 @@
     </Paper>
 
     {#if showModal}
-
     <div class="modal">
-        <!-- <div class="top-section">
-            <h3>Add new medical visit</h3>
-        </div> -->
         <div class="container">
             <form on:submit|preventDefault={submitForm}>
                 <Textfield variant="outlined" bind:value={establishment} label="Establishment">
