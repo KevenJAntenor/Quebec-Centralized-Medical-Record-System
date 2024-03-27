@@ -7,5 +7,5 @@ export type MedicalFile = {
     patient?: Patient;
     // TODO: Add more fields (lists of medical records and visits)
     medicalVisitList?: MedicalVisit[];
-  }
-  
+}
+
