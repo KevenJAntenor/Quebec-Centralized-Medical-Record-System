@@ -107,27 +107,30 @@
     let treatment = "";
     let summary = "";
     let notes = "";
-
+    
     async function deleteVisit(visitId: number) {
         const id = medicalFile.id;
         const response = await fetch(
-            `${API_URL}/medical-files/${id}/medical-visits`,
+            `http://localhost:8080/medical-files/${id}/medical-visits`,
             {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(visitId),
             },
         );
-        if (!response.ok) {
+        const updatedMedicalFileResponse = await fetch(
+            `${API_URL}/medical-files/${id}`,
+        );
+        if (!updatedMedicalFileResponse.ok) {
             console.error(
-                "Failed to delete medical visit",
-                await response.text(),
+                "Failed to fetch updated MedicalFile",
+                await updatedMedicalFileResponse.text(),
             );
             return;
         }
-        medicalVisitList = medicalVisitList.filter(
-            (visit: MedicalVisit) => visit.id !== visitId,
-        );
+
+        // Update the medicalFile variable
+        medicalFile = await updatedMedicalFileResponse.json();
     }
 
     async function submitForm() {
@@ -158,7 +161,7 @@
         }
         // Fetch the updated MedicalFile
         const updatedMedicalFileResponse = await fetch(
-            `${API_URL}:8080/medical-files/${id}`,
+            `${API_URL}/medical-files/${id}`,
         );
         if (!updatedMedicalFileResponse.ok) {
             console.error(
