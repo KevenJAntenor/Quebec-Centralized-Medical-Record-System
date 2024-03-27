@@ -117,6 +117,16 @@
                 body: JSON.stringify(visitId),
             },
         );
+        if (!response.ok) {
+            console.error(
+                "Failed to delete medical visit",
+                await response.text(),
+            );
+            return;
+        }
+        medicalVisitList = medicalVisitList.filter(
+            (visit: MedicalVisit) => visit.id !== visitId,
+        );
     }
 
     async function submitForm() {

@@ -61,16 +61,16 @@ export const actions: object = {
         });
         return res;
     },
-    deleteVisit: async ({ fetch, request }: RequestEvent) => {
-        const data = await request.formData();
-        const id = data.get('id');
-        const medicalFileId = data.get('medicalFileId')
+    // deleteVisit: async ({ fetch, request }: RequestEvent) => {
+    //     const data = await request.formData();
+    //     const id = data.get('id');
+    //     const medicalFileId = data.get('medicalFileId')
 
-        const res = await fetch(`${API_URL}/medical-files/${medicalFileId}/medical-visits`, {
-            method: 'DELETE',
-            body: JSON.stringify({ id }),
-        });
-        return res;
-    }
+    //     const res = await fetch(`${API_URL}/medical-files/${medicalFileId}/medical-visits`, {
+    //         method: 'DELETE',
+    //         body: JSON.stringify({ id }),
+    //     });
+    //     return res;
+    // }
 };
 
