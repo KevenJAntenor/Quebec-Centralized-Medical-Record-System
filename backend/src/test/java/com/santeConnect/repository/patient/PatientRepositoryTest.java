@@ -1,4 +1,4 @@
-package com.santeConnect.repository.entities;
+package com.santeConnect.repository.patient;
 
 import com.santeConnect.domain.entities.Coordinate;
 import com.santeConnect.domain.entities.Patient;

@@ -1,9 +1,7 @@
-package com.santeConnect.repository.entities;
+package com.santeConnect.repository.patient;
 
-import com.santeConnect.domain.entities.Coordinate;
 import com.santeConnect.domain.entities.MedicalFile;
 import com.santeConnect.domain.entities.MedicalVisit;
-import com.santeConnect.domain.entities.Patient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
