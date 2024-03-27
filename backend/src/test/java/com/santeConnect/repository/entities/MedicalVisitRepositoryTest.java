@@ -46,7 +46,7 @@ public class MedicalVisitRepositoryTest {
 
         medicalVisitList = new ArrayList<>();
         medicalVisitList.add(medicalVisit);
-        
+
         medicalFile.setMedicalVisitList(medicalVisitList);
         medicalFileRepository.save(medicalFile);
         medicalVisit.setMedicalFile(medicalFile);
@@ -55,20 +55,22 @@ public class MedicalVisitRepositoryTest {
     }
 
     @Test
-    void saveMedicalVisit(){
+    void saveMedicalVisit() {
         assertThat(repository.count()).isEqualTo(1);
     }
 
     @Test
-    void assertMedicalFileHasMedicalVisit(){
+    void assertMedicalFileHasMedicalVisit() {
         assertThat(medicalFileRepository.findMedicalFileByInsuranceNumber(insuranceNumber1).isPresent()).isTrue();
-        assertThat(medicalFileRepository.findMedicalFileByInsuranceNumber(insuranceNumber1).get().getMedicalVisitList().size()).isEqualTo(1);
+        assertThat(medicalFileRepository.findMedicalFileByInsuranceNumber(insuranceNumber1).get().getMedicalVisitList()
+                .size()).isEqualTo(1);
     }
 
     @Test
-    void assertMedicalVisitHasMedicalFile(){
+    void assertMedicalVisitHasMedicalFile() {
         assertThat(repository.findById(medicalVisit.getId()).get().getMedicalFile()).isEqualTo(medicalFile);
-        assertThat(repository.findById(medicalVisit.getId()).get().getMedicalFile().getInsuranceNumber()).isEqualTo(insuranceNumber1);
+        assertThat(repository.findById(medicalVisit.getId()).get().getMedicalFile().getInsuranceNumber())
+                .isEqualTo(insuranceNumber1);
     }
 
 }

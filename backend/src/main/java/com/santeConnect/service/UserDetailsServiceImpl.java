@@ -27,8 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         if (user.isPresent()) {
             AppUser currentUser = user.get();
-            builder = org.springframework.security.core
-                    .userdetails.User.withUsername(username);
+            builder = org.springframework.security.core.userdetails.User.withUsername(username);
             builder.password(currentUser.getPassword());
             builder.roles(currentUser.getRole());
         } else {

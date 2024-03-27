@@ -18,11 +18,13 @@ public class PatientRepositoryTest {
 
     @Test
     void savePatient() {
-        Coordinate coordinate = new Coordinate("123, Rue Saint-Estauche, Montréal", "5141231231", "5143456345", "alice@gmail.com");
+        Coordinate coordinate = new Coordinate("123, Rue Saint-Estauche, Montréal", "5141231231", "5143456345",
+                "alice@gmail.com");
 
         coordinateRepository.save(coordinate);
 
-        Patient patient = new Patient("Smiths", "Alice", "1985-12-01", "Female", "Robert Smith", "Susan Smith", "Los Angeles", coordinate);
+        Patient patient = new Patient("Smiths", "Alice", "1985-12-01", "Female", "Robert Smith", "Susan Smith",
+                "Los Angeles", coordinate);
 
         repository.save(patient);
         assertThat(repository.findByFirstName("Alice").isPresent()).isTrue();
@@ -31,14 +33,15 @@ public class PatientRepositoryTest {
 
     @Test
     void deletePatient() {
-        Coordinate coordinate = new Coordinate("123, Rue Saint-Estauche, Montréal", "5141231231", "5143456345", "alice@gmail.com");
+        Coordinate coordinate = new Coordinate("123, Rue Saint-Estauche, Montréal", "5141231231", "5143456345",
+                "alice@gmail.com");
         coordinateRepository.save(coordinate);
-        Patient patient = new Patient("Smiths", "Alice", "1985-12-01", "Female", "Robert Smith", "Susan Smith", "Los Angeles", coordinate);
+        Patient patient = new Patient("Smiths", "Alice", "1985-12-01", "Female", "Robert Smith", "Susan Smith",
+                "Los Angeles", coordinate);
 
         repository.save(patient);
         repository.delete(patient);
         assertThat(repository.findByFirstName("Alice").isEmpty()).isTrue();
     }
-
 
 }

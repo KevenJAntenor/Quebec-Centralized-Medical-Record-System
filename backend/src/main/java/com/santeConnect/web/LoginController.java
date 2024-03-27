@@ -25,9 +25,8 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> getToken(@RequestBody AccountCredentials credentials) {
         // generate token nd send it in the response auth header
-        UsernamePasswordAuthenticationToken creds = new
-                UsernamePasswordAuthenticationToken(credentials.username(),
-                                                    credentials.password());
+        UsernamePasswordAuthenticationToken creds = new UsernamePasswordAuthenticationToken(credentials.username(),
+                credentials.password());
         Authentication auth = authenticationManager.authenticate(creds);
 
         // Generate Token
@@ -36,6 +35,7 @@ public class LoginController {
         return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION,
                 "Bearer" + jwts).header(
                         HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS,
-                "Authorization").build();
+                        "Authorization")
+                .build();
     }
 }

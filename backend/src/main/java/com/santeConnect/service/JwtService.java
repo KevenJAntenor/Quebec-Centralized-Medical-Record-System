@@ -35,8 +35,7 @@ public class JwtService {
     // Get a token from request Authorization header,
     // verify the token, and get username
     public String getAuthUser(HttpServletRequest request) {
-        String token = request.getHeader
-                (HttpHeaders.AUTHORIZATION);
+        String token = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (token != null) {
             String user = Jwts.parserBuilder()

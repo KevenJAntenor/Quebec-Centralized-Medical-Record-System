@@ -1,29 +1,28 @@
 package com.santeConnect.domain.users;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
 //@ToString
 @Getter
 @Setter
-//@AllArgsConstructor
+// @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class AppUser {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(nullable=false, updatable=false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false, updatable = false)
     private Long id;
 
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String password;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String role;
 
     public AppUser(String username, String password, String role) {

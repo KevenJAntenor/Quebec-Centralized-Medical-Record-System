@@ -23,8 +23,8 @@ public class MedicalFileRestTest {
         // testing with correct credentials
         this.mockMvc
                 .perform(post("/login")
-                .content("{\"username\":\"admin\",\"password\":\"admin\"}")
-                .header(HttpHeaders.CONTENT_TYPE,"application/json"))
+                        .content("{\"username\":\"admin\",\"password\":\"admin\"}")
+                        .header(HttpHeaders.CONTENT_TYPE, "application/json"))
                 .andDo(print()).andExpect(status().isOk());
     }
 

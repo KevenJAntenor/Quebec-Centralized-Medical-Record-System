@@ -6,7 +6,7 @@ import lombok.*;
 //@ToString
 @Getter
 @Setter
-//@AllArgsConstructor
+// @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "patient")
@@ -40,7 +40,8 @@ public class Patient {
     @OneToOne
     private Coordinate coordinate;
 
-    public Patient(String lastName, String firstName, String dateOfBirth, String gender, String knownParent1, String knownParent2, String cityOfBirth, Coordinate coordinate) {
+    public Patient(String lastName, String firstName, String dateOfBirth, String gender, String knownParent1,
+            String knownParent2, String cityOfBirth, Coordinate coordinate) {
         super();
         this.lastName = lastName;
         this.firstName = firstName;

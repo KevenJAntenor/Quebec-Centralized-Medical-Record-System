@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class MedicalFileService {
 
     @PreAuthorize("hasRole('ADMIN')")
-    public void updateMedicalFile(MedicalFile medicalFile){
+    public void updateMedicalFile(MedicalFile medicalFile) {
         // TODO
     }
 

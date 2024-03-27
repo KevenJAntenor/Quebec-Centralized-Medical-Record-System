@@ -9,7 +9,7 @@ import java.util.List;
 //@ToString
 @Getter
 @Setter
-//@AllArgsConstructor
+// @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "medical_visit")
@@ -39,7 +39,8 @@ public class MedicalVisit {
     @JoinColumn(name = "medical_file_id")
     private MedicalFile medicalFile;
 
-    public MedicalVisit(String establishment, String doctor, String dateOfVisit, String diagnostic, String treatment, String summary, String notes) {
+    public MedicalVisit(String establishment, String doctor, String dateOfVisit, String diagnostic, String treatment,
+            String summary, String notes) {
         this.establishment = establishment;
         this.doctor = doctor;
         this.dateOfVisit = dateOfVisit;

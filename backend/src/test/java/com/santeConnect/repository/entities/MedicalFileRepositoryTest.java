@@ -34,7 +34,8 @@ public class MedicalFileRepositoryTest {
         patientRepository.deleteAll();
         coordinateRepository.deleteAll();
         coordinate = new Coordinate("123, Rue Saint-Estauche, Montréal", "5141231231", "5143456345", "alice@gmail.com");
-        patient = new Patient("Smiths", "Alice", "1985-12-01", "Female", "Robert Smith", "Susan Smith", "Los Angeles", coordinate);
+        patient = new Patient("Smiths", "Alice", "1985-12-01", "Female", "Robert Smith", "Susan Smith", "Los Angeles",
+                coordinate);
         insuranceNumber1 = "ASOW12345678";
         insuranceNumber2 = "ADWA12341234";
         medicalFile = new MedicalFile(insuranceNumber1, patient);
@@ -45,7 +46,7 @@ public class MedicalFileRepositoryTest {
     }
 
     @Test
-    void saveMedialFileWithoutPatient(){
+    void saveMedialFileWithoutPatient() {
         repository.deleteAll();
         MedicalFile medicalFile = new MedicalFile(insuranceNumber2, null);
         repository.save(medicalFile);
@@ -54,16 +55,15 @@ public class MedicalFileRepositoryTest {
     }
 
     @Test
-    void saveMedicalFileWithPatient(){
+    void saveMedicalFileWithPatient() {
         assertThat(repository.findMedicalFileByInsuranceNumber(insuranceNumber1).isPresent()).isTrue();
         assertThat(repository.findMedicalFileByInsuranceNumber(insuranceNumber1).get().getPatient()).isEqualTo(patient);
     }
 
     @Test
-    void deleteMedicalFile(){
+    void deleteMedicalFile() {
         repository.deleteAll();
         assertThat(repository.count()).isEqualTo(0);
     }
-
 
 }
