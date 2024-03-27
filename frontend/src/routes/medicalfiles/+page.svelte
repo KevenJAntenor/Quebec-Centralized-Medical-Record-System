@@ -34,7 +34,12 @@
         return `${medicalFile.patient?.firstName} ${medicalFile.patient?.lastName}`;
     };
 
-    let sort: keyof MedicalFile = "id";
+    type ColumnType =
+        | "insuranceNumber"
+        | "email"
+        | "patient"
+        | "personalNumber";
+    let sort: ColumnType = "insuranceNumber";
     let sortDirection: Lowercase<keyof typeof SortValue> = "ascending";
 
     function handleSort() {
@@ -47,7 +52,7 @@
             } else if (sort === "email") {
                 aVal = a.patient?.coordinate?.email;
                 bVal = b.patient?.coordinate?.email;
-            } else if (sort === "personal-number") {
+            } else if (sort === "personalNumber") {
                 aVal = Number(
                     a.patient?.coordinate?.personalPhoneNumber?.replace(
                         /\D/g,
@@ -64,6 +69,9 @@
                 aVal = a[sort];
                 bVal = b[sort];
             }
+            if (!aVal && !bVal) return 0;
+            if (!aVal || aVal === "null") return 1;
+            if (!bVal || bVal === "null") return -1;
 
             const [sortedAVal, sortedBVal] = [aVal, bVal][
                 sortDirection === "ascending" ? "slice" : "reverse"
@@ -107,7 +115,7 @@
                 <Label>Email</Label>
                 <IconButton class="material-icons">arrow_upward</IconButton>
             </Cell>
-            <Cell columnId="personal-number">
+            <Cell columnId="personalNumber">
                 <Label>Personal Number</Label>
                 <IconButton class="material-icons">arrow_upward</IconButton>
             </Cell>
@@ -174,4 +182,3 @@
 
 <style>
 </style>
-
