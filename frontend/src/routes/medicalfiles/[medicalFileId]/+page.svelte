@@ -13,6 +13,7 @@
     import Paper, { Title, Subtitle, Content } from "@smui/paper";
     import Select, { Option } from "@smui/select";
     import Button, { Label } from "@smui/button";
+    import { API_URL } from '../../../constants';
 
     export let data: PageServerData;
 
@@ -110,7 +111,7 @@
     async function deleteVisit(visitId: number) {
         const id = medicalFile.id;
         const response = await fetch(
-            `http://localhost:8080/medical-files/${id}/medical-visits`,
+            `${API_URL}/medical-files/${id}/medical-visits`,
             {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
@@ -141,7 +142,7 @@
             notes,
         };
         const response = await fetch(
-            `http://localhost:8080/medical-files/${id}/medical-visits`,
+            `${API_URL}/medical-files/${id}/medical-visits`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -157,7 +158,7 @@
         }
         // Fetch the updated MedicalFile
         const updatedMedicalFileResponse = await fetch(
-            `http://localhost:8080/medical-files/${id}`,
+            `${API_URL}:8080/medical-files/${id}`,
         );
         if (!updatedMedicalFileResponse.ok) {
             console.error(
