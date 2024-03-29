@@ -1,24 +1,19 @@
 <script lang="ts">
-    import type { MedicalFile } from "$lib/types/medicalFile";
     import type { MedicalVisit } from "$lib/types/medicalVisit";
-    import type { PageData } from "./$types";
+    import type { PageServerData } from "./$types";
     import DataTable, {
         Head,
         Body,
         Row,
         Cell,
-        // Label,
         SortValue,
         Pagination,
     } from "@smui/data-table";
     import IconButton from "@smui/icon-button";
     import Paper, { Title, Subtitle, Content } from "@smui/paper";
-    // import { Label } from '@smui/common';
     import Select, { Option } from "@smui/select";
-    // import type { PageData } from './$types';
     import Button, { Label } from "@smui/button";
-
-    export let form: formDataTrainer;
+    import { API_URL } from "../../../constants";
 
     export let data: PageServerData;
 
@@ -113,6 +108,28 @@
     let summary = "";
     let notes = "";
 
+    async function deleteVisit(visitId: number) {
+        const id = medicalFile.id;
+        const response = await fetch(
+            `${API_URL}/medical-files/${id}/medical-visits`,
+            {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(visitId),
+            },
+        );
+        if (!response.ok) {
+            console.error(
+                "Failed to delete medical visit",
+                await response.text(),
+            );
+            return;
+        }
+        medicalVisitList = medicalVisitList.filter(
+            (visit: MedicalVisit) => visit.id !== visitId,
+        );
+    }
+
     async function submitForm() {
         const id = medicalFile.id;
         const medicalVisit = {
@@ -125,7 +142,7 @@
             notes,
         };
         const response = await fetch(
-            `http://localhost:8080/medical-files/${id}/medical-visits`,
+            `${API_URL}/medical-files/${id}/medical-visits`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -141,7 +158,7 @@
         }
         // Fetch the updated MedicalFile
         const updatedMedicalFileResponse = await fetch(
-            `http://localhost:8080/medical-files/${id}`,
+            `${API_URL}/medical-files/${id}`,
         );
         if (!updatedMedicalFileResponse.ok) {
             console.error(
@@ -241,6 +258,13 @@
                     <Cell>{medicalVisit.dateOfVisit}</Cell>
                     <Cell>{medicalVisit.diagnostic}</Cell>
                     <Cell>{medicalVisit.treatment}</Cell>
+                    <Cell>
+                        <Button
+                            on:click={() => {
+                                deleteVisit(medicalVisit.id);
+                            }}>Delete</Button
+                        >
+                    </Cell>
                 </Row>
             {/each}
         </Body>
@@ -292,4 +316,3 @@
         <Title>Medical History List</Title>
     </Paper>
 </div>
-

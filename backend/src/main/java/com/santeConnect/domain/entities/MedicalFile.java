@@ -27,7 +27,7 @@ public class MedicalFile {
     private Patient patient;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "medicalFile", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "medicalFile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MedicalVisit> medicalVisitList;
 
     public MedicalFile(String insuranceNumber, Patient patient) {

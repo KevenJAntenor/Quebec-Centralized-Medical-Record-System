@@ -1,4 +1,4 @@
-package com.santeConnect.repository.entities;
+package com.santeConnect.repository.patient;
 
 import com.santeConnect.domain.entities.Patient;
 import org.springframework.data.repository.CrudRepository;
