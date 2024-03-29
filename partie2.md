@@ -52,17 +52,32 @@ Par Emil Surkhaev
 Plant uml code inside plantUml-partie2 directory
 ### Diagramme de Classe
 
-Plant uml code inside plantUml-partie2 directory
-[Insérer le diagramme de classe ici]
+![Diagramme de classe](./plantUml-partie2/class-diagram-repository.png)
+
+Le diagramme de classe montre des interfaces pour chaque 'repository' (par exemple, PatientRepository, MedicalFileRepository, MedicalVisitRepository, CoordinateRepository)
+avec des méthodes pour les opérations courantes telles que findById(), findAll(), save() et delete(). Chacune de ces interfaces serait implémentée par une classe qui gère
+les interactions avec la base de données pour cette entité.
+
+![Diagramme de classe](./plantUml-partie2/class-diagram-repository.puml)
 
 ### Diagramme de Séquence
 
-Plant uml code inside plantUml-partie2 directory
-[Insérer le diagramme de séquence ici]
+![Diagramme de classe](./plantUml-partie2/sequence-diagram-repository.png)
+
+Le diagramme de séquence illustre un scénario typique où un client interagit avec un 'repository' pour récupérer ou persister des données.
+Il pourrait montrer un MedicalService demandant à un MedicalFileRepository un dossier médical par ID
+qui à son tour interagit avec la base de données.
+
+![Diagramme de classe](./plantUml-partie2/sequence-diagram-repository.puml)
 
 ### Implémentation
 
-[Description de l'implémentation du patron de conception]
+L'implémentation du patron Repository consiste à encapsuler la logique nécessaire pour accéder aux sources de données pour les objets de domaine, fournissant une séparation
+claire entre la logique de l'application et la logique d'accès aux données. Les implémentations utiliseraient les méthodes de dépôt CRUD (Create, Read, Update, Delete) fournies
+par Spring Data, qui étend déjà Repository pour les opérations CRUD de base.
+Chaque interface de dépôt aurait des méthodes adaptées aux besoins, telles que la recherche d'un patient 
+par nom ou d'un dossier médical par numéro d'assurance. Les implémentations s'occuperaient de la création de méthodes de requête,
+en utilisant la création de requête de Spring Data à partir des noms de méthodes.
 
 
 ## Nom du Patron de Conception 3

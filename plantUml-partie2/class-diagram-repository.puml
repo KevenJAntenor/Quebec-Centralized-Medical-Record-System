@@ -1,0 +1,73 @@
+@startuml
+interface Repository<T, ID> {
+    +save(entity: T): T
+    +findById(id: ID): Optional<T>
+    +findAll(): Iterable<T>
+    +delete(entity: T): void
+}
+
+interface PatientRepository {
+    +findByFirstName(firstName: String): Optional<Patient>
+}
+
+interface MedicalFileRepository {
+    +findMedicalFileByInsuranceNumber(insuranceNumber: String): Optional<MedicalFile>
+    +findAll(): Iterable<MedicalFile>
+    +save(file: MedicalFile): MedicalFile
+}
+
+interface MedicalVisitRepository {
+
+}
+
+interface CoordinateRepository {
+
+}
+
+PatientRepository -up-|> Repository
+MedicalFileRepository -up-|> Repository
+MedicalVisitRepository -up-|> Repository
+CoordinateRepository -up-|> Repository
+
+' Classes d'entité
+class Patient {
+    -lastName: String
+    -firstName: String
+    -dateOfBirth: String
+    -gender: String
+    -knownParent1: String
+    -knownParent2: String
+    -cityOfBirth: String
+    -coordinate: Coordinate
+}
+
+class MedicalFile {
+    -insuranceNumber: String
+    -patient: Patient
+    -medicalVisitList: List<MedicalVisit>
+}
+
+class MedicalVisit {
+    -establishment: String
+    -doctor: String
+    -dateOfVisit: String
+    -diagnostic: String
+    -treatment: String
+    -summary: String
+    -notes: String
+    -medicalFile: MedicalFile
+}
+
+class Coordinate {
+    -address: String
+    -personalPhoneNumber: String
+    -workPhoneNumber: String
+    -email: String
+}
+
+' Associations
+Patient "1" -- "0..1" Coordinate
+MedicalFile "1" -- "1" Patient
+MedicalFile "1" -- "*" MedicalVisit
+
+@enduml
