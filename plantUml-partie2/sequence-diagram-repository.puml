@@ -1,0 +1,14 @@
+@startuml
+actor Client
+participant "MedicalService" as Service
+participant "MedicalFileRepository" as Repository
+database "Base de Données" as Database
+
+Client -> Service: demandeDossierMedical(id)
+Service -> Repository: findById(id)
+Repository -> Database: Requête SELECT
+Database -> Repository: Retourne Dossier
+Repository -> Service: Retourne Optional<MedicalFile>
+Service -> Client: Retourne MedicalFile
+
+@enduml
