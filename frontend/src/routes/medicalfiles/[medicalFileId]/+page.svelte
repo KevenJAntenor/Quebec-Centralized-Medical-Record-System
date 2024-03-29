@@ -13,7 +13,7 @@
     import Paper, { Title, Subtitle, Content } from "@smui/paper";
     import Select, { Option } from "@smui/select";
     import Button, { Label } from "@smui/button";
-    import { API_URL } from '../../../constants';
+    import { API_URL } from "../../../constants";
 
     export let data: PageServerData;
 
@@ -158,7 +158,7 @@
         }
         // Fetch the updated MedicalFile
         const updatedMedicalFileResponse = await fetch(
-            `${API_URL}:8080/medical-files/${id}`,
+            `${API_URL}/medical-files/${id}`,
         );
         if (!updatedMedicalFileResponse.ok) {
             console.error(
