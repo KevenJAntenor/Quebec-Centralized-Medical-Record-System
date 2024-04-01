@@ -17,7 +17,7 @@ together{
 interface Subject {
     +attach(Observer o) 
     +detach(Observer o)
-    +notify()
+    +notifyObservers()
 }
 together{
     class MedicalFileFacade {
