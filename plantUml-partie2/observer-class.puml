@@ -21,6 +21,9 @@ interface Subject {
 }
 together{
     class MedicalFileFacade {
+        +attach(Observer o)
+        +detach(Observer o)
+        +notify()
         +getMedicalVisitCreation()
         +getMedicalHistoryCreation()
     }
