@@ -43,8 +43,7 @@ public class MedicalFileController {
         if (optionalFile.isEmpty())
             return ResponseEntity.notFound().build();
         MedicalFile medicalFile = optionalFile.get();
-        medicalVisit.setMedicalFile(medicalFile);
-        medicalFile.getMedicalVisitList().add(medicalVisit);
+        medicalFile.addMedicalVisit(medicalVisit);
         var result = repository.save(medicalFile);
         // For observer Pattern
         MedicalFileFacade facade = new MedicalFileFacade();
@@ -59,14 +58,15 @@ public class MedicalFileController {
         if (optionalFile.isEmpty())
             return ResponseEntity.notFound().build();
         MedicalFile medicalFile = optionalFile.get();
-        Optional<MedicalVisit> visit = medicalFile.getMedicalVisitList().stream().filter(m -> {
+        Optional<MedicalVisit> medicalVisit = medicalFile.getMedicalVisitList().stream().filter(m -> {
             System.out.println(m.getId().toString());
             return m.getId() == visitId;
         })
                 .findFirst();
-        if (visit.isEmpty())
+        if (medicalVisit.isEmpty())
             return ResponseEntity.notFound().build();
-        System.out.println("OUI > " + medicalFile.getMedicalVisitList().remove(visit.get()));
+//        System.out.println("OUI > " + medicalFile.getMedicalVisitList().remove(visit.get()));
+        medicalFile.removeMedicalVisit(medicalVisit.get());
         var result = repository.save(medicalFile);
         return ResponseEntity.ok("Visit deleted");
     }

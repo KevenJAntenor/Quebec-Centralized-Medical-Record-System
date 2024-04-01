@@ -35,4 +35,14 @@ public class MedicalFile {
         this.insuranceNumber = insuranceNumber;
         this.patient = patient;
     }
+
+    public void addMedicalVisit(MedicalVisit medicalVisit) {
+        medicalVisitList.add(medicalVisit);
+        medicalVisit.setMedicalFile(this);
+    }
+
+    public void removeMedicalVisit(MedicalVisit medicalVisit) {
+        medicalVisitList.remove(medicalVisit);
+        medicalVisit.setMedicalFile(null);
+    }
 }

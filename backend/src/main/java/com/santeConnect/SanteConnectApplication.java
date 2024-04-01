@@ -254,7 +254,6 @@ public class SanteConnectApplication implements CommandLineRunner {
         medicalVisitRepository.saveAll(medicalVisits1);
         medicalVisitRepository.saveAll(medicalVisits2);
 
-        // Fetch all cars and log to console
         for (MedicalFile medicalFile : medicalFileRepository.findAll()) {
             logger.info("Medical File ID: {}, Insurance Number: {}, Patient ID: {}, Patient Name: {} {}",
                     medicalFile.getId(), medicalFile.getInsuranceNumber(), medicalFile.getPatient().getId(),
