@@ -13,6 +13,8 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.santeConnect.middlewares.ActivateObservers.activateObservers;
+
 @RestController
 public class MedicalFileController {
 
@@ -47,9 +49,7 @@ public class MedicalFileController {
         medicalFile.getMedicalVisitList().add(medicalVisit);
         var result = repository.save(medicalFile);
         // For observer Pattern
-        MedicalFileFacade facade = new MedicalFileFacade();
-        ModificationObserver observer = new ModificationObserver(facade);
-        facade.setMedicalFile(medicalFile);
+        activateObservers(medicalFile);
         return ResponseEntity.ok(result);
     }
 
@@ -68,6 +68,8 @@ public class MedicalFileController {
             return ResponseEntity.notFound().build();
         System.out.println("OUI > " + medicalFile.getMedicalVisitList().remove(visit.get()));
         var result = repository.save(medicalFile);
+        // For observer Pattern
+        activateObservers(medicalFile);
         return ResponseEntity.ok("Visit deleted");
     }
 }
