@@ -13,7 +13,11 @@
     import Paper, { Title, Subtitle, Content } from "@smui/paper";
     import Select, { Option } from "@smui/select";
     import Button, { Label } from "@smui/button";
-    import { API_URL } from "../../../constants";
+    import { API_URL } from '../../../constants';
+    import Textfield from '@smui/textfield';
+    // import Icon from '@smui/textfield/icon';
+    import HelperText from '@smui/textfield/helper-text';
+
 
     export let data: PageServerData;
 
@@ -79,6 +83,12 @@
         medicalVisitList = medicalVisitList;
     }
 
+    let showModal = false;
+
+    function toggleModal() {
+        showModal = !showModal;
+    }
+
     interface medicalVisitFields {
         establishment: string;
         doctor: string;
@@ -111,23 +121,26 @@
     async function deleteVisit(visitId: number) {
         const id = medicalFile.id;
         const response = await fetch(
-            `${API_URL}/medical-files/${id}/medical-visits`,
+            `http://localhost:8080/medical-files/${id}/medical-visits`,
             {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(visitId),
             },
         );
-        if (!response.ok) {
+        const updatedMedicalFileResponse = await fetch(
+            `${API_URL}/medical-files/${id}`,
+        );
+        if (!updatedMedicalFileResponse.ok) {
             console.error(
-                "Failed to delete medical visit",
-                await response.text(),
+                "Failed to fetch updated MedicalFile",
+                await updatedMedicalFileResponse.text(),
             );
             return;
         }
-        medicalVisitList = medicalVisitList.filter(
-            (visit: MedicalVisit) => visit.id !== visitId,
-        );
+
+        // Update the medicalFile variable
+        medicalFile = await updatedMedicalFileResponse.json();
     }
 
     async function submitForm() {
@@ -188,29 +201,45 @@
     </Paper>
     <Paper>
         <Title>Medical Visit List</Title>
-        <Content></Content>
+        <Content>
+        {#if showModal}
+            <Button on:click={toggleModal}>Close</Button>
+        {:else}
+            <Button on:click={toggleModal}>Add new medical visit</Button>
+        {/if}
+        </Content>
     </Paper>
 
-    <div class="new">
-        <div class="top-section">
-            <h3>Add new medical visit</h3>
-            <!-- <Button color="secondary" variant="raised">
-                <Label>Add Medical Visit</Label>
-              </Button>   -->
-        </div>
+    {#if showModal}
+    <div class="modal">
         <div class="container">
             <form on:submit|preventDefault={submitForm}>
-                <input bind:value={establishment} placeholder="Establishment" />
-                <input bind:value={doctor} placeholder="Doctor" />
-                <input bind:value={dateOfVisit} placeholder="Date of Visit" />
-                <input bind:value={diagnostic} placeholder="Diagnostic" />
-                <input bind:value={treatment} placeholder="Treatment" />
-                <input bind:value={summary} placeholder="Summary" />
-                <input bind:value={notes} placeholder="Notes" />
-                <button type="submit">Add Medical Visit</button>
+                <Textfield variant="outlined" bind:value={establishment} label="Establishment">
+                    <HelperText slot="helper">Hospital / clinic name</HelperText>
+                </Textfield>
+                <Textfield variant="outlined" bind:value={doctor} label="Doctor">
+                    <HelperText slot="helper">Doctor's name</HelperText>
+                </Textfield>
+                <Textfield variant="outlined" bind:value={dateOfVisit} label="Date of visit">
+                    <HelperText slot="helper">Date of visit</HelperText>
+                </Textfield>
+                <Textfield variant="outlined" bind:value={diagnostic} label="Diagnostic">
+                    <HelperText slot="helper">Diagnostic</HelperText>
+                </Textfield>
+                <Textfield variant="outlined" bind:value={treatment} label="Treatement">
+                    <HelperText slot="helper">Treatement</HelperText>
+                </Textfield>
+                <Textfield variant="outlined" bind:value={summary} label="Summary">
+                    <HelperText slot="helper">Summary</HelperText>
+                </Textfield>
+                <Textfield variant="outlined" bind:value={notes} label="Notes">
+                    <HelperText slot="helper">Notes</HelperText>
+                </Textfield>
+                <Button type="submit" variant="raised">Add Medical Visit</Button>
             </form>
         </div>
     </div>
+    {/if}
 
     <DataTable
         sortable
@@ -316,3 +345,12 @@
         <Title>Medical History List</Title>
     </Paper>
 </div>
+
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin: 0 auto;
+    }
+</style>
