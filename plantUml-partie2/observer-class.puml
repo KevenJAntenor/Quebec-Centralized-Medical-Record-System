@@ -51,6 +51,8 @@ ModificationObserver -> MedicalFileFacade
 Subject <|.. MedicalFileFacade
 
 MedicalFileFacade . entities.MedicalFile
+MedicalFileFacade . entities.MedicalVisit
+MedicalFileFacade . entities.MedicalHistory
 
 MedicalFile --> MedicalVisit
 MedicalFile --> MedicalHistory

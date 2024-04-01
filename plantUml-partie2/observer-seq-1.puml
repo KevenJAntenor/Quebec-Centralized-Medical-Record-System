@@ -1,0 +1,20 @@
+@startuml
+
+hide footbox
+title Facade Pattern Behavior
+
+participant "MedicalFileFacade" as F
+participant "MedicalFile" as A
+
+[-> F: getModifications()
+activate F
+F -> A: getMedicalVisits()
+activate A
+A --> F
+F -> A: getMedicalHistories()
+A --> F
+deactivate A
+[<-- F
+deactivate F
+
+@enduml

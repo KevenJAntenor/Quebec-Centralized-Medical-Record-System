@@ -1,0 +1,69 @@
+@startuml
+
+hide footbox
+title Observer Pattern Behavior
+
+participant "MedicalFileFacade" as CS
+participant "ModificationObserver" as O1
+participant "EmailObserver" as O2
+
+O1 -> CS: attach(this)
+
+[-> CS: setMedicalFile(medicalFile)
+activate CS
+CS -> CS: notifyObservers()
+activate CS  #CCCCCC
+CS -> O1: update()
+activate O1
+O1 -> CS: getMedicalFile()
+CS --> O1: medicalFile
+O1 -> O1: archive()
+deactivate O1
+deactivate CS
+[<- CS
+deactivate CS
+
+O2 -> CS: attach(this)
+
+[-> CS: setMedicalFile(medicalFile)
+activate CS
+CS -> CS: notifyObservers()
+activate CS  #CCCCCC
+par
+  CS -> O1: update()
+  activate O1
+    O1 -> CS: getMedicalFile()
+    CS --> O1: medicalFile
+    O1 -> O1: archive()
+  deactivate O1
+else
+  CS -> O2: update()
+  activate O2
+    O2 -> CS: getMedicalFile()
+    CS --> O2: medicalFile
+    O2 -> O2: sendEmail()
+  deactivate O2
+end
+deactivate CS
+[<- CS
+deactivate CS
+
+O1 -> CS: detach(this)
+
+[-> CS: setMedicalFile(medicalFile)
+activate CS
+CS -> CS: notifyObservers()
+activate CS  #CCCCCC
+CS -> O2: update()
+activate O2
+O2 -> CS: getMedicalFile()
+CS --> O2: medicalFile
+O2 -> O2: sendEmail()
+deactivate O2
+deactivate CS
+[<- CS
+deactivate CS
+
+
+
+@enduml

@@ -26,9 +26,6 @@
 ## Facade-Observer
 
 Par Dominique Elias
-<!-- 
-Le patron de conception `Observer` est utilisé pour permettre à un objet de la class Modification (Observer) d'être notifié et mis à jour automatiquement lorsqu'un autre objet medicalFile (Subject) change d'état.
-Le patron de conception `Facade` est utilisé ici pas seulement pour simplifier l'interface de sous-système MedicalFile, mais aussi pour ne pas rendre le sous-système MedicalFile dépendant de l'interface de l'Observer. -->
 
 ### Diagramme de Classe
 
@@ -36,7 +33,19 @@ Le patron de conception `Facade` est utilisé ici pas seulement pour simplifier 
 
 ### Diagramme de Séquence
 
-![Diagramme de séquence](./plantUml-partie2/observer-seq.png)
+Patron Facade, utiliser principalement pour découpler la classe `MedicalFile` de l'interface de l'Observer.
+
+![Diagramme de séquence](./plantUml-partie2/observer-seq-1.png)
+
+Patron Observer, on montre trois exécutions de la méthode setMedicalFile de la classe `MedicalFileFacade` qui notifie les Observers.
+Avant la première exécution, l'`Observer` `ModificationObserver` est instancié et ajouté à la liste des Observers de `MedicalFileFacade`.
+Ensuite, lors de l'exécution de la méthode setMedicalFile, l'`Observer` `ModificationObserver` est notifié et mis à jour automatiquement.
+On instancie un autre `Observer` `EmailObserver` et il s'ajoute à la liste des Observers de `MedicalFileFacade`.
+Quand on exécute la méthode setMedicalFile une deuxième fois, les deux Observers sont notifiés et mis à jour automatiquement.
+L'`Observer` `ModificationObserver` décide de ne plus être notifié et il est retiré de la liste des Observers de `MedicalFileFacade` avec la méthode detach.
+Donc lors de la troisième exécution de la méthode setMedicalFile, seul l'`Observer` `EmailObserver` est notifié et mis à jour automatiquement.
+
+![Diagramme de séquence](./plantUml-partie2/observer-seq-2.png)
 
 ### Implémentation
 
