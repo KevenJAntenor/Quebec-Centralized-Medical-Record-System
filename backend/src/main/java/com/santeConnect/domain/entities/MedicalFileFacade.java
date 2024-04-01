@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Act both as a Facade for MedicalFile, and as a Subject
- * For observers
+ * Act both as a Facade for MedicalFile, and as a Subject for observers
  */
 public class MedicalFileFacade implements Subject{
 

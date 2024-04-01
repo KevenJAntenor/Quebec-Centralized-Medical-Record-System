@@ -2,10 +2,9 @@ package com.santeConnect.middlewares;
 
 import com.santeConnect.domain.entities.MedicalFile;
 import com.santeConnect.domain.entities.MedicalVisit;
-import com.santeConnect.repository.patient.MedicalFileRepository;
+import com.santeConnect.repository.entities.MedicalFileRepository;
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
 import java.util.Optional;
 
 import static com.santeConnect.middlewares.ActivateObservers.activateObservers;

@@ -3,10 +3,8 @@ package com.santeConnect.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-//@ToString
 @Getter
 @Setter
-// @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "patient")

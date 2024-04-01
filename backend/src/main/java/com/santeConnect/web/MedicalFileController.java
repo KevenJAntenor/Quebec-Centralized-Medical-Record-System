@@ -2,7 +2,7 @@ package com.santeConnect.web;
 
 import com.santeConnect.domain.entities.MedicalFile;
 import com.santeConnect.domain.entities.MedicalVisit;
-import com.santeConnect.repository.patient.MedicalFileRepository;
+import com.santeConnect.repository.entities.MedicalFileRepository;
 
 import java.util.List;
 
