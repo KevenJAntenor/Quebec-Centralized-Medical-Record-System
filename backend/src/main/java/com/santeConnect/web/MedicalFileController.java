@@ -1,7 +1,9 @@
 package com.santeConnect.web;
 
 import com.santeConnect.domain.entities.MedicalFile;
+import com.santeConnect.domain.entities.MedicalFileFacade;
 import com.santeConnect.domain.entities.MedicalVisit;
+import com.santeConnect.domain.entities.ModificationObserver;
 import com.santeConnect.repository.patient.MedicalFileRepository;
 
 import java.util.List;
@@ -44,6 +46,10 @@ public class MedicalFileController {
         medicalVisit.setMedicalFile(medicalFile);
         medicalFile.getMedicalVisitList().add(medicalVisit);
         var result = repository.save(medicalFile);
+        // For observer Pattern
+        MedicalFileFacade facade = new MedicalFileFacade();
+        ModificationObserver observer = new ModificationObserver(facade);
+        facade.setMedicalFile(medicalFile);
         return ResponseEntity.ok(result);
     }
 

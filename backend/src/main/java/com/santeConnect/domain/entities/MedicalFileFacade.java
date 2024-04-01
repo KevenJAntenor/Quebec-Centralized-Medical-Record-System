@@ -12,8 +12,7 @@ public class MedicalFileFacade implements Subject{
     private List<Observer> observers;
     private MedicalFile medicalFile;
 
-    MedicalFileFacade(MedicalFile medicalFile) {
-        this.medicalFile = medicalFile;
+    public MedicalFileFacade() {
         observers = new ArrayList<>();
     }
 
