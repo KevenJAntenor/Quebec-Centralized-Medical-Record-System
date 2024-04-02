@@ -5,7 +5,7 @@ import com.santeConnect.domain.entities.MedicalFile;
 import com.santeConnect.domain.entities.MedicalVisit;
 import com.santeConnect.domain.entities.Patient;
 import com.santeConnect.domain.users.AppUser;
-import com.santeConnect.repository.patient.*;
+import com.santeConnect.repository.entities.*;
 import com.santeConnect.repository.users.AppUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

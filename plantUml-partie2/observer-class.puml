@@ -1,0 +1,60 @@
+@startuml
+
+skinparam nodesep 75
+skinparam ranksep 50
+hide empty members
+
+together{
+    interface Observer {
+        +update()
+    }
+
+    class ModificationObserver {
+        +update()
+    }
+}
+
+interface Subject {
+    +attach(Observer o) 
+    +detach(Observer o)
+    +notifyObservers()
+}
+together{
+    class MedicalFileFacade {
+        +attach(Observer o)
+        +detach(Observer o)
+        +notify()
+        +getMedicalVisitCreation()
+        +getMedicalHistoryCreation()
+    }
+
+
+    package entities {
+        class MedicalFile {
+            +addMedicalVisit()
+            +addMedicalHistory()
+            +rmMedicalVisit(medicalVisit)
+            +rmMedicalHistory(medicalHistory)
+        }
+
+        class MedicalVisit {
+        }
+
+        class MedicalHistory {
+        }
+    }
+}
+
+Subject "1" -> "0..n" Observer
+Observer <|.. ModificationObserver
+ModificationObserver -> MedicalFileFacade
+Subject <|.. MedicalFileFacade
+
+MedicalFileFacade . entities.MedicalFile
+MedicalFileFacade . entities.MedicalVisit
+MedicalFileFacade . entities.MedicalHistory
+
+MedicalFile --> MedicalVisit
+MedicalFile --> MedicalHistory
+
+@enduml

@@ -7,10 +7,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-//@ToString
 @Getter
 @Setter
-// @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "medical_file")

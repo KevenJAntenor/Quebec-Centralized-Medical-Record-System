@@ -4,12 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
-//@ToString
 @Getter
 @Setter
-// @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "medical_visit")

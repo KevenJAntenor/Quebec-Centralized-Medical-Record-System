@@ -1,4 +1,4 @@
-package com.santeConnect.repository.patient;
+package com.santeConnect.repository.entities;
 
 import com.santeConnect.domain.entities.MedicalFile;
 import com.santeConnect.domain.entities.MedicalVisit;
