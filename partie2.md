@@ -95,18 +95,32 @@ Par Emil Surkhaev
 Plant uml code inside plantUml-partie2 directory
 ### Diagramme de Classe
 
-Plant uml code inside plantUml-partie2 directory
-[Insérer le diagramme de classe ici]
+![Diagramme de classe](./plantUml-partie2/singleton-class.png)
 
 ### Diagramme de Séquence
 
-Plant uml code inside plantUml-partie2 directory
-[Insérer le diagramme de séquence ici]
+![Diagramme de classe](./plantUml-partie2/singleton-seq.png)
 
 ### Implémentation
 
-[Description de l'implémentation du patron de conception]
+Le patron `Singleton` est utilisé pour s'assurer qu'une seule instance du service `JwtService` est créée et utilisée dans toute l'application SantéConnect. 
+Cette instance unique gère la création et la validation des JWT tokens utilisés pour l'authentification des utilisateurs. 
+Le `Singleton` est particulièrement important pour le service de jetons JWT car il doit conserver un état cohérent et sécurisé pour la signature et la vérification des jetons.
 
+### Problèmes de Conception et Corrections
+
+- **Problème de Conception :** Sans le patron `Singleton`, plusieurs instances du `JwtService` pourraient être créées, 
+augmentant le risque d'incohérence dans la gestion des jetons et potentiellement des failles de sécurité.
+- **Correction :** En implémentant le `Singleton`, nous nous assurons que `JwtService` est instancié une seule fois, maintenant l'intégrité et la cohérence du processus d'authentification.
+
+### Différences entre l'implémentation et la conception
+
+- **Différence :** La mise en œuvre actuelle ne montre pas explicitement l'utilisation du `Singleton`. 
+Cependant, dans un déploiement réel, nous veillerions à ce que `JwtService` soit injecté via Spring en tant que `singleton` pour garantir la meilleure pratique et sécurité.
+
+### Définitions des patrons de conception
+
+- Intention de l'`Singleton` : Assurer qu'une classe n'ait qu'une seule instance et fournir un point d'accès global à cette instance.
 
 ## Nom du Patron de Conception 3
 Par Youenn Pierre-Justin
