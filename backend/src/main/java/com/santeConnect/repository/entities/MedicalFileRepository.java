@@ -20,9 +20,12 @@ public interface MedicalFileRepository extends CrudRepository<MedicalFile, Long>
     @Query("SELECT m FROM MedicalFile m WHERE CONCAT(m.patient.firstName, ' ', m.patient.lastName) LIKE %:fullName%")
     List<MedicalFile> findByPatientFullName(@Param("fullName") String fullName);
 
+    // Temporary method to get all medical files 
+    // should use prSpring Data Rest to expose the repository
     List<MedicalFile> findAll();
     Optional<MedicalFile> findById(Long id);
 
-    @SuppressWarnings("unchecked")
-    MedicalFile save(MedicalFile file);
+    // TODO why is this here?
+    // @SuppressWarnings("unchecked")
+    // MedicalFile save(MedicalFile file);
 }
