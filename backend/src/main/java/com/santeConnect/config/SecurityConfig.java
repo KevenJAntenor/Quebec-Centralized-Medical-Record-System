@@ -24,7 +24,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 import java.util.Arrays;
-
+// TODO allow access to "/api-docs/**" and "/swagger-ui/**" paths when security is enabled
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
