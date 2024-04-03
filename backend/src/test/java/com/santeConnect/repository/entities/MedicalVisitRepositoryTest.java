@@ -59,8 +59,8 @@ public class MedicalVisitRepositoryTest {
 
     @Test
     void assertMedicalFileHasMedicalVisit() {
-        assertThat(medicalFileRepository.findMedicalFileByInsuranceNumber(insuranceNumber1).isPresent()).isTrue();
-        assertThat(medicalFileRepository.findMedicalFileByInsuranceNumber(insuranceNumber1).get().getMedicalVisitList()
+        assertThat(medicalFileRepository.findByInsuranceNumber(insuranceNumber1).isPresent()).isTrue();
+        assertThat(medicalFileRepository.findByInsuranceNumber(insuranceNumber1).get().getMedicalVisitList()
                 .size()).isEqualTo(1);
     }
 
