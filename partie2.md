@@ -57,7 +57,7 @@ Donc lorsqu'un objet `MedicalFile` change d'état, l'objet `ModificationObserver
 
 Ce Patron offre aussi la flexibilité de pouvoir ajouter d'autres classes Observers qui dépendent de `medicalFileFacade` sans avoir à modifier la classe.
 
-Par exemple, si on veut ajouter une classe qui envoie un courriel à un médecin lorsqu'un `medicalFile` est modifié, on peut le faire en ajoutant une classe `EmailObserver` qui réalise (implememnts) `Observer`, sans avoir à modifier `medicalFileFacade`.
+Par exemple, si on veut ajouter une classe qui envoie un courriel à un médecin lorsqu'un `medicalFile` est modifié, on peut le faire en ajoutant une classe `EmailObserver` qui réalise (implements) `Observer`, sans avoir à modifier `medicalFileFacade`.
 
 On sert du patron `Facade` ici pour garder la classe `MedicalFile` indépendante de l'interface de l'`Observer`.
 
