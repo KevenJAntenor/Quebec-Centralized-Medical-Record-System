@@ -12,13 +12,11 @@ import java.util.Date;
 
 @Component
 public class JwtService {
-    static final long EXPIRATION_DATE = 86400000;
-    // 1 day in ms, TODO change in production.
+    static final long EXPIRATION_DATE = 86400000; // 1 day in ms, TODO change in production.
     static final String PREFIX = "Bearer";
 
-    // Generate secret key, only for testing
-    // TODO in production, read it only from
-    // app config
+    // Generate secret key, only for demonstration purposes
+    // TODO in production, read it from app config
     static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     // Generate signed jwt token
