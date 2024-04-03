@@ -31,12 +31,13 @@ public class MedicalVisit {
     private String notes;
 
     @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medical_file_id")
     private MedicalFile medicalFile;
 
     public MedicalVisit(String establishment, String doctor, String dateOfVisit, String diagnostic, String treatment,
             String summary, String notes) {
+        super();
         this.establishment = establishment;
         this.doctor = doctor;
         this.dateOfVisit = dateOfVisit;
