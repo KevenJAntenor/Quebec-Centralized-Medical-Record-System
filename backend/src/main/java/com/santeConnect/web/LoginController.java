@@ -24,8 +24,9 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<?> getToken(@RequestBody AccountCredentials credentials) {
-        // generate token nd send it in the response auth header
-        UsernamePasswordAuthenticationToken creds = new UsernamePasswordAuthenticationToken(credentials.username(),
+        // Generate token and send it in the response Authorization header
+        UsernamePasswordAuthenticationToken creds = new UsernamePasswordAuthenticationToken(
+                credentials.username(),
                 credentials.password());
         Authentication auth = authenticationManager.authenticate(creds);
 
