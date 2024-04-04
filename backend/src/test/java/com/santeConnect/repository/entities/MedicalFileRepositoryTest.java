@@ -51,14 +51,14 @@ public class MedicalFileRepositoryTest {
         repository.deleteAll();
         MedicalFile medicalFile = new MedicalFile(insuranceNumber2, null);
         repository.save(medicalFile);
-        assertThat(repository.findMedicalFileByInsuranceNumber(insuranceNumber2).isPresent()).isTrue();
-        assertThat(repository.findMedicalFileByInsuranceNumber(insuranceNumber2).get().getPatient()).isNull();
+        assertThat(repository.findByInsuranceNumber(insuranceNumber2).isPresent()).isTrue();
+        assertThat(repository.findByInsuranceNumber(insuranceNumber2).get().getPatient()).isNull();
     }
 
     @Test
     void saveMedicalFileWithPatient() {
-        assertThat(repository.findMedicalFileByInsuranceNumber(insuranceNumber1).isPresent()).isTrue();
-        assertThat(repository.findMedicalFileByInsuranceNumber(insuranceNumber1).get().getPatient()).isEqualTo(patient);
+        assertThat(repository.findByInsuranceNumber(insuranceNumber1).isPresent()).isTrue();
+        assertThat(repository.findByInsuranceNumber(insuranceNumber1).get().getPatient()).isEqualTo(patient);
     }
 
     @Test

@@ -42,8 +42,7 @@ public class SecurityConfig {
 
     public void configureGlobal(AuthenticationManagerBuilder auth)
             throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     // @Bean
@@ -68,28 +67,31 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf((csrf) -> csrf.disable()).cors(withDefaults())
-                .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests.anyRequest().permitAll());
-        /**
-         * enable when frontend is done
-         * http.csrf((csrf) -> csrf.disable())
-         * .cors(withDefaults())
-         * .sessionManagement((sessionManagement) -> sessionManagement.
-         * sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-         * .authorizeHttpRequests((authorizeHttpRequests) ->
-         * authorizeHttpRequests.requestMatchers(HttpMethod.POST,
-         * "/login")
-         * .permitAll().anyRequest().authenticated())
-         * // TO define roles endpoint
-         * // .authorizeHttpRequests((authorizeHttpRequests) ->
-         * // authorizeHttpRequests.requestMatchers("/admin/**").hasRole
-         * // ("ADMIN").requestMatchers("/user/**").hasRole("USER")
-         * // .anyRequest().authenticated())
-         * .addFilterBefore(authentificationFilter,
-         * UsernamePasswordAuthenticationFilter.class)
-         * .exceptionHandling((exceptionHandling) -> exceptionHandling.
-         * authenticationEntryPoint(exceptionHandler));
-         */
+        // http.csrf((csrf) -> csrf.disable()).cors(withDefaults())
+        //         .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests.anyRequest().permitAll());
+        
+        // enable when frontend is done
+         http.csrf((csrf) -> csrf.disable())
+         .cors(withDefaults())
+         .sessionManagement((sessionManagement) -> sessionManagement.
+         sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+         .authorizeHttpRequests((authorizeHttpRequests) ->
+         authorizeHttpRequests
+                 // TODO delete line below when login is implemented
+                 .requestMatchers("medical-files/**").permitAll()
+                 .requestMatchers("/api-docs/**", "/swagger-ui/**").permitAll()
+                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                 .anyRequest().authenticated())
+         // TODO define roles endpoint
+         // .authorizeHttpRequests((authorizeHttpRequests) ->
+         // authorizeHttpRequests.requestMatchers("/admin/**").hasRole
+         // ("ADMIN").requestMatchers("/user/**").hasRole("USER")
+         // .anyRequest().authenticated())
+         .addFilterBefore(authentificationFilter,
+         UsernamePasswordAuthenticationFilter.class)
+         .exceptionHandling((exceptionHandling) -> exceptionHandling.
+         authenticationEntryPoint(exceptionHandler));
+         
         return http.build();
     }
 

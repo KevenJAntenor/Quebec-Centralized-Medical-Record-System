@@ -1,4 +1,8 @@
 package com.santeConnect.domain.jwt;
 
-public record AccountCredentials(String username, String password) {
-}
+/**
+ * Record to store credentials for authentification
+ * @param username
+ * @param password
+ */
+public record AccountCredentials(String username, String password) {}

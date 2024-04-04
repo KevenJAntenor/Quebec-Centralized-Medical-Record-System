@@ -26,7 +26,7 @@ public class AuthentificationFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain)
             throws ServletException, java.io.IOException {
-        // get token from auth header
+        // get token from Authorization header
         String jws = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (jws != null) {
             // verify token and get user
