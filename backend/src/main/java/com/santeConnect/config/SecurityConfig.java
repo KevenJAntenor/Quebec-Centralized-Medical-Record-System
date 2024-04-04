@@ -9,12 +9,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -27,6 +27,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     private final UserDetailsServiceImpl userDetailsService;
@@ -45,15 +46,6 @@ public class SecurityConfig {
         auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
-    // @Bean
-    // public InMemoryUserDetailsManager userDetailsService() {
-    // UserDetails user = User.builder().username("user")
-    // .password(passwordEncoder().encode("password"))
-    // .roles("USER").build();
-    //
-    // return new InMemoryUserDetailsManager(user);
-    // }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -67,10 +59,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        // http.csrf((csrf) -> csrf.disable()).cors(withDefaults())
-        //         .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests.anyRequest().permitAll());
-        
-        // enable when frontend is done
          http.csrf((csrf) -> csrf.disable())
          .cors(withDefaults())
          .sessionManagement((sessionManagement) -> sessionManagement.
@@ -81,12 +69,10 @@ public class SecurityConfig {
                  .requestMatchers("medical-files/**").permitAll()
                  .requestMatchers("/api-docs/**", "/swagger-ui/**").permitAll()
                  .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                 // TODO define roles endpoint
+//                 .requestMatchers("/admin/**").hasRole("ADMIN")
+//                 .requestMatchers("/user/**").hasRole("USER")
                  .anyRequest().authenticated())
-         // TODO define roles endpoint
-         // .authorizeHttpRequests((authorizeHttpRequests) ->
-         // authorizeHttpRequests.requestMatchers("/admin/**").hasRole
-         // ("ADMIN").requestMatchers("/user/**").hasRole("USER")
-         // .anyRequest().authenticated())
          .addFilterBefore(authentificationFilter,
          UsernamePasswordAuthenticationFilter.class)
          .exceptionHandling((exceptionHandling) -> exceptionHandling.
