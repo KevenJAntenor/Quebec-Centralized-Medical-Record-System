@@ -1,0 +1,38 @@
+@startuml
+
+class JwtService {
+  -static instance: JwtService
+  -JwtService()
+  +static getInstance(): JwtService
+  +getToken(username: String): String
+  +getAuthUser(request: HttpServletRequest): String
+}
+
+class LoginController {
+  -jwtService: JwtService
+  +getToken(credentials: AccountCredentials): ResponseEntity<?>
+}
+
+class AuthentificationFilter {
+  -jwtService: JwtService
+  +doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain): void
+}
+
+class AccountCredentials {
+  -username: String
+  -password: String
+}
+
+class AuthEntryPoint {
+}
+
+JwtService ..> LoginController : <<use>>
+JwtService ..> AuthentificationFilter : <<use>>
+
+JwtService <-- LoginController
+JwtService <-- AuthentificationFilter
+
+AccountCredentials "1" -- "1" LoginController : has credentials >
+AuthEntryPoint -- "1" AuthentificationFilter : entry point >
+
+@enduml

@@ -1,0 +1,38 @@
+@startuml
+
+actor User
+participant LoginController
+participant JwtService
+participant AuthentificationFilter
+database Database
+
+User -> LoginController: login(credentials)
+activate LoginController
+
+LoginController -> JwtService: getInstance()
+activate JwtService
+JwtService -> JwtService: createToken(username)
+JwtService -->> LoginController: token
+deactivate JwtService
+
+LoginController -->> User: token
+deactivate LoginController
+
+User -> AuthentificationFilter: request(token)
+activate AuthentificationFilter
+
+AuthentificationFilter -> JwtService: getInstance()
+activate JwtService
+JwtService -> JwtService: verifyToken(token)
+JwtService -->> AuthentificationFilter: username
+deactivate JwtService
+
+AuthentificationFilter -> Database: getUserDetails(username)
+activate Database
+Database -->> AuthentificationFilter: userDetails
+deactivate Database
+
+AuthentificationFilter -->> User: accessGranted(userDetails)
+deactivate AuthentificationFilter
+
+@enduml
