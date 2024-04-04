@@ -4,6 +4,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
+
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +13,7 @@ import java.security.Key;
 import java.util.Date;
 
 @Component
+@Scope("singleton") // default scope, only to point it out
 public class JwtService {
     static final long EXPIRATION_DATE = 86400000;
     // 1 day in ms, TODO change in production.

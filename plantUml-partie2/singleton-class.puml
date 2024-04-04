@@ -26,12 +26,6 @@ class AccountCredentials {
 class AuthEntryPoint {
 }
 
-class MedicalFileController {
-}
-
-class MainController {
-}
-
 JwtService ..> LoginController : <<use>>
 JwtService ..> AuthentificationFilter : <<use>>
 

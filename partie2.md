@@ -92,7 +92,6 @@ spring.jpa.show-sql=true
 
 Par Emil Surkhaev
 
-Plant uml code inside plantUml-partie2 directory
 ### Diagramme de Classe
 
 ![Diagramme de classe](./plantUml-partie2/singleton-class.png)
@@ -103,20 +102,21 @@ Plant uml code inside plantUml-partie2 directory
 
 ### Implémentation
 
-Le patron `Singleton` est utilisé pour s'assurer qu'une seule instance du service `JwtService` est créée et utilisée dans toute l'application SantéConnect. 
-Cette instance unique gère la création et la validation des JWT tokens utilisés pour l'authentification des utilisateurs. 
-Le `Singleton` est particulièrement important pour le service de jetons JWT car il doit conserver un état cohérent et sécurisé pour la signature et la vérification des jetons.
+Le patron `Singleton` est utilisé pour s'assurer qu'une seule instance du service `JwtService` est créée et utilisée dans toute l'application SantéConnect.
+Cette instance unique gère la création et la validation des JWT tokens utilisés pour l'authentification des utilisateurs.
+Le `Singleton` est particulièrement important pour le service de jetons JWT car il doit conserver une configuration cohérente et sécurisée pour la signature, la création et la vérification des jetons.
+la classe `JwtService` est un singleton car spring boot crée une seule instance pour chaque classe annotée avec `@Component`.
+On a ajouté `@scope("singleton")` pour s'assurer que spring boot crée une seule instance de `JwtService` pour toute l'application.
+Notez que c'est la valeur par défaut de `@Component` mais on l'a ajouté pour plus de clarté.
 
 ### Problèmes de Conception et Corrections
 
-- **Problème de Conception :** Sans le patron `Singleton`, plusieurs instances du `JwtService` pourraient être créées, 
-augmentant le risque d'incohérence dans la gestion des jetons et potentiellement des failles de sécurité.
+- **Problème de Conception :** Sans le patron `Singleton`, plusieurs instances du `JwtService` pourraient être créées, introduisant le risque d'incohérence dans la gestion des jetons et potentiellement des failles de sécurité.
 - **Correction :** En implémentant le `Singleton`, nous nous assurons que `JwtService` est instancié une seule fois, maintenant l'intégrité et la cohérence du processus d'authentification.
 
 ### Différences entre l'implémentation et la conception
 
-- **Différence :** La mise en œuvre actuelle ne montre pas explicitement l'utilisation du `Singleton`. 
-Cependant, dans un déploiement réel, nous veillerions à ce que `JwtService` soit injecté via Spring en tant que `singleton` pour garantir la meilleure pratique et sécurité.
+- **Différence :** L'ancienne implementation de la classe `JwtService` utilisait l'implementation classique d'un `Singleton` pour créer une instance unique, avec un constructeur privé et une méthode statique pour obtenir l'instance unique. Ceci était moins flexible que l'implémentation actuelle avec `@Component`, qui est plus simple et plus conforme aux standards de Spring Boot.
 
 ### Définitions des patrons de conception
 
