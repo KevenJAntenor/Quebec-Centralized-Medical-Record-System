@@ -11,7 +11,7 @@ public class FetchMedicalFile extends MedicalFileOperation<MedicalFile>{
     }
 
     @Override
-    protected ResponseEntity<MedicalFile> performOperation(MedicalFile medicalFile) {
+    protected ResponseEntity<MedicalFile> perform(MedicalFile medicalFile) {
         return ResponseEntity.ok(medicalFile);
     }
 }

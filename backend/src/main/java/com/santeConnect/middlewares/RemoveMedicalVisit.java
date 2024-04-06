@@ -19,7 +19,7 @@ public class RemoveMedicalVisit extends MedicalFileOperation<String> {
     }
 
     @Override
-    protected ResponseEntity<String> performOperation(MedicalFile medicalFile) {
+    protected ResponseEntity<String> perform(MedicalFile medicalFile) {
         Optional<MedicalVisit> visit = medicalFile.getMedicalVisitList().stream().filter(m -> m.getId() == visitId).findFirst();
         if (visit.isEmpty())
             return ResponseEntity.notFound().build();

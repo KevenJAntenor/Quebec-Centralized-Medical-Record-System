@@ -18,8 +18,8 @@ public abstract class MedicalFileOperation<T> {
         Optional<MedicalFile> optionalFile = repository.findById(id);
         if (optionalFile.isEmpty())
             return ResponseEntity.notFound().build();
-        return performOperation(optionalFile.get());
+        return perform(optionalFile.get());
     }
 
-    protected abstract ResponseEntity<T> performOperation(MedicalFile medicalFile);
+    protected abstract ResponseEntity<T> perform(MedicalFile medicalFile);
 }

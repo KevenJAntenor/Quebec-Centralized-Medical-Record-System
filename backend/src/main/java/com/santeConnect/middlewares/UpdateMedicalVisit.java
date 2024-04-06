@@ -18,7 +18,7 @@ public class UpdateMedicalVisit  extends MedicalFileOperation<MedicalFile> {
     }
 
     @Override
-    protected ResponseEntity<MedicalFile> performOperation(MedicalFile medicalFile) {
+    protected ResponseEntity<MedicalFile> perform(MedicalFile medicalFile) {
         medicalVisit.setMedicalFile(medicalFile);
         medicalFile.getMedicalVisitList().add(medicalVisit);
         var result = repository.save(medicalFile);
