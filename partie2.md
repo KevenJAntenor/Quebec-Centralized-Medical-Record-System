@@ -17,7 +17,7 @@
 ## Table of Contents
 
 1. [Facade-Observer](#facade-observer)
-2. [Nom du Patron de Conception 2](#nom-du-patron-de-conception-2)
+2. [Singleton](#singleton)
 3. [Nom du Patron de Conception 3](#nom-du-patron-de-conception-3)
 4. [Nom du Patron de Conception 4](#nom-du-patron-de-conception-4)
 5. [Différences entre l'implémentation et la conception](#différences-entre-limplémentation-et-la-conception)
@@ -59,7 +59,7 @@ Ce Patron offre aussi la flexibilité de pouvoir ajouter d'autres classes Observ
 
 Par exemple, si on veut ajouter une classe qui envoie un courriel à un médecin lorsqu'un `medicalFile` est modifié, on peut le faire en ajoutant une classe `EmailObserver` qui réalise (implements) `Observer`, sans avoir à modifier `medicalFileFacade`.
 
-On sert du patron `Facade` ici pour garder la classe `MedicalFile` indépendante de l'interface de l'`Observer`.
+On sert du patron `Facade` ici pour garder la classe `MedicalFile` indépendante de l'interface de l'`Observer`. Mais aussi à limiter les méthodes de `MedicalFile` qui peuvent être appelées par les `Observers`.
 
 ### Problèmes de Conception et Corrections
 
@@ -88,7 +88,7 @@ spring.jpa.show-sql=true
 - Intention de l'`Observer` : Définir une interdépendance de type un-à-plusieurs, de façon que quand un objet change d'état, tous ceux qui en dépendent en soient notifiés et automatiquement mis à  jour.
 - Intention de la `Facade` : Fournit une interface unifiée, à l'ensemble des interfaces d'un sous-système. La façade fournit une interface de plus haut niveau, qui rend le sous-système plus facile à utiliser.
 
-## Nom du Patron de Conception 2
+## Singleton
 
 Par Emil Surkhaev
 

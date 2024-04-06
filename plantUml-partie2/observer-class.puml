@@ -24,8 +24,8 @@ together{
         +attach(Observer o)
         +detach(Observer o)
         +notify()
-        +getMedicalVisitCreation()
-        +getMedicalHistoryCreation()
+        +getMedicalFile()
+        +setMedicalFile()
     }
 
 
@@ -51,8 +51,8 @@ ModificationObserver -> MedicalFileFacade
 Subject <|.. MedicalFileFacade
 
 MedicalFileFacade . entities.MedicalFile
-MedicalFileFacade . entities.MedicalVisit
-MedicalFileFacade . entities.MedicalHistory
+' MedicalFileFacade . entities.MedicalVisit
+' MedicalFileFacade . entities.MedicalHistory
 
 MedicalFile --> MedicalVisit
 MedicalFile --> MedicalHistory
