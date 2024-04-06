@@ -32,7 +32,6 @@ public class MedicalFileController {
      * @param id to get medical file from db
      * @return response code with medical file
      */
-    @SuppressWarnings("unchecked")
     @GetMapping("medical-files/{id}")
     public ResponseEntity<MedicalFile> getMedicalFile(@PathVariable Long id) {
         MedicalFileOperation fetchMedicalFile = new FetchMedicalFile(repository);
@@ -45,7 +44,6 @@ public class MedicalFileController {
      * @param medicalVisit to add associated medical visit
      * @return response code with medical file
      */
-    @SuppressWarnings("unchecked")
     @PostMapping("medical-files/{id}/medical-visits")
     public ResponseEntity<MedicalFile> addMedicalVisit(@PathVariable Long id, @RequestBody MedicalVisit medicalVisit) {
         MedicalFileOperation updateMedicalVisit = new UpdateMedicalVisit(repository, medicalVisit);
@@ -58,7 +56,6 @@ public class MedicalFileController {
      * @param visitId to rm associated medical visit
      * @return response code with message
      */
-    @SuppressWarnings("unchecked")
     @DeleteMapping("medical-files/{id}/medical-visits")
     public ResponseEntity<String> deleteMedicalVisit(@PathVariable Long id, @RequestBody Long visitId) {
         MedicalFileOperation removeMedicalVisit = new RemoveMedicalVisit(repository, visitId);
