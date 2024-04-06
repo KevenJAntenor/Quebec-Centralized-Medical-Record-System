@@ -1,53 +1,17 @@
 package com.santeConnect.middlewares;
 
 import com.santeConnect.domain.entities.MedicalFile;
-import com.santeConnect.domain.entities.MedicalVisit;
 import com.santeConnect.repository.entities.MedicalFileRepository;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Optional;
+public class FetchMedicalFile extends MedicalFileOperation<MedicalFile>{
 
-import static com.santeConnect.middlewares.ActivateObservers.activateObservers;
-
-public class FetchMedicalFile {
-
-    public static ResponseEntity<MedicalFile> fetchMedicalFile(MedicalFileRepository repository, Long id) {
-        Optional<MedicalFile> optionalFile = repository.findById(id);
-        if (optionalFile.isEmpty())
-            return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(optionalFile.get());
+    public FetchMedicalFile(MedicalFileRepository repository) {
+        super(repository);
     }
 
-    public static ResponseEntity<MedicalFile> updateMedicalVisit(MedicalFileRepository repository, Long id, MedicalVisit medicalVisit) {
-        Optional<MedicalFile> optionalFile = repository.findById(id);
-        if (optionalFile.isEmpty())
-            return ResponseEntity.notFound().build();
-        MedicalFile medicalFile = optionalFile.get();
-        medicalVisit.setMedicalFile(medicalFile);
-        medicalFile.getMedicalVisitList().add(medicalVisit);
-        var result = repository.save(medicalFile);
-        // For observer Pattern
-        activateObservers(medicalFile);
-        return ResponseEntity.ok(result);
+    @Override
+    protected ResponseEntity<MedicalFile> performOperation(MedicalFile medicalFile) {
+        return ResponseEntity.ok(medicalFile);
     }
-
-    public static ResponseEntity<String> removeMedicalVisit(MedicalFileRepository repository, Long id, Long visitId) {
-        Optional<MedicalFile> optionalFile = repository.findById(id);
-        if (optionalFile.isEmpty())
-            return ResponseEntity.notFound().build();
-        MedicalFile medicalFile = optionalFile.get();
-        Optional<MedicalVisit> visit = medicalFile.getMedicalVisitList().stream().filter(m -> {
-                    System.out.println(m.getId().toString());
-                    return m.getId() == visitId;
-                })
-                .findFirst();
-        if (visit.isEmpty())
-            return ResponseEntity.notFound().build();
-        System.out.println("OUI > " + medicalFile.getMedicalVisitList().remove(visit.get()));
-        var result = repository.save(medicalFile);
-        // For observer Pattern
-        activateObservers(medicalFile);
-        return ResponseEntity.ok("Visit deleted");
-    }
-
 }
