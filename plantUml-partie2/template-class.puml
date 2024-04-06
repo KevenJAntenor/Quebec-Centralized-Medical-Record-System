@@ -1,0 +1,30 @@
+@startuml
+
+!include commons.style
+skinparam ranksep 50
+
+' show top to bottom direction
+
+
+abstract class MedicalFileOperation <<AbstractAlgorithm>> {
+  - execute(Long: id) // template method
+  ~ {abstract} <<operation>> perform(mf: MedicalFile)
+}
+
+class FetchMedicalFile <<ConcreteAlgorithm>> {
+  ~  <<operation>> perform(mf: MedicalFile)
+}
+
+class UpdateMedicalFile <<ConcreteAlgorithm>> {
+  ~  <<operation>> perform(mf: MedicalFile)
+}
+
+class RemoveMedicalFile <<ConcreteAlgorithm>> {
+  ~  <<operation>> perform(mf: MedicalFile)
+}
+
+MedicalFileOperation <|-- FetchMedicalFile
+MedicalFileOperation <|-- UpdateMedicalFile
+MedicalFileOperation <|-- RemoveMedicalFile
+
+@enduml

@@ -1,0 +1,63 @@
+'Style defined by Benjamin Benni during his PhD thesis'
+'Adapted by Sébastien Mosser for INF-5153'
+
+skinparam nodesep 75
+skinparam ranksep 75
+hide empty members
+
+skinparam noteFontSize 10
+skinparam noteFontName Courier
+
+skinparam monochrome  false
+skinparam shadowing   false
+skinparam roundcorner 10
+skinparam linetype polyline
+
+skinparam class {
+    BackgroundColor GhostWhite
+    ArrowColor      Gray
+    BorderColor     Black
+    fontColor       CornFlowerBlue
+}
+
+skinparam state {
+    BackgroundColor GhostWhite
+    ArrowColor      Gray
+    BorderColor     Black
+    fontColor       CornFlowerBlue
+}
+
+skinparam object {
+    BackgroundColor GhostWhite
+    ArrowColor      Gray
+    BorderColor     Black
+}
+
+skinparam package<<Layout>> {
+  borderColor         Transparent
+  backgroundColor     Transparent
+  fontColor           Transparent
+  stereotypeFontColor Transparent
+}
+
+skinparam sequence {
+	ArrowColor                  Gray
+  LifeLineBorderColor         CornFlowerBlue
+  LifeLineBackgroundColor     GhostWhite
+	ParticipantBorderColor      CornFlowerBlue
+	ParticipantBackgroundColor  GhostWhite
+  ActorBorderColor            CornFlowerBlue
+	ActorBackgroundColor        GhostWhite
+  BoxBorderColor         CornFlowerBlue
+  BoxBackgroundColor         GhostWhite
+}
+
+skinparam stereotypeCBackgroundColor CornflowerBlue
+
+hide footbox
+hide empty members
+
+skinparam note {
+ BackgroundColor GhostWhite
+ BorderColor         CornFlowerBlue
+}

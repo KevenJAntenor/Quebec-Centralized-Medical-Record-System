@@ -2,14 +2,16 @@ package com.santeConnect.web;
 
 import com.santeConnect.domain.entities.MedicalFile;
 import com.santeConnect.domain.entities.MedicalVisit;
+import com.santeConnect.middlewares.FetchMedicalFile;
+import com.santeConnect.middlewares.MedicalFileOperation;
+import com.santeConnect.middlewares.RemoveMedicalVisit;
+import com.santeConnect.middlewares.UpdateMedicalVisit;
 import com.santeConnect.repository.entities.MedicalFileRepository;
 
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import static com.santeConnect.middlewares.FetchMedicalFile.*;
 
 @RestController
 public class MedicalFileController {
@@ -32,7 +34,8 @@ public class MedicalFileController {
      */
     @GetMapping("medical-files/{id}")
     public ResponseEntity<MedicalFile> getMedicalFile(@PathVariable Long id) {
-        return fetchMedicalFile(repository, id);
+        MedicalFileOperation fetchMedicalFile = new FetchMedicalFile(repository);
+        return fetchMedicalFile.execute(id);
     }
 
     /**
@@ -43,7 +46,8 @@ public class MedicalFileController {
      */
     @PostMapping("medical-files/{id}/medical-visits")
     public ResponseEntity<MedicalFile> addMedicalVisit(@PathVariable Long id, @RequestBody MedicalVisit medicalVisit) {
-        return updateMedicalVisit(repository, id, medicalVisit);
+        MedicalFileOperation updateMedicalVisit = new UpdateMedicalVisit(repository, medicalVisit);
+        return updateMedicalVisit.execute(id);
     }
 
     /**
@@ -54,6 +58,7 @@ public class MedicalFileController {
      */
     @DeleteMapping("medical-files/{id}/medical-visits")
     public ResponseEntity<String> deleteMedicalVisit(@PathVariable Long id, @RequestBody Long visitId) {
-        return removeMedicalVisit(repository, id, visitId);
+        MedicalFileOperation removeMedicalVisit = new RemoveMedicalVisit(repository, visitId);
+        return removeMedicalVisit.execute(id);
     }
 }
