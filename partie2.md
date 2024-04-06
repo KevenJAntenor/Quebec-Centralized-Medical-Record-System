@@ -176,18 +176,23 @@ Pour chaque problème de conception que vous allez corriger, vous devrez décrir
 
 ### Diagramme de Séquence
 
+On montre ici un exemple de l'utilisation du patron `Template` pour les routes GET, POST, DELETE dans le contrôleur `MedicalFileController`.
+On remarque que chaque route possède des opérations communes, `execute(id)`, mais avec des opérations spécifiques à chaque route.
+
 ![Diagramme de séquence](./plantUml-partie2/template-seq.png)
 
 ### Implémentation
 
-[Description de l'implémentation du patron de conception]
-
-Pour chaque problème de conception que vous allez corriger, vous devrez décrire comment vous avez détecté le problème de conception et comment vous l'avez corrigé.
+On utilise le patron de conception `Template` pour faciliter la gestion des routes GET, POST, DELETE etc. dans le contrôleur `MedicalFileController`.
+Enfaite chaque route possède des opertions communes, comme la vérification si medicalFile existe, mais avec des opération spécifiques a chaque route.
+Par example, la route POST doit mettre à jour un medicalFile, alors que la route GET doit retourner un medicalFile.
+Les deux routes doivent vérifier si le medicalFile existe, mais avec des opérations furutres différentes.
 
 ### Différences entre l'implémentation et la conception
 
-Toute différence entre l'implémentation et la conception doit être documentée dans le rapport que vous allez me remettre.
+Aucune différence entre l'implémentation et la conception.
 
 ### Problèmes de Conception et Corrections
 
-Pour chaque problème de conception que vous allez corriger, vous devrez décrire comment vous avez détecté le problème de conception et comment vous l'avez corrigé.
+Avant l'utilsation du patron `Template`, chaque route avait des opérations communes dupliquées. Ceci cause l'anti-pattern Duplicated Code.
+Avec le patron `Template`, on a pu réduire la duplication de code et rendre le code plus lisible et maintenable.
