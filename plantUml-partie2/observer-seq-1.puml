@@ -6,12 +6,10 @@ title Facade Pattern Behavior
 participant "MedicalFileFacade" as F
 participant "MedicalFile" as A
 
-[-> F: getModifications()
+[-> F: updateMedicalVisit(medicalFile)
 activate F
-F -> A: getMedicalVisits()
+F -> A: setMedicalFile(medicalFile)
 activate A
-A --> F
-F -> A: getMedicalHistories()
 A --> F
 deactivate A
 [<-- F
