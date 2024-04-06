@@ -20,8 +20,9 @@
 2. [Nom du Patron de Conception 2](#nom-du-patron-de-conception-2)
 3. [Nom du Patron de Conception 3](#nom-du-patron-de-conception-3)
 4. [Nom du Patron de Conception 4](#nom-du-patron-de-conception-4)
-5. [Différences entre l'implémentation et la conception](#différences-entre-limplémentation-et-la-conception)
-6. [Problèmes de Conception et Corrections](#problèmes-de-conception-et-corrections)
+5. [Template](#template)
+<!-- 5. [Différences entre l'implémentation et la conception](#différences-entre-limplémentation-et-la-conception) -->
+<!-- 6. [Problèmes de Conception et Corrections](#problèmes-de-conception-et-corrections) -->
 
 ## Facade-Observer
 
@@ -152,6 +153,30 @@ Plant uml code inside plantUml-partie2 directory
 
 Plant uml code inside plantUml-partie2 directory
 [Insérer le diagramme de séquence ici]
+
+### Implémentation
+
+[Description de l'implémentation du patron de conception]
+
+Pour chaque problème de conception que vous allez corriger, vous devrez décrire comment vous avez détecté le problème de conception et comment vous l'avez corrigé.
+
+### Différences entre l'implémentation et la conception
+
+Toute différence entre l'implémentation et la conception doit être documentée dans le rapport que vous allez me remettre.
+
+### Problèmes de Conception et Corrections
+
+Pour chaque problème de conception que vous allez corriger, vous devrez décrire comment vous avez détecté le problème de conception et comment vous l'avez corrigé.
+
+## Template
+
+### Diagramme de Classe
+
+![Diagramme de classe](./plantUml-partie2/template-class.png)
+
+### Diagramme de Séquence
+
+![Diagramme de séquence](./plantUml-partie2/template-seq.png)
 
 ### Implémentation
 

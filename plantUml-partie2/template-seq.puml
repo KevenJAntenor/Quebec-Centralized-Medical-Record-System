@@ -1,0 +1,62 @@
+@startuml
+
+!include commons.style
+title Template Method Pattern Behavior
+
+participant ": MedicalFileController" as C
+participant "a1: FetchMedicalFile" as A1
+participant "a2: UpdateMedicalvisit" as A2
+participant "a3: RemoveMedicalvisit" as A3
+
+
+
+[-> C: GET /medical-files/:id
+activate C
+C -> A1: execute(id)
+activate A1
+A1 -> A1: execute(id)
+activate A1 #219BAF
+deactivate A1
+A1 -> A1: perform()
+note right: specific to\nFetchMedicalFile
+activate A1 #DAA939
+deactivate A1
+A1 --> C: Response
+deactivate A1
+[<-- C: Response
+deactivate C
+
+
+[-> C: POST /medical-files/:id/medical-visits
+activate C
+C -> A2: execute(id)
+activate A2
+A2 -> A2: execute(id)
+activate A2 #219BAF
+deactivate A2
+A2 -> A2: perform()
+note left: specific to\nUpdateMedicalvisit
+activate A2 #E5E042
+deactivate A2
+A2 --> C: Response
+deactivate A2
+[<-- C: Response
+deactivate C
+
+[-> C: DELETE /medical-files/:id/medical-visits
+activate C
+C -> A3: execute(id)
+activate A3
+A3 -> A3: execute(id)
+activate A3 #219BAF
+deactivate A3
+A3 -> A3: perform()
+note left: specific to\nRemoveMedicalvisit
+activate A3 #E5E042
+deactivate A3
+A3 --> C: Response
+deactivate A3
+[<-- C: Response
+deactivate C
+
+@enduml
