@@ -67,7 +67,7 @@ public class SecurityConfig {
          authorizeHttpRequests
                  // TODO delete line below when login is implemented
                  .requestMatchers("medical-files/**").permitAll()
-                 .requestMatchers("/api-docs/**", "/swagger-ui/**").permitAll()
+                 .requestMatchers("/api-docs/**", "/swagger-ui/**", "/jacoco/**").permitAll()
                  .requestMatchers(HttpMethod.POST, "/login").permitAll()
                  // TODO define roles endpoint
 //                 .requestMatchers("/admin/**").hasRole("ADMIN")
