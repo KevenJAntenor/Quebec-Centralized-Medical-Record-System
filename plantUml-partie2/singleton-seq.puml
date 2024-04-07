@@ -1,5 +1,7 @@
 @startuml
 
+!include commons.style
+
 actor User
 participant LoginController
 participant JwtService

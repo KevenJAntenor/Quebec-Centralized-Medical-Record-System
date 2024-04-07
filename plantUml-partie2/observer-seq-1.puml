@@ -1,5 +1,6 @@
 @startuml
 
+!include commons.style
 hide footbox
 title Facade Pattern Behavior
 
