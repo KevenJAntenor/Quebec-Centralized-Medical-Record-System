@@ -29,7 +29,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 
 @WebMvcTest(LoginController.class)
-@AutoConfigureMockMvc(addFilters = false) // Disable security filters
+@AutoConfigureMockMvc(addFilters = false) // Disable security filter
 public class LoginControllerTest {
 
     @Autowired
