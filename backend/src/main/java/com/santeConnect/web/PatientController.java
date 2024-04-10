@@ -1,20 +1,11 @@
 package com.santeConnect.web;
 
-import com.santeConnect.domain.entities.MedicalFile;
-import com.santeConnect.domain.entities.MedicalVisit;
 import com.santeConnect.domain.strategy.AdressModificationStrategy;
 import com.santeConnect.domain.strategy.CoordinateModification;
 import com.santeConnect.domain.strategy.EmailModificationStrategy;
 import com.santeConnect.domain.strategy.PersonalPhoneModificationStrategy;
 import com.santeConnect.domain.strategy.WorkPhoneModificationStrategy;
-import com.santeConnect.middlewares.FetchMedicalFile;
-import com.santeConnect.middlewares.MedicalFileOperation;
-import com.santeConnect.middlewares.RemoveMedicalVisit;
-import com.santeConnect.middlewares.UpdateMedicalVisit;
-import com.santeConnect.repository.entities.MedicalFileRepository;
 import com.santeConnect.repository.entities.PatientRepository;
-
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
