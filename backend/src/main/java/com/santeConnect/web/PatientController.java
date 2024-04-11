@@ -1,5 +1,7 @@
 package com.santeConnect.web;
 
+import com.santeConnect.domain.entities.Coordinate;
+import com.santeConnect.domain.entities.Patient;
 import com.santeConnect.domain.strategy.AdressModificationStrategy;
 import com.santeConnect.domain.strategy.CoordinateModification;
 import com.santeConnect.domain.strategy.EmailModificationStrategy;
@@ -26,22 +28,26 @@ public class PatientController {
             return ResponseEntity.status(403).build();
 
         CoordinateModification modification = new CoordinateModification();
+        Patient patientFound = patient.get();
+        Coordinate patientCoordinates = patientFound.getCoordinate();
         if (StringUtils.hasText(workPhone)) {
             modification.setStrategy(new WorkPhoneModificationStrategy(workPhone));
-            modification.execute(patient.get().getCoordinate());
+            modification.execute(patientCoordinates);
         }
         if (StringUtils.hasText(personalPhone)) {
             modification.setStrategy(new PersonalPhoneModificationStrategy(personalPhone));
-            modification.execute(patient.get().getCoordinate());
+            modification.execute(patientCoordinates);
         }
         if (StringUtils.hasText(email)) {
             modification.setStrategy(new EmailModificationStrategy(email));
-            modification.execute(patient.get().getCoordinate());
+            modification.execute(patientCoordinates);
         }
         if (StringUtils.hasText(address)) {
             modification.setStrategy(new AdressModificationStrategy(address));
-            modification.execute(patient.get().getCoordinate());
+            modification.execute(patientCoordinates);
         }
+        patientFound.setCoordinate(patientCoordinates);
+        repository.save(patientFound);
         return ResponseEntity.ok().build();
     }
 }
