@@ -1,0 +1,65 @@
+@startuml
+left to right direction
+class InvalidCoordinateException {
+    +InvalidCoordinateException()
+}
+interface CoordinateModificationStrategy {
+    +modify(Coordinate coordinate)
+}
+
+class AdressModificationStrategy {
+    -newAdress: String
+    +modify(coordinate: Coordinate)
+}
+
+class EmailModificationStrategy {
+    -newEmail: String
+    -regex: String
+    +modify(coordinate: Coordinate)
+}
+
+class PersonalPhoneModificationStrategy {
+    -newPhone: String
+    -regex: String
+    +modify(coordinate: Coordinate)
+}
+
+class WorkPhoneModificationStrategy {
+    -newPhone: String
+    -regex: String
+    +modify(coordinate: Coordinate)
+}
+
+
+class CoordinateModification {
+    -strategy: CoordinateModificationStrategy
+    +setStrategy(strategy: CoordinateModificationStrategy)
+    +execute(coordinate: Coordinate)
+}
+
+class Coordinate {
+    +setAddress(address: String)
+    +setEmail(email: String)
+    +setPersonalPhoneNumber(phone: String)
+}
+
+CoordinateModificationStrategy <|.r. EmailModificationStrategy
+CoordinateModificationStrategy <|.r. PersonalPhoneModificationStrategy
+CoordinateModificationStrategy <|.r. WorkPhoneModificationStrategy
+CoordinateModificationStrategy <|.r. AdressModificationStrategy
+
+
+InvalidCoordinateException <.. AdressModificationStrategy: throws
+InvalidCoordinateException <.. EmailModificationStrategy: throws
+InvalidCoordinateException <.l. PersonalPhoneModificationStrategy: throws
+InvalidCoordinateException <.. WorkPhoneModificationStrategy: throws
+
+CoordinateModification -r[hidden]-> WorkPhoneModificationStrategy
+PersonalPhoneModificationStrategy -u[hidden]-> WorkPhoneModificationStrategy
+PersonalPhoneModificationStrategy -d[hidden]-> EmailModificationStrategy
+EmailModificationStrategy -d[hidden]-> AdressModificationStrategy
+
+CoordinateModificationStrategy .l.> Coordinate: uses
+CoordinateModification .d.> CoordinateModificationStrategy: uses
+@enduml
+
