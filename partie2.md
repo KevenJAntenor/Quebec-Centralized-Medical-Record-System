@@ -18,7 +18,7 @@
 
 1. [Facade-Observer](#facade-observer)
 2. [Singleton](#singleton)
-3. [Nom du Patron de Conception 3](#nom-du-patron-de-conception-3)
+3. [Strategy](#strategy)
 4. [Nom du Patron de Conception 4](#nom-du-patron-de-conception-4)
 5. [Template](#template)
 <!-- 5. [Différences entre l'implémentation et la conception](#différences-entre-limplémentation-et-la-conception) -->
@@ -123,23 +123,29 @@ Notez que c'est la valeur par défaut de `@Component` mais on l'a ajouté pour p
 
 - Intention de l'`Singleton` : Assurer qu'une classe n'ait qu'une seule instance et fournir un point d'accès global à cette instance.
 
-## Nom du Patron de Conception 3
+## Strategy
 Par Youenn Pierre-Justin
 
 ### Diagramme de Classe
 
-Plant uml code inside plantUml-partie2 directory
-[Insérer le diagramme de classe ici]
+![Diagramme de classe](./plantUml-partie2/strategy-class.png)
 
 ### Diagramme de Séquence
 
-Plant uml code inside plantUml-partie2 directory
-[Insérer le diagramme de séquence ici]
+![Diagramme de classe](./plantUml-partie2/strategy-seq.png)
 
 ### Implémentation
 
-[Description de l'implémentation du patron de conception]
+Le patron Strategy est utilisé pour gerer la modification des coordonnees du patient. En effet lorsque l'utilisateur modifie une coordonnee, il s'occupe de la validation de la coordonnee en fonction du type de coordonnees et donc par extension de la strategie associe a cette coordonnee.
 
+### Problèmes de Conception et Corrections
+
+- **Problème de Conception :** Sans le patron `Strategy`, ce serait alors la responsibilité du controleur ou du service de gerer la logique d'affaire associé a la modification d'un coordonnee.
+- **Correction :** En implémentant le `Strategy pattern`, on attribut clairement la responsibilité de la validation aupres de la strategy adaptee a la coordonnees modifiee
+
+### Définitions des patrons de conception
+
+- Intention de `Strategy pattern` : Permet de creer une famille d'algorithme, les mettres dans des classes separees et rendre leurs objet interchangeable. Il remplace l'heritage par une composition
 
 ## Nom du Patron de Conception 4
 Par Keven Jude Anténor
