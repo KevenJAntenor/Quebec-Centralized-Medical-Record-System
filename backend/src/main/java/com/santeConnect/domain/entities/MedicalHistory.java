@@ -23,21 +23,21 @@ public class MedicalHistory {
 
     private String doctor;
 
-    private String start;
+    private String startDate;
 
-    private String end;
+    private String endDate;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medical_file_id")
     private MedicalFile medicalFile;
 
-    public MedicalHistory(String diagnostic, String treatment, String doctor, String start, String end) {
+    public MedicalHistory(String diagnostic, String treatment, String doctor, String startDate, String endDate) {
         super();
         this.diagnostic = diagnostic;
         this.treatment = treatment;
         this.doctor = doctor;
-        this.start = start;
-        this.end = end;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 }
