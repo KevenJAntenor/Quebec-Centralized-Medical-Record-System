@@ -1,7 +1,7 @@
 import type { PageServerLoad } from './$types';
 import { API_URL } from '../constants';
 
-export const load: PageServerLoad = async ({ locals, request }) => {
+export const load: PageServerLoad = async ({ locals }) => {
     let backendData;
     const token = locals.token;
     try {
@@ -18,10 +18,5 @@ export const load: PageServerLoad = async ({ locals, request }) => {
     return {
         backendData,
         message: (token) ? 'you are logged in!' : 'you are not logged in!',
-        props: {
-            locals: {
-                token,
-            },
-        },
     };
 };
