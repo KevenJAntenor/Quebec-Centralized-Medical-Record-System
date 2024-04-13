@@ -3,6 +3,7 @@ package com.santeConnect;
 import com.santeConnect.domain.entities.Coordinate;
 import com.santeConnect.domain.entities.MedicalFile;
 import com.santeConnect.domain.entities.MedicalVisit;
+import com.santeConnect.domain.entities.MedicalHistory;
 import com.santeConnect.domain.entities.Patient;
 import com.santeConnect.domain.users.AppUser;
 import com.santeConnect.repository.entities.*;
@@ -31,18 +32,22 @@ public class SanteConnectApplication implements CommandLineRunner {
 
     private final MedicalVisitRepository medicalVisitRepository;
 
+    private final MedicalHistoryRepository medicalHistoryRepository;
+
     private final AppUserRepository appUserRepository;
 
     public SanteConnectApplication(MedicalFileRepository medicalFileRepository,
             PatientRepository patientRepository,
             CoordinateRepository coordinateRepository,
             MedicalVisitRepository medicalVisitRepository,
-            AppUserRepository appUserRepository) {
+            AppUserRepository appUserRepository,
+            MedicalHistoryRepository medicalHistoryRepository) {
         this.medicalFileRepository = medicalFileRepository;
         this.patientRepository = patientRepository;
         this.coordinateRepository = coordinateRepository;
         this.medicalVisitRepository = medicalVisitRepository;
         this.appUserRepository = appUserRepository;
+        this.medicalHistoryRepository = medicalHistoryRepository;
     }
 
     public static void main(String[] args) {
@@ -60,6 +65,11 @@ public class SanteConnectApplication implements CommandLineRunner {
                 "Treatment 3", "Summary 3", "Notes 3");
         MedicalVisit visit4 = new MedicalVisit("Establishment 4", "Doctor 4", "2022-04-01", "Diagnostic 4",
                 "Treatment 4", "Summary 4", "Notes 4");
+
+        MedicalHistory history1 = new MedicalHistory("Diagnostic 1", "Treatment 1", "Doctor 1", "2022-01-01", "2022-01-31");
+        MedicalHistory history2 = new MedicalHistory("Diagnostic 2", "Treatment 2", "Doctor 2", "2022-02-01", "2022-02-28");
+        MedicalHistory history3 = new MedicalHistory("Diagnostic 3", "Treatment 3", "Doctor 3", "2022-03-01", "2022-03-31");
+        MedicalHistory history4 = new MedicalHistory("Diagnostic 4", "Treatment 4", "Doctor 4", "2022-04-01", "2022-04-30");
 
         Coordinate coordinate1 = new Coordinate();
         coordinate1.setAddress("2020 Rue Saint-Urbain, Montréal, QC H2X 4E1, Canada");
@@ -196,11 +206,22 @@ public class SanteConnectApplication implements CommandLineRunner {
         visit3.setMedicalFile(medicalFile2);
         visit4.setMedicalFile(medicalFile2);
 
+        history1.setMedicalFile(medicalFile1);
+        history2.setMedicalFile(medicalFile1);
+        history3.setMedicalFile(medicalFile2);
+        history4.setMedicalFile(medicalFile2);
+
         List<MedicalVisit> medicalVisits1 = Arrays.asList(visit1, visit2);
         List<MedicalVisit> medicalVisits2 = Arrays.asList(visit3, visit4);
 
+        List<MedicalHistory> medicalHistories1 = Arrays.asList(history1, history2);
+        List<MedicalHistory> medicalHistories2 = Arrays.asList(history3, history4);
+
         medicalFile1.setMedicalVisitList(medicalVisits1);
         medicalFile2.setMedicalVisitList(medicalVisits2);
+
+        medicalFile1.setMedicalHistoryList(medicalHistories1);
+        medicalFile2.setMedicalHistoryList(medicalHistories2);
 
         MedicalFile medicalFile3 = new MedicalFile();
         medicalFile3.setInsuranceNumber("CDEF12345678");
@@ -253,6 +274,9 @@ public class SanteConnectApplication implements CommandLineRunner {
 
         medicalVisitRepository.saveAll(medicalVisits1);
         medicalVisitRepository.saveAll(medicalVisits2);
+
+        medicalHistoryRepository.saveAll(medicalHistories1);
+        medicalHistoryRepository.saveAll(medicalHistories2);
 
         // Fetch all medical Files and log to console
         for (MedicalFile medicalFile : medicalFileRepository.findAll()) {
