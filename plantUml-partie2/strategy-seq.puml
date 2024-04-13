@@ -1,0 +1,36 @@
+@startuml
+
+!include commons.style
+
+actor User
+participant PatientController
+
+User -> PatientController: modify(Coordinate newCoordinate, Long id)
+activate PatientController
+activate PatientRepository
+
+activate Patient
+PatientController -> PatientRepository: findById(id)
+PatientRepository --> PatientController : Patient
+
+activate Coordinate
+PatientController -> Coordinate: new Coordinate()
+
+activate CoordinateModification
+PatientController -> CoordinateModification: new CoordinateModification()
+alt newCoordinate is workPhone
+    PatientController -> CoordinateModification: setStrategy(new WorkPhoneMoficationStrategy(newCoordinate))
+    PatientController -> CoordinateModification: execute(coordinate)
+else newCoordinate is personalPhone
+    PatientController -> CoordinateModification: setStrategy(new PersonalPhoneModificationStrategy(newCoordinate))
+    PatientController -> CoordinateModification: execute(coordinate)
+else newCoordinate is email
+    PatientController -> CoordinateModification: setStrategy(new EmailModificationStrategy(newCoordinate))
+    PatientController -> CoordinateModification: execute(coordinate)
+else newCoordinate is address
+    PatientController -> CoordinateModification: setStrategy(new AddressModificationStrategy(newCoordinate))
+    PatientController -> CoordinateModification: execute(coordinate)
+end
+PatientController -> PatientRepository: save(patient)
+
+@enduml
