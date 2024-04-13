@@ -6,6 +6,9 @@ const redirectOnInvalidSession = (token: string | undefined, event: RequestEvent
     const inSession = event.cookies.get('in_sess') === '1';
     return redirect(302, `/login`);
   }
+  if (token && event.url.pathname === '/login') {
+    return redirect(302, `/medicalfiles`);
+  }
 };
 
 export const handle: Handle = async ({ event, resolve }) => {
