@@ -71,7 +71,7 @@ public class MedicalFileController {
      * @param medicalHistory to add associated medical history
      * @return response code with medical file
      */
-    @PostMapping("medical-files/{id}/medical-history")
+    @PostMapping("medical-files/{id}/medical-histories")
     public ResponseEntity<MedicalFile> addMedicalHistory(@PathVariable Long id, @RequestBody MedicalHistory medicalHistory) {
         MedicalFileOperation updateMedicalHistory = new UpdateMedicalHistory(repository, medicalHistory);
         return updateMedicalHistory.execute(id);
@@ -83,7 +83,7 @@ public class MedicalFileController {
      * @param historyId to remove associated medical history
      * @return response code with message
      */
-    @DeleteMapping("medical-files/{id}/medical-history")
+    @DeleteMapping("medical-files/{id}/medical-histories")
     public ResponseEntity<String> deleteMedicalHistory(@PathVariable Long id, @RequestBody Long historyId) {
         MedicalFileOperation removeMedicalHistory = new RemoveMedicalHistory(repository, historyId);
         return removeMedicalHistory.execute(id);
