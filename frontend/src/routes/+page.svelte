@@ -4,6 +4,7 @@
     import { API_URL } from "../constants";
 
     let backendData: string;
+
     onMount(async () => {
         try {
             const response = await fetch(API_URL);
@@ -19,6 +20,8 @@
 <h1>It works!</h1>
 <div>from client: {backendData ?? "loading"}</div>
 <div>from svelte: {data.backendData}</div>
+<div>{data.message}</div>
+
 
 <style>
     h1 {
