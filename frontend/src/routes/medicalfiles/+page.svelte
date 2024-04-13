@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { MedicalFile } from "$lib/types/medicalFile";
+    import { onMount } from "svelte";
     import type { PageData } from "./$types";
     import DataTable, {
         Head,
@@ -40,6 +41,7 @@
         | "patient"
         | "personalNumber";
     let sort: ColumnType = "insuranceNumber";
+
     let sortDirection: Lowercase<keyof typeof SortValue> = "ascending";
 
     function handleSort() {
@@ -87,6 +89,10 @@
         });
         medicalFiles = medicalFiles;
     }
+
+    onMount(() => {
+        handleSort();
+    });
 </script>
 
 <svelte:head>

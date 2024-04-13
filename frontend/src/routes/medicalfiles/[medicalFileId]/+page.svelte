@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { MedicalVisit } from "$lib/types/medicalVisit";
+    import type { MedicalHistory } from "$lib/types/medicalHistory";
     import type { PageServerData } from "./$types";
     import DataTable, {
         Head,
@@ -89,27 +90,6 @@
         showModal = !showModal;
     }
 
-    interface medicalVisitFields {
-        establishment: string;
-        doctor: string;
-        dateOfVisit: string;
-        diagnostic: string;
-        treatment: string;
-    }
-
-    const formData: medicalVisitFields = {
-        establishment: "",
-        doctor: "",
-        dateOfVisit: "",
-        diagnostic: "",
-        treatment: "",
-    };
-
-    interface formDataMedicalVisit extends FormData, medicalVisitFields {
-        success: boolean;
-        message: string;
-    }
-
     let establishment = "";
     let doctor = "";
     let dateOfVisit = "";
@@ -184,6 +164,141 @@
         // Update the medicalFile variable
         medicalFile = await updatedMedicalFileResponse.json();
     }
+
+    $: medicalHistoryList = medicalFile.medicalHistoryList;
+
+    let rowsPerPageHistory = 10;
+    let currentPageHistory = 0;
+
+    $: startHistory = currentPageHistory * rowsPerPageHistory;
+    $: endHistory = Math.min(
+        startHistory + rowsPerPageHistory,
+        medicalHistoryList.length,
+    );
+    $: sliceHistory = medicalHistoryList.slice(startHistory, endHistory);
+    $: lastPageHistory = Math.max(
+        Math.ceil(medicalHistoryList.length / rowsPerPageHistory) - 1,
+        0,
+    );
+
+    $: if (currentPageHistory > lastPageHistory) {
+        currentPageHistory = lastPageHistory;
+    }
+
+    $: if (medicalHistoryList.length > rowsPerPageHistory) {
+        currentPageHistory = 1;
+    } else {
+        currentPageHistory = 0;
+    }
+
+    let sortHistory: keyof MedicalHistory = "id";
+    let sortDirectionHistory: Lowercase<keyof typeof SortValue> = "ascending";
+
+    function handleSortHistory() {
+        medicalHistoryList.sort((a: MedicalHistory, b: MedicalHistory) => {
+            let aVal: any, bVal: any;
+            if (sortHistory === "diagnostic") {
+                aVal = a.diagnostic;
+                bVal = b.diagnostic;
+            } else if (sortHistory === "treatment") {
+                aVal = a.treatment;
+                bVal = b.treatment;
+            } else if (sortHistory === "doctor") {
+                aVal = a.doctor;
+                bVal = b.doctor;
+            }
+
+            const [sortedAVal, sortedBVal] = [aVal, bVal][
+                sortDirectionHistory === "ascending" ? "slice" : "reverse"
+            ]();
+            if (
+                typeof sortedAVal === "string" &&
+                typeof sortedBVal === "string"
+            ) {
+                return sortedAVal.localeCompare(sortedBVal);
+            }
+            return Number(sortedAVal) - Number(sortedBVal);
+        });
+        medicalHistoryList = medicalHistoryList;
+    }
+
+    let showHistoryModal = false;
+
+    function toggleHistoryModal() {
+        showHistoryModal = !showHistoryModal;
+    }
+
+    let diagnosticHistory = "";
+    let treatmentHistory = "";
+    let doctorHistory = "";
+    let startDateHistory = "";
+    let endDateHistory = "";
+
+    async function submitHistoryForm() {
+        const id = medicalFile.id;
+        const medicalHistory = {
+            diagnostic: diagnosticHistory,
+            treatment: treatmentHistory,
+            doctor: doctorHistory,
+            startDate: startDateHistory,
+            endDate: endDateHistory,
+        };
+        const response = await fetch(
+            `${API_URL}/medical-files/${id}/medical-histories`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(medicalHistory),
+            },
+        );
+        if (!response.ok) {
+            console.error(
+                "Failed to create medical history",
+                await response.text(),
+            );
+            return;
+        }
+        // Fetch the updated MedicalFile
+        const updatedMedicalFileResponse = await fetch(
+            `${API_URL}/medical-files/${id}`,
+        );
+        if (!updatedMedicalFileResponse.ok) {
+            console.error(
+                "Failed to fetch updated MedicalFile",
+                await updatedMedicalFileResponse.text(),
+            );
+            return;
+        }
+
+        // Update the medicalFile variable
+        medicalFile = await updatedMedicalFileResponse.json();
+    }
+
+    async function deleteHistory(historyId: number) {
+        const id = medicalFile.id;
+        const response = await fetch(
+            `http://localhost:8080/medical-files/${id}/medical-histories`,
+            {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(historyId),
+            },
+        );
+        const updatedMedicalFileResponse = await fetch(
+            `${API_URL}/medical-files/${id}`,
+        );
+        if (!updatedMedicalFileResponse.ok) {
+            console.error(
+                "Failed to fetch updated MedicalFile",
+                await updatedMedicalFileResponse.text(),
+            );
+            return;
+        }
+
+        // Update the medicalFile variable
+        medicalFile = await updatedMedicalFileResponse.json();
+    }
+
 </script>
 
 <svelte:head>
@@ -277,9 +392,7 @@
             {#each slice as medicalVisit (medicalVisit.id)}
                 <Row>
                     <Cell>
-                        <a
-                            href={`/medicalfiles/${medicalFile.id}/${medicalVisit.id}`}
-                        >
+                        <a href={`/medicalfiles/${medicalFile.id}/visits/${medicalVisit.id}`}>
                             {medicalVisit.establishment}
                         </a>
                     </Cell>
@@ -343,7 +456,139 @@
 
     <Paper>
         <Title>Medical History List</Title>
+        <Content>
+        {#if showHistoryModal}
+            <Button on:click={toggleHistoryModal}>Close</Button>
+        {:else}
+            <Button on:click={toggleHistoryModal}>Add new medical history</Button>
+        {/if}
+        </Content>
     </Paper>
+
+    {#if showHistoryModal}
+    <div class="modal">
+        <div class="container">
+            <form on:submit|preventDefault={submitHistoryForm}>
+                <Textfield variant="outlined" bind:value={diagnosticHistory} label="Diagnostic">
+                    <HelperText slot="helper">Diagnostic</HelperText>
+                </Textfield>
+                <Textfield variant="outlined" bind:value={treatmentHistory} label="Treatement">
+                    <HelperText slot="helper">Treatement</HelperText>
+                </Textfield>
+                <Textfield variant="outlined" bind:value={doctorHistory} label="Doctor">
+                    <HelperText slot="helper">Doctor's name</HelperText>
+                </Textfield>
+                <Textfield variant="outlined" bind:value={startDateHistory} label="Start Date">
+                    <HelperText slot="helper">Start Date</HelperText>
+                </Textfield>
+                <Textfield variant="outlined" bind:value={endDateHistory} label="End Date">
+                    <HelperText slot="helper">End Date</HelperText>
+                </Textfield>
+                <Button type="submit" variant="raised">Add Medical History</Button>
+            </form>
+        </div>
+    </div>
+    {/if}
+
+    <DataTable
+        sortable
+        bind:sort={sortHistory}
+        bind:sortDirection={sortDirectionHistory}
+        on:SMUIDataTable:sorted={handleSortHistory}
+        table$aria-label="Medical History list"
+        style="width: 100%;"
+    >
+        <Head>
+            <Row>
+                <Cell columnId="diagnostic">
+                    <Label>Diagnostic</Label>
+                    <IconButton class="material-icons">arrow_upward</IconButton>
+                </Cell>
+                <Cell columnId="treatment">
+                    <Label>Treatment</Label>
+                    <IconButton class="material-icons">arrow_upward</IconButton>
+                </Cell>
+                <Cell columnId="doctor">
+                    <Label>Doctor</Label>
+                    <IconButton class="material-icons">arrow_upward</IconButton>
+                </Cell>
+                <Cell columnId="startDate">
+                    <Label>Start Date</Label>
+                    <IconButton class="material-icons">arrow_upward</IconButton>
+                </Cell>
+                <Cell columnId="endDate">
+                    <Label>End Date</Label>
+                    <IconButton class="material-icons">arrow_upward</IconButton>
+                </Cell>
+            </Row>
+        </Head>
+        <Body>
+            {#each sliceHistory as medicalHistory (medicalHistory.id)}
+                <Row>
+                    <Cell>
+                        <a href={`/medicalfiles/${medicalFile.id}/histories/${medicalHistory.id}`}>
+                            {medicalHistory.diagnostic}
+                        </a>
+                    </Cell>
+                    <Cell>{medicalHistory.treatment}</Cell>
+                    <Cell>{medicalHistory.doctor}</Cell>
+                    <Cell>{medicalHistory.startDate}</Cell>
+                    <Cell>{medicalHistory.endDate}</Cell>
+                    <Cell>
+                        <Button
+                            on:click={() => {
+                                deleteHistory(medicalHistory.id);
+                            }}>Delete</Button
+                        >
+                    </Cell>
+                </Row>
+            {/each}
+        </Body>
+        <Pagination slot="paginate">
+            <svelte:fragment slot="rowsPerPage">
+                <Label>Rows Per Page</Label>
+                <Select variant="outlined" bind:value={rowsPerPageHistory} noLabel>
+                    <Option value={10}>10</Option>
+                    <Option value={25}>25</Option>
+                    <Option value={100}>100</Option>
+                </Select>
+            </svelte:fragment>
+            <svelte:fragment slot="total">
+                {startHistory + 1}-{endHistory} of {medicalHistoryList.length}
+            </svelte:fragment>
+
+            <IconButton
+                class="material-icons"
+                action="first-page"
+                title="First page"
+                on:click={() => (currentPageHistory = 0)}
+                disabled={currentPageHistory === 0}>first_page</IconButton
+            >
+            <IconButton
+                class="material-icons"
+                action="prev-page"
+                title="Prev page"
+                on:click={() => currentPageHistory--}
+                disabled={currentPageHistory === 0}>chevron_left</IconButton
+            >
+            <IconButton
+                class="material-icons"
+                action="next-page"
+                title="Next page"
+                on:click={() => currentPageHistory++}
+                disabled={currentPageHistory === lastPageHistory}>chevron_right</IconButton
+            >
+            <IconButton
+                class="material-icons"
+                action="last-page"
+                title="Last page"
+                on:click={() => (currentPageHistory = lastPageHistory)}
+                disabled={currentPageHistory === lastPageHistory}>last_page</IconButton
+            >
+        </Pagination>
+    </DataTable>
+    
+
 </div>
 
 <style>

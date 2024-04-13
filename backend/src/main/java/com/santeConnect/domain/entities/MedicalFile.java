@@ -28,6 +28,10 @@ public class MedicalFile {
     @OneToMany(mappedBy = "medicalFile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MedicalVisit> medicalVisitList;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "medicalFile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicalHistory> medicalHistoryList;
+
     public MedicalFile(String insuranceNumber, Patient patient) {
         super();
         this.insuranceNumber = insuranceNumber;
