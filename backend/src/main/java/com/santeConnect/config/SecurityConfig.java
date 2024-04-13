@@ -65,8 +65,6 @@ public class SecurityConfig {
          sessionCreationPolicy(SessionCreationPolicy.STATELESS))
          .authorizeHttpRequests((authorizeHttpRequests) ->
          authorizeHttpRequests
-                 // TODO delete line below when login is implemented
-                 .requestMatchers("medical-files/**").permitAll()
                  .requestMatchers("/api-docs/**", "/swagger-ui/**", "/jacoco/**").permitAll()
                  .requestMatchers(HttpMethod.POST, "/login").permitAll()
                  // TODO define roles endpoint
