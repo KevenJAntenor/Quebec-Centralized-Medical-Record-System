@@ -34,12 +34,20 @@ export const actions: object = {
 
     if (res.ok) {      
       const token = res.headers.get('Authorization');
-      
+
       if (!token) {
         throw new Error('Token is missing from Authorization header');
       }
 
       cookies.set('token', token, {
+        path: '/',
+        httpOnly: true,
+        sameSite: 'strict',
+        secure: false,
+        maxAge: 60 * 60, // 1h
+      });
+
+      cookies.set('in_sess', '1', {
         path: '/',
         httpOnly: true,
         sameSite: 'strict',
