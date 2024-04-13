@@ -2,10 +2,13 @@ package com.santeConnect.web;
 
 import com.santeConnect.domain.entities.MedicalFile;
 import com.santeConnect.domain.entities.MedicalVisit;
+import com.santeConnect.domain.entities.MedicalHistory;
 import com.santeConnect.middlewares.FetchMedicalFile;
 import com.santeConnect.middlewares.MedicalFileOperation;
 import com.santeConnect.middlewares.RemoveMedicalVisit;
 import com.santeConnect.middlewares.UpdateMedicalVisit;
+import com.santeConnect.middlewares.RemoveMedicalHistory;
+import com.santeConnect.middlewares.UpdateMedicalHistory;
 import com.santeConnect.repository.entities.MedicalFileRepository;
 
 import java.util.List;
@@ -60,5 +63,29 @@ public class MedicalFileController {
     public ResponseEntity<String> deleteMedicalVisit(@PathVariable Long id, @RequestBody Long visitId) {
         MedicalFileOperation removeMedicalVisit = new RemoveMedicalVisit(repository, visitId);
         return removeMedicalVisit.execute(id);
+    }
+    
+        /**
+     * Route to add a medical history to a medical file
+     * @param id to get the medical file from db
+     * @param medicalHistory to add associated medical history
+     * @return response code with medical file
+     */
+    @PostMapping("medical-files/{id}/medical-history")
+    public ResponseEntity<MedicalFile> addMedicalHistory(@PathVariable Long id, @RequestBody MedicalHistory medicalHistory) {
+        MedicalFileOperation updateMedicalHistory = new UpdateMedicalHistory(repository, medicalHistory);
+        return updateMedicalHistory.execute(id);
+    }
+
+    /**
+     *
+     * @param id to get the medical file from db
+     * @param historyId to remove associated medical history
+     * @return response code with message
+     */
+    @DeleteMapping("medical-files/{id}/medical-history")
+    public ResponseEntity<String> deleteMedicalHistory(@PathVariable Long id, @RequestBody Long historyId) {
+        MedicalFileOperation removeMedicalHistory = new RemoveMedicalHistory(repository, historyId);
+        return removeMedicalHistory.execute(id);
     }
 }
