@@ -11,19 +11,20 @@ import com.santeConnect.middlewares.RemoveMedicalHistory;
 import com.santeConnect.middlewares.UpdateMedicalHistory;
 import com.santeConnect.repository.entities.MedicalFileRepository;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class MedicalFileController {
 
-    private final MedicalFileRepository repository;
-
-    public MedicalFileController(MedicalFileRepository repository) {
-        this.repository = repository;
-    }
+    @Autowired
+    private MedicalFileRepository repository;
 
     @GetMapping("medical-files")
     public ResponseEntity<List<MedicalFile>> getMedicalFiles() {
@@ -32,6 +33,7 @@ public class MedicalFileController {
 
     /**
      * Route to get a medical file
+     * 
      * @param id to get medical file from db
      * @return response code with medical file
      */
@@ -43,19 +45,21 @@ public class MedicalFileController {
 
     /**
      * Route to add a medical visit also activates observers
-     * @param id to get the medical file from db
+     * 
+     * @param id           to get the medical file from db
      * @param medicalVisit to add associated medical visit
      * @return response code with medical file
      */
     @PostMapping("medical-files/{id}/medical-visits")
-    public ResponseEntity<MedicalFile> addMedicalVisit(@PathVariable Long id, @RequestBody MedicalVisit medicalVisit) {
+    public ResponseEntity<MedicalFile> addMedicalVisit(@PathVariable Long id,
+            @RequestBody @Valid MedicalVisit medicalVisit) {
         MedicalFileOperation updateMedicalVisit = new UpdateMedicalVisit(repository, medicalVisit);
         return updateMedicalVisit.execute(id);
     }
 
     /**
      *
-     * @param id to get the medical file from db
+     * @param id      to get the medical file from db
      * @param visitId to rm associated medical visit
      * @return response code with message
      */
@@ -64,22 +68,24 @@ public class MedicalFileController {
         MedicalFileOperation removeMedicalVisit = new RemoveMedicalVisit(repository, visitId);
         return removeMedicalVisit.execute(id);
     }
-    
-        /**
+
+    /**
      * Route to add a medical history to a medical file
-     * @param id to get the medical file from db
+     * 
+     * @param id             to get the medical file from db
      * @param medicalHistory to add associated medical history
      * @return response code with medical file
      */
     @PostMapping("medical-files/{id}/medical-histories")
-    public ResponseEntity<MedicalFile> addMedicalHistory(@PathVariable Long id, @RequestBody MedicalHistory medicalHistory) {
+    public ResponseEntity<MedicalFile> addMedicalHistory(@PathVariable Long id,
+            @Valid @RequestBody MedicalHistory medicalHistory) {
         MedicalFileOperation updateMedicalHistory = new UpdateMedicalHistory(repository, medicalHistory);
         return updateMedicalHistory.execute(id);
     }
 
     /**
      *
-     * @param id to get the medical file from db
+     * @param id        to get the medical file from db
      * @param historyId to remove associated medical history
      * @return response code with message
      */

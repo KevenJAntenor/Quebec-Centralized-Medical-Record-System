@@ -15,8 +15,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @SpringBootApplication
 @EnableMethodSecurity
@@ -57,19 +60,28 @@ public class SanteConnectApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        MedicalVisit visit1 = new MedicalVisit("Establishment 1", "Doctor 1", "2022-01-01", "Diagnostic 1",
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        MedicalVisit visit1 = new MedicalVisit("Establishment 1", "Doctor 1", formatter.parse("2022-01-01"),
+                "Diagnostic 1",
                 "Treatment 1", "Summary 1", "Notes 1");
-        MedicalVisit visit2 = new MedicalVisit("Establishment 2", "Doctor 2", "2022-02-01", "Diagnostic 2",
+        MedicalVisit visit2 = new MedicalVisit("Establishment 2", "Doctor 2", formatter.parse("2022-02-01"),
+                "Diagnostic 2",
                 "Treatment 2", "Summary 2", "Notes 2");
-        MedicalVisit visit3 = new MedicalVisit("Establishment 3", "Doctor 3", "2022-03-01", "Diagnostic 3",
+        MedicalVisit visit3 = new MedicalVisit("Establishment 3", "Doctor 3", formatter.parse("2022-03-01"),
+                "Diagnostic 3",
                 "Treatment 3", "Summary 3", "Notes 3");
-        MedicalVisit visit4 = new MedicalVisit("Establishment 4", "Doctor 4", "2022-04-01", "Diagnostic 4",
+        MedicalVisit visit4 = new MedicalVisit("Establishment 4", "Doctor 4", formatter.parse("2022-04-01"),
+                "Diagnostic 4",
                 "Treatment 4", "Summary 4", "Notes 4");
 
-        MedicalHistory history1 = new MedicalHistory("Diagnostic 1", "Treatment 1", "Doctor 1", "2022-01-01", "2022-01-31");
-        MedicalHistory history2 = new MedicalHistory("Diagnostic 2", "Treatment 2", "Doctor 2", "2022-02-01", "2022-02-28");
-        MedicalHistory history3 = new MedicalHistory("Diagnostic 3", "Treatment 3", "Doctor 3", "2022-03-01", "2022-03-31");
-        MedicalHistory history4 = new MedicalHistory("Diagnostic 4", "Treatment 4", "Doctor 4", "2022-04-01", "2022-04-30");
+        MedicalHistory history1 = new MedicalHistory("Diagnostic 1", "Treatment 1", "Doctor 1",
+                formatter.parse("2022-01-01"), formatter.parse("2022-01-31"));
+        MedicalHistory history2 = new MedicalHistory("Diagnostic 2", "Treatment 2", "Doctor 2",
+                formatter.parse("2022-02-01"), formatter.parse("2022-02-28"));
+        MedicalHistory history3 = new MedicalHistory("Diagnostic 3", "Treatment 3", "Doctor 3",
+                formatter.parse("2022-03-01"), formatter.parse("2022-03-31"));
+        MedicalHistory history4 = new MedicalHistory("Diagnostic 4", "Treatment 4", "Doctor 4",
+                formatter.parse("2022-04-01"), formatter.parse("2022-04-30"));
 
         Coordinate coordinate1 = new Coordinate();
         coordinate1.setAddress("2020 Rue Saint-Urbain, Montréal, QC H2X 4E1, Canada");
