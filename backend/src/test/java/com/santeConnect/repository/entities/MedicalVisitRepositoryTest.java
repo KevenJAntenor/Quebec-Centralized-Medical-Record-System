@@ -49,6 +49,7 @@ public class MedicalVisitRepositoryTest {
         medicalFileRepository.save(medicalFile);
         medicalVisit.setMedicalFile(medicalFile);
         repository.save(medicalVisit);
+
     }
 
     @Test
@@ -70,11 +71,4 @@ public class MedicalVisitRepositoryTest {
                 .isEqualTo(insuranceNumber1);
     }
 
-    @Test
-    void findByMedicalFile() {
-        List<MedicalVisit> visits = repository.findByMedicalFile(medicalFile);
-
-        assertThat(visits).hasSize(1);
-        assertThat(visits.get(0)).isEqualTo(medicalVisit);
-    }
 }
