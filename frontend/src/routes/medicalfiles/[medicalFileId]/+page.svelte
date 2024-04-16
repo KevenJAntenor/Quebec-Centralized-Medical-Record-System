@@ -14,11 +14,10 @@
     import Paper, { Title, Subtitle, Content } from "@smui/paper";
     import Select, { Option } from "@smui/select";
     import Button, { Label } from "@smui/button";
-    import { API_URL } from '../../../constants';
-    import Textfield from '@smui/textfield';
+    import { API_URL } from "../../../constants";
+    import Textfield from "@smui/textfield";
     // import Icon from '@smui/textfield/icon';
-    import HelperText from '@smui/textfield/helper-text';
-
+    import HelperText from "@smui/textfield/helper-text";
 
     export let data: PageServerData;
 
@@ -298,7 +297,6 @@
         // Update the medicalFile variable
         medicalFile = await updatedMedicalFileResponse.json();
     }
-
 </script>
 
 <svelte:head>
@@ -317,43 +315,76 @@
     <Paper>
         <Title>Medical Visit List</Title>
         <Content>
-        {#if showModal}
-            <Button on:click={toggleModal}>Close</Button>
-        {:else}
-            <Button on:click={toggleModal}>Add new medical visit</Button>
-        {/if}
+            {#if showModal}
+                <Button on:click={toggleModal}>Close</Button>
+            {:else}
+                <Button on:click={toggleModal}>Add new medical visit</Button>
+            {/if}
         </Content>
     </Paper>
 
     {#if showModal}
-    <div class="modal">
-        <div class="container">
-            <form on:submit|preventDefault={submitForm}>
-                <Textfield variant="outlined" bind:value={establishment} label="Establishment">
-                    <HelperText slot="helper">Hospital / clinic name</HelperText>
-                </Textfield>
-                <Textfield variant="outlined" bind:value={doctor} label="Doctor">
-                    <HelperText slot="helper">Doctor's name</HelperText>
-                </Textfield>
-                <Textfield variant="outlined" bind:value={dateOfVisit} label="Date of visit">
-                    <HelperText slot="helper">Date of visit</HelperText>
-                </Textfield>
-                <Textfield variant="outlined" bind:value={diagnostic} label="Diagnostic">
-                    <HelperText slot="helper">Diagnostic</HelperText>
-                </Textfield>
-                <Textfield variant="outlined" bind:value={treatment} label="Treatement">
-                    <HelperText slot="helper">Treatement</HelperText>
-                </Textfield>
-                <Textfield variant="outlined" bind:value={summary} label="Summary">
-                    <HelperText slot="helper">Summary</HelperText>
-                </Textfield>
-                <Textfield variant="outlined" bind:value={notes} label="Notes">
-                    <HelperText slot="helper">Notes</HelperText>
-                </Textfield>
-                <Button type="submit" variant="raised">Add Medical Visit</Button>
-            </form>
+        <div class="modal">
+            <div class="container">
+                <form on:submit|preventDefault={submitForm}>
+                    <Textfield
+                        variant="outlined"
+                        bind:value={establishment}
+                        label="Establishment"
+                    >
+                        <HelperText slot="helper"
+                            >Hospital / clinic name</HelperText
+                        >
+                    </Textfield>
+                    <Textfield
+                        variant="outlined"
+                        bind:value={doctor}
+                        label="Doctor"
+                    >
+                        <HelperText slot="helper">Doctor's name</HelperText>
+                    </Textfield>
+                    <Textfield
+                        type="date"
+                        variant="outlined"
+                        bind:value={dateOfVisit}
+                        label="Date of visit"
+                    >
+                        <HelperText slot="helper">Date of visit</HelperText>
+                    </Textfield>
+                    <Textfield
+                        variant="outlined"
+                        bind:value={diagnostic}
+                        label="Diagnostic"
+                    >
+                        <HelperText slot="helper">Diagnostic</HelperText>
+                    </Textfield>
+                    <Textfield
+                        variant="outlined"
+                        bind:value={treatment}
+                        label="Treatement"
+                    >
+                        <HelperText slot="helper">Treatement</HelperText>
+                    </Textfield>
+                    <Textfield
+                        variant="outlined"
+                        bind:value={summary}
+                        label="Summary"
+                    >
+                        <HelperText slot="helper">Summary</HelperText>
+                    </Textfield>
+                    <Textfield
+                        variant="outlined"
+                        bind:value={notes}
+                        label="Notes"
+                    >
+                        <HelperText slot="helper">Notes</HelperText>
+                    </Textfield>
+                    <Button type="submit" variant="raised"
+                        >Add Medical Visit</Button
+                    >
+                </form>
+            </div>
         </div>
-    </div>
     {/if}
 
     <DataTable
@@ -392,7 +423,9 @@
             {#each slice as medicalVisit (medicalVisit.id)}
                 <Row>
                     <Cell>
-                        <a href={`/medicalfiles/${medicalFile.id}/visits/${medicalVisit.id}`}>
+                        <a
+                            href={`/medicalfiles/${medicalFile.id}/visits/${medicalVisit.id}`}
+                        >
                             {medicalVisit.establishment}
                         </a>
                     </Cell>
@@ -457,37 +490,63 @@
     <Paper>
         <Title>Medical History List</Title>
         <Content>
-        {#if showHistoryModal}
-            <Button on:click={toggleHistoryModal}>Close</Button>
-        {:else}
-            <Button on:click={toggleHistoryModal}>Add new medical history</Button>
-        {/if}
+            {#if showHistoryModal}
+                <Button on:click={toggleHistoryModal}>Close</Button>
+            {:else}
+                <Button on:click={toggleHistoryModal}
+                    >Add new medical history</Button
+                >
+            {/if}
         </Content>
     </Paper>
 
     {#if showHistoryModal}
-    <div class="modal">
-        <div class="container">
-            <form on:submit|preventDefault={submitHistoryForm}>
-                <Textfield variant="outlined" bind:value={diagnosticHistory} label="Diagnostic">
-                    <HelperText slot="helper">Diagnostic</HelperText>
-                </Textfield>
-                <Textfield variant="outlined" bind:value={treatmentHistory} label="Treatement">
-                    <HelperText slot="helper">Treatement</HelperText>
-                </Textfield>
-                <Textfield variant="outlined" bind:value={doctorHistory} label="Doctor">
-                    <HelperText slot="helper">Doctor's name</HelperText>
-                </Textfield>
-                <Textfield variant="outlined" bind:value={startDateHistory} label="Start Date">
-                    <HelperText slot="helper">Start Date</HelperText>
-                </Textfield>
-                <Textfield variant="outlined" bind:value={endDateHistory} label="End Date">
-                    <HelperText slot="helper">End Date</HelperText>
-                </Textfield>
-                <Button type="submit" variant="raised">Add Medical History</Button>
-            </form>
+        <div class="modal">
+            <div class="container">
+                <form on:submit|preventDefault={submitHistoryForm}>
+                    <Textfield
+                        variant="outlined"
+                        bind:value={diagnosticHistory}
+                        label="Diagnostic"
+                    >
+                        <HelperText slot="helper">Diagnostic</HelperText>
+                    </Textfield>
+                    <Textfield
+                        variant="outlined"
+                        bind:value={treatmentHistory}
+                        label="Treatement"
+                    >
+                        <HelperText slot="helper">Treatement</HelperText>
+                    </Textfield>
+                    <Textfield
+                        variant="outlined"
+                        bind:value={doctorHistory}
+                        label="Doctor"
+                    >
+                        <HelperText slot="helper">Doctor's name</HelperText>
+                    </Textfield>
+                    <Textfield
+                        variant="outlined"
+                        bind:value={startDateHistory}
+                        type="date"
+                        label="Start Date"
+                    >
+                        <HelperText slot="helper">Start Date</HelperText>
+                    </Textfield>
+                    <Textfield
+                        variant="outlined"
+                        bind:value={endDateHistory}
+                        type="date"
+                        label="End Date"
+                    >
+                        <HelperText slot="helper">End Date</HelperText>
+                    </Textfield>
+                    <Button type="submit" variant="raised"
+                        >Add Medical History</Button
+                    >
+                </form>
+            </div>
         </div>
-    </div>
     {/if}
 
     <DataTable
@@ -526,7 +585,9 @@
             {#each sliceHistory as medicalHistory (medicalHistory.id)}
                 <Row>
                     <Cell>
-                        <a href={`/medicalfiles/${medicalFile.id}/histories/${medicalHistory.id}`}>
+                        <a
+                            href={`/medicalfiles/${medicalFile.id}/histories/${medicalHistory.id}`}
+                        >
                             {medicalHistory.diagnostic}
                         </a>
                     </Cell>
@@ -547,7 +608,11 @@
         <Pagination slot="paginate">
             <svelte:fragment slot="rowsPerPage">
                 <Label>Rows Per Page</Label>
-                <Select variant="outlined" bind:value={rowsPerPageHistory} noLabel>
+                <Select
+                    variant="outlined"
+                    bind:value={rowsPerPageHistory}
+                    noLabel
+                >
                     <Option value={10}>10</Option>
                     <Option value={25}>25</Option>
                     <Option value={100}>100</Option>
@@ -576,19 +641,19 @@
                 action="next-page"
                 title="Next page"
                 on:click={() => currentPageHistory++}
-                disabled={currentPageHistory === lastPageHistory}>chevron_right</IconButton
+                disabled={currentPageHistory === lastPageHistory}
+                >chevron_right</IconButton
             >
             <IconButton
                 class="material-icons"
                 action="last-page"
                 title="Last page"
                 on:click={() => (currentPageHistory = lastPageHistory)}
-                disabled={currentPageHistory === lastPageHistory}>last_page</IconButton
+                disabled={currentPageHistory === lastPageHistory}
+                >last_page</IconButton
             >
         </Pagination>
     </DataTable>
-    
-
 </div>
 
 <style>
@@ -599,3 +664,4 @@
         margin: 0 auto;
     }
 </style>
+

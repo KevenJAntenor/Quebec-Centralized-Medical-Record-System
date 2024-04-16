@@ -7,8 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,6 +31,7 @@ public class MedicalVisitRepositoryTest {
 
     @BeforeEach
     void setUpObjects() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         repository.deleteAll();
         medicalFileRepository.deleteAll();
         insuranceNumber1 = "ASOW12345678";
@@ -36,7 +40,10 @@ public class MedicalVisitRepositoryTest {
         medicalVisit = new MedicalVisit();
         medicalVisit.setEstablishment("St-estach hospital");
         medicalVisit.setDoctor("Dr. John Doe");
-        medicalVisit.setDateOfVisit("2022-01-01");
+        try {
+            medicalVisit.setDateOfVisit(formatter.parse("2022-01-01"));
+        } catch (ParseException e) {
+        }
         medicalVisit.setDiagnostic("Diagnostic");
         medicalVisit.setTreatment("Treatment");
         medicalVisit.setSummary("Summary");

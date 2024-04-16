@@ -1,5 +1,9 @@
 package com.santeConnect.domain.entities;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -23,16 +27,18 @@ public class MedicalHistory {
 
     private String doctor;
 
-    private String startDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date startDate;
 
-    private String endDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date endDate;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medical_file_id")
     private MedicalFile medicalFile;
 
-    public MedicalHistory(String diagnostic, String treatment, String doctor, String startDate, String endDate) {
+    public MedicalHistory(String diagnostic, String treatment, String doctor, Date startDate, Date endDate) {
         super();
         this.diagnostic = diagnostic;
         this.treatment = treatment;

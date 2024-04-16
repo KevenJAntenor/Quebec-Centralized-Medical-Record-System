@@ -1,6 +1,11 @@
 package com.santeConnect.domain.entities;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +25,8 @@ public class MedicalVisit {
     private String doctor;
 
     @Column(name = "date_of_visit")
-    private String dateOfVisit;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date dateOfVisit;
 
     private String diagnostic;
 
@@ -35,7 +41,7 @@ public class MedicalVisit {
     @JoinColumn(name = "medical_file_id")
     private MedicalFile medicalFile;
 
-    public MedicalVisit(String establishment, String doctor, String dateOfVisit, String diagnostic, String treatment,
+    public MedicalVisit(String establishment, String doctor, Date dateOfVisit, String diagnostic, String treatment,
             String summary, String notes) {
         super();
         this.establishment = establishment;
