@@ -63,3 +63,5 @@
 **Disponibilités:** Mardi et Jeudi, de 13h à 17h
 
 **Forces, Faiblesses et Compétences Techniques:** Fort en Java, C et C++, Faiblesses Backend, 
+
+**La collaboration de Keven a été faite de manière asynchrone en pair programming. Prière de ne pas le pénalisé pour son manque de commit.**
