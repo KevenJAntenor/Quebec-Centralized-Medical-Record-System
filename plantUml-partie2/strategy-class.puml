@@ -59,7 +59,8 @@ PersonalPhoneModificationStrategy -u[hidden]-> WorkPhoneModificationStrategy
 PersonalPhoneModificationStrategy -d[hidden]-> EmailModificationStrategy
 EmailModificationStrategy -d[hidden]-> AdressModificationStrategy
 
-CoordinateModificationStrategy .l.> Coordinate: uses
-CoordinateModification .d.> CoordinateModificationStrategy: uses
+CoordinateModificationStrategy -l-> Coordinate: uses
+PatientController --> CoordinateModification
+CoordinateModification *-d- CoordinateModificationStrategy: uses
 @enduml
 
