@@ -60,6 +60,7 @@ PersonalPhoneModificationStrategy -d[hidden]-> EmailModificationStrategy
 EmailModificationStrategy -d[hidden]-> AdressModificationStrategy
 
 CoordinateModificationStrategy -l-> Coordinate: uses
+PatientController --> CoordinateModification
 CoordinateModification *-d- CoordinateModificationStrategy: uses
 @enduml
 
