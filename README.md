@@ -1,17 +1,12 @@
-# equipe9-inf5153-h2024-projet
+# SanteConnect
 
-## project description
+## To run the project
 
-Hexagonal architecture is used. check [parite1.md](partie1.md) for more details.
+You have to run the backend and the frontend in two separate terminals.
 
-### backend framework
-
-- [Spring Boot](https://spring.io/projects/spring-boot) (backend)
+Follow the instructions in the backend and frontend READMEs.
+Once you have both running, you can access the web app at [http://localhost:5173](http://localhost:5173).
 
 [backend README](backend/README.md)
-
-### frontend framework
-
-- [Svelte](https://learn.svelte.dev/tutorial/welcome-to-svelte) (frontend)
 
 [frontend README](frontend/README.md)
