@@ -423,13 +423,7 @@
         <Body>
             {#each slice as medicalVisit (medicalVisit.id)}
                 <Row>
-                    <Cell>
-                        <a
-                            href={`/medicalfiles/${medicalFile.id}/visits/${medicalVisit.id}`}
-                        >
-                            {medicalVisit.establishment}
-                        </a>
-                    </Cell>
+                    <Cell>{medicalVisit.establishment}</Cell>
                     <Cell>{medicalVisit.doctor}</Cell>
                     <Cell>{new Date(medicalVisit.dateOfVisit).toISOString().split('T')[0]}</Cell>
                     <Cell>{medicalVisit.diagnostic}</Cell>
@@ -585,19 +579,11 @@
         <Body>
             {#each sliceHistory as medicalHistory (medicalHistory.id)}
                 <Row>
-                    <Cell>
-                        <a
-                            href={`/medicalfiles/${medicalFile.id}/histories/${medicalHistory.id}`}
-                        >
-                            {medicalHistory.diagnostic}
-                        </a>
-                    </Cell>
+                    <Cell>{medicalHistory.diagnostic}</Cell>
                     <Cell>{medicalHistory.treatment}</Cell>
                     <Cell>{medicalHistory.doctor}</Cell>
                     <Cell>{new Date(medicalHistory.startDate).toISOString().split('T')[0]}</Cell>
-                    <!-- <Cell>{medicalHistory.startDate}</Cell> -->
                     <Cell>{new Date(medicalHistory.endDate).toISOString().split('T')[0]}</Cell>
-                    <!-- <Cell>{medicalHistory.endDate}</Cell> -->
                     <Cell>
                         <Button
                             on:click={() => {
