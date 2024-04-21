@@ -26,6 +26,7 @@ You will see a message saying `Error: Full authentication is required to access 
 
 The only paths that are accessable in the backend are the documentation [swagger-ui](http://localhost:8080/swagger-ui/index.html), and the test coverage report [jacoco](http://localhost:8080/jacoco/index.html).
 
+While the backend is running, you can now run the frontend. [frontend README](../frontend/README.md)
 
 to run the tests only:
 ```sh
