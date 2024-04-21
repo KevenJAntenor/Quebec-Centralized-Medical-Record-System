@@ -2,20 +2,16 @@ import type { PageServerLoad, RequestEvent } from './$types';
 import { API_URL } from '../../../constants';
 import { fail } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ fetch, params, locals }) => {
+export const load: PageServerLoad = async ({ fetch, params }) => {
     const { medicalFileId } = params;
-    const res = await fetch(`${API_URL}/medical-files/${medicalFileId}`, {
-        headers: {
-            'Authorization': `${locals.token}`
-        }
-    });
+    const res = await fetch(`${API_URL}/medical-files/${medicalFileId}`);
     return {
         medicalFile: await res.json(),
     };
 };
 
 export const actions: object = {
-    createMedicalVisit: async ({ fetch, request, locals }: RequestEvent) => {
+    createMedicalVisit: async ({ fetch, request }: RequestEvent) => {
         const data = await request.formData();
 
         const establishment = data.get('establishment');
@@ -54,30 +50,12 @@ export const actions: object = {
             treatment,
         });
 
-        // get medical file id from the URL
         const medicalFileId = data.get('medicalFileId')
         const res = await fetch(`${API_URL}/medical-files/${medicalFileId}/medical-visits`, {
             method: 'POST',
-            headers: {
-                'Authorization': `${locals.token}`
-            },
             body: JSON.stringify({ establishment, doctor, dateOfVisit, diagnostic, treatment }),
         });
         return res;
     },
-
-    // deleteVisit: async ({ fetch, request, locals }: RequestEvent) => {
-    //     const data = await request.formData();
-    //     const id = data.get('id');
-    //     const medicalFileId = data.get('medicalFileId')
-    //     const res = await fetch(`${API_URL}/medical-files/${medicalFileId}/medical-visits`, {
-    //         method: 'DELETE',
-    //             headers: {
-    //                 'Authorization': `${locals.token}`
-    //             },
-    //         body: JSON.stringify({ id }),
-    //     });
-    //     return res;
-    // }
 };
 

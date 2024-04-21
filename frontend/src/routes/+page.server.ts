@@ -5,12 +5,7 @@ export const load: PageServerLoad = async ({ locals }) => {
     let backendData;
     const token = locals.token;
     try {
-        const response = await fetch(API_URL, {
-            method: 'GET',
-            headers: {     
-                'Authorization': `${token}`
-            }
-        });
+        const response = await fetch(API_URL);
         backendData = await response.text();
     } catch (error: unknown) {
         backendData = `Make sure your backend is running! Request failed with error: ${error}`;
