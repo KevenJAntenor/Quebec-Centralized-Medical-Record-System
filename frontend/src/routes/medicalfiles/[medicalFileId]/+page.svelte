@@ -168,6 +168,15 @@
         medicalFile = await updatedMedicalFileResponse.json();
         showModal = false;
 
+        // clear the form
+        establishment = "";
+        doctor = "";
+        dateOfVisit = "";
+        diagnostic = "";
+        treatment = "";
+        summary = "";
+        notes = "";
+
         notification = 'Medical visit added successfully';
         setTimeout(() => notification = null, 2000);
     }
@@ -279,7 +288,14 @@
 
         // Update the medicalFile variable
         medicalFile = await updatedMedicalFileResponse.json();
-        showModal = false;
+        showHistoryModal = false;
+
+        // clear the form
+        diagnosticHistory = "";
+        treatmentHistory = "";
+        doctorHistory = "";
+        startDateHistory = "";
+        endDateHistory = "";
 
         notification = 'Medical History added successfully';
         setTimeout(() => notification = null, 2000);
