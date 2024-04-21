@@ -20,6 +20,7 @@
     import HelperText from "@smui/textfield/helper-text";
 
     export let data: PageServerData;
+    let notification: string | null = null;
 
     $: ({ medicalFile } = data);
 
@@ -120,6 +121,9 @@
 
         // Update the medicalFile variable
         medicalFile = await updatedMedicalFileResponse.json();
+
+        notification = 'Medical visit deleted successfully';
+        setTimeout(() => notification = null, 2000);
     }
 
     async function submitForm() {
@@ -162,6 +166,10 @@
 
         // Update the medicalFile variable
         medicalFile = await updatedMedicalFileResponse.json();
+        showModal = false;
+
+        notification = 'Medical visit added successfully';
+        setTimeout(() => notification = null, 2000);
     }
 
     $: medicalHistoryList = medicalFile.medicalHistoryList;
@@ -271,6 +279,10 @@
 
         // Update the medicalFile variable
         medicalFile = await updatedMedicalFileResponse.json();
+        showModal = false;
+
+        notification = 'Medical History added successfully';
+        setTimeout(() => notification = null, 2000);
     }
 
     async function deleteHistory(historyId: number) {
@@ -296,6 +308,9 @@
 
         // Update the medicalFile variable
         medicalFile = await updatedMedicalFileResponse.json();
+
+        notification = 'Medical history deleted successfully';
+        setTimeout(() => notification = null, 2000);
     }
 </script>
 
@@ -304,6 +319,9 @@
 </svelte:head>
 
 <div class="paper-container">
+    {#if notification}
+        <div class="notification">{notification}</div>
+    {/if}
     <Paper>
         <Title>Medical File {medicalFile.insuranceNumber}</Title>
         <Subtitle>Patient</Subtitle>
@@ -651,6 +669,21 @@
         flex-direction: column;
         width: 90%;
         margin: 0 auto;
+    }
+
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        background-color: #44c767;
+        color: white;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        transition: opacity 0.5s, transform 0.5s;
+        opacity: 1;
+        transform: translateX(0);
     }
 </style>
 
