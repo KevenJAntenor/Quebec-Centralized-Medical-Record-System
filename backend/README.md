@@ -1,11 +1,18 @@
 ## Table of Contents
 
-1. [How to run the backend](#how-to-run-the-backend)
-2. [Important notes about the database](#important-notes-about-the-database)
-3. [OpenAPI documentation](#openapi-documentation)
-4. [Jacoco test coverage report](#jacoco-test-coverage-report)
+1. [Dependencies](#dependencies)
+2. [How to run the backend](#how-to-run-the-backend)
+3. [Important notes about the database](#important-notes-about-the-database)
+4. [OpenAPI documentation](#openapi-documentation)
+5. [Jacoco test coverage report](#jacoco-test-coverage-report)
 
 ## Backend
+
+### Dependencies
+
+- [Java 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+- [Maven](https://maven.apache.org/download.cgi) (v3.9.6)
+- [SQLite3](https://www.sqlite.org/download.html)
 
 ### How to run the backend
 
