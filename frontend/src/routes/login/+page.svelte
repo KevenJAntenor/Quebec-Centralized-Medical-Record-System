@@ -78,6 +78,7 @@
 
     input {
         font-size: 1.15rem;
+        color: white;
         box-sizing: border-box;
         height: 3.125rem;
         padding: 0.5rem;
