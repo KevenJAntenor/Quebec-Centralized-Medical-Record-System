@@ -37,7 +37,7 @@ mvn clean verify
 
 The database is created automatically when running the spring-boot application, this is possible thanks to the use of hibernate and JPA dependency.
 
-**No need to execute any SQL script to create the database. nor create the tables, nor insert the data. Everything is done automatically.**
+**No need to execute any SQL script to create the database. nor create the tables, nor insert the data. Everything is done automatically. However, the SQLITE3 script is present at backend/db.sql**
 
 The main database is an sqlite database, which is created in the root folder of the backend, "medical_file.db".
 
