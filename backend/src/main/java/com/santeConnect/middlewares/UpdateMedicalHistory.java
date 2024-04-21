@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 
 import static com.santeConnect.middlewares.ActivateObservers.activateObservers;
 
-//@Service
 public class UpdateMedicalHistory  extends MedicalFileOperation<MedicalFile> {
 
     private MedicalHistory medicalHistory;
