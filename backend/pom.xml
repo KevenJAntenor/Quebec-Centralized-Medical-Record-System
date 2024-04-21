@@ -152,6 +152,14 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.12</version>
+                <configuration>
+                    <excludes>
+                        <exclude>com/santeConnect/dialect/*.class</exclude>
+                        <exclude>com/santeConnect/config/*.class</exclude>
+                        <exclude>com/santeConnect/middlewares/*.class</exclude>
+                        <exclude>com/santeConnect/web/*.class</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
