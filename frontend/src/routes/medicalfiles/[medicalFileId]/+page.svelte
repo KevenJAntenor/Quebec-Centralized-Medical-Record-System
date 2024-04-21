@@ -311,6 +311,7 @@
             >{medicalFile.patient?.firstName}
             {medicalFile.patient?.lastName}</Content
         >
+        <Button href="/medicalfiles">Back to Medical Files</Button>
     </Paper>
     <Paper>
         <Title>Medical Visit List</Title>
@@ -430,7 +431,7 @@
                         </a>
                     </Cell>
                     <Cell>{medicalVisit.doctor}</Cell>
-                    <Cell>{medicalVisit.dateOfVisit}</Cell>
+                    <Cell>{new Date(medicalVisit.dateOfVisit).toISOString().split('T')[0]}</Cell>
                     <Cell>{medicalVisit.diagnostic}</Cell>
                     <Cell>{medicalVisit.treatment}</Cell>
                     <Cell>
@@ -593,8 +594,10 @@
                     </Cell>
                     <Cell>{medicalHistory.treatment}</Cell>
                     <Cell>{medicalHistory.doctor}</Cell>
-                    <Cell>{medicalHistory.startDate}</Cell>
-                    <Cell>{medicalHistory.endDate}</Cell>
+                    <Cell>{new Date(medicalHistory.startDate).toISOString().split('T')[0]}</Cell>
+                    <!-- <Cell>{medicalHistory.startDate}</Cell> -->
+                    <Cell>{new Date(medicalHistory.endDate).toISOString().split('T')[0]}</Cell>
+                    <!-- <Cell>{medicalHistory.endDate}</Cell> -->
                     <Cell>
                         <Button
                             on:click={() => {

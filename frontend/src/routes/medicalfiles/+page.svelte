@@ -11,6 +11,7 @@
         SortValue,
         Pagination,
     } from "@smui/data-table";
+    import Paper, { Title, Subtitle, Content } from "@smui/paper";
     import IconButton from "@smui/icon-button";
     // import { Label } from '@smui/common';
     import Select, { Option } from "@smui/select";
