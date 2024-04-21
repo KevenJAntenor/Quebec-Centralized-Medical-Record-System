@@ -2,6 +2,11 @@
 
 ## Prérequis
 
+## Dépendances
+
+- [Node.js](https://nodejs.org/en/) (v21.7.1)
+- [npm](https://www.npmjs.com/) (v10.5.0)
+
 ## Installation
 
 Ouvrez un terminal dans le répertoire `frontend/` du projet et tapez les commandes suivantes pour installer les dépendances puis faire rouler le projet en mode développement.
