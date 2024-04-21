@@ -350,6 +350,7 @@
                         variant="outlined"
                         bind:value={establishment}
                         label="Establishment"
+                        required
                     >
                         <HelperText slot="helper"
                             >Hospital / clinic name</HelperText
@@ -359,6 +360,7 @@
                         variant="outlined"
                         bind:value={doctor}
                         label="Doctor"
+                        required
                     >
                         <HelperText slot="helper">Doctor's name</HelperText>
                     </Textfield>
@@ -367,6 +369,7 @@
                         variant="outlined"
                         bind:value={dateOfVisit}
                         label="Date of visit"
+                        required
                     >
                         <HelperText slot="helper">Date of visit</HelperText>
                     </Textfield>
@@ -374,6 +377,7 @@
                         variant="outlined"
                         bind:value={diagnostic}
                         label="Diagnostic"
+                        required
                     >
                         <HelperText slot="helper">Diagnostic</HelperText>
                     </Textfield>
@@ -381,6 +385,7 @@
                         variant="outlined"
                         bind:value={treatment}
                         label="Treatement"
+                        required
                     >
                         <HelperText slot="helper">Treatement</HelperText>
                     </Textfield>
@@ -388,6 +393,7 @@
                         variant="outlined"
                         bind:value={summary}
                         label="Summary"
+                        required
                     >
                         <HelperText slot="helper">Summary</HelperText>
                     </Textfield>
@@ -395,6 +401,7 @@
                         variant="outlined"
                         bind:value={notes}
                         label="Notes"
+                        required
                     >
                         <HelperText slot="helper">Notes</HelperText>
                     </Textfield>
@@ -521,6 +528,7 @@
                         variant="outlined"
                         bind:value={diagnosticHistory}
                         label="Diagnostic"
+                        required
                     >
                         <HelperText slot="helper">Diagnostic</HelperText>
                     </Textfield>
@@ -528,6 +536,7 @@
                         variant="outlined"
                         bind:value={treatmentHistory}
                         label="Treatement"
+                        required
                     >
                         <HelperText slot="helper">Treatement</HelperText>
                     </Textfield>
@@ -535,6 +544,7 @@
                         variant="outlined"
                         bind:value={doctorHistory}
                         label="Doctor"
+                        required
                     >
                         <HelperText slot="helper">Doctor's name</HelperText>
                     </Textfield>
@@ -543,6 +553,7 @@
                         bind:value={startDateHistory}
                         type="date"
                         label="Start Date"
+                        required
                     >
                         <HelperText slot="helper">Start Date</HelperText>
                     </Textfield>
@@ -551,6 +562,7 @@
                         bind:value={endDateHistory}
                         type="date"
                         label="End Date"
+                        required
                     >
                         <HelperText slot="helper">End Date</HelperText>
                     </Textfield>
