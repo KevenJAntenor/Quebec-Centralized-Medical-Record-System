@@ -23,3 +23,8 @@ npm run dev
 Doit avoir le backend en cours d'exécution pour accéder aux sites web.
 
 Le site web est accessible à l'adresse suivante: [http://localhost:5173](http://localhost:5173)
+
+Pour vous connecter, vous pouvez utiliser les identifiants suivants: (déjà dans la base de données)
+
+- nom d'utilisateur: `user`
+- mot de passe: `user`
