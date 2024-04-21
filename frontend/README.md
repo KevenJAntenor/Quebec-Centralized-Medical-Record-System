@@ -28,3 +28,5 @@ Pour vous connecter, vous pouvez utiliser les identifiants suivants: (déjà dan
 
 - nom d'utilisateur: `user`
 - mot de passe: `user`
+
+Voir le [README principal](../README.md) pour plus d'informations.
