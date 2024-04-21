@@ -19,7 +19,6 @@ public class CoordinateRepositoryTest {
 
     @BeforeEach
     void setUpObjects() {
-        // repository.deleteAll();
         coordinate = new Coordinate("123, Rue Saint-Estauche, Montréal", "5141231231", "5143456345", "alice@gmail.com");
         repository.save(coordinate);
         id = coordinate.getId();

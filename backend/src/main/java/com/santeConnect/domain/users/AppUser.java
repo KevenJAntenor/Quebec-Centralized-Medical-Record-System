@@ -3,10 +3,8 @@ package com.santeConnect.domain.users;
 import jakarta.persistence.*;
 import lombok.*;
 
-//@ToString
 @Getter
 @Setter
-// @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class AppUser {

@@ -2,13 +2,11 @@ package com.santeConnect.repository.entities;
 
 import com.santeConnect.domain.entities.MedicalFile;
 import com.santeConnect.domain.entities.MedicalHistory;
-import com.santeConnect.domain.entities.MedicalVisit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +30,6 @@ public class MedicalHistoryRepositoryTest {
 
     @BeforeEach
     void setUpObjects() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         repository.deleteAll();
         medicalFileRepository.deleteAll();
         insuranceNumber1 = "ASOW12345678";

@@ -14,15 +14,12 @@
 - **Professeur :** Gnagnely Serge Dogny
 - **Date :** 8 Avril 2024
 
-## Table of Contents
+## Table de contenu
 
 1. [Facade-Observer](#facade-observer)
 2. [Singleton](#singleton)
 3. [Strategy](#strategy)
-4. [Nom du Patron de Conception 4](#nom-du-patron-de-conception-4)
-5. [Template](#template)
-<!-- 5. [Différences entre l'implémentation et la conception](#différences-entre-limplémentation-et-la-conception) -->
-<!-- 6. [Problèmes de Conception et Corrections](#problèmes-de-conception-et-corrections) -->
+4. [Template](#template)
 
 ## Facade-Observer
 
@@ -146,33 +143,6 @@ Le patron Strategy est utilisé pour gerer la modification des coordonnees du pa
 ### Définitions des patrons de conception
 
 - Intention de `Strategy pattern` : Permet de creer une famille d'algorithme, les mettres dans des classes separees et rendre leurs objet interchangeable. Il remplace l'heritage par une composition
-
-## Nom du Patron de Conception 4
-Par Keven Jude Anténor
-
-### Diagramme de Classe
-
-Plant uml code inside plantUml-partie2 directory
-[Insérer le diagramme de classe ici]
-
-### Diagramme de Séquence
-
-Plant uml code inside plantUml-partie2 directory
-[Insérer le diagramme de séquence ici]
-
-### Implémentation
-
-[Description de l'implémentation du patron de conception]
-
-Pour chaque problème de conception que vous allez corriger, vous devrez décrire comment vous avez détecté le problème de conception et comment vous l'avez corrigé.
-
-### Différences entre l'implémentation et la conception
-
-Toute différence entre l'implémentation et la conception doit être documentée dans le rapport que vous allez me remettre.
-
-### Problèmes de Conception et Corrections
-
-Pour chaque problème de conception que vous allez corriger, vous devrez décrire comment vous avez détecté le problème de conception et comment vous l'avez corrigé.
 
 ## Template
 
