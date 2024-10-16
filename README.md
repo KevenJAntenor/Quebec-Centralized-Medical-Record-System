@@ -1,25 +1,52 @@
-# SanteConnect
+# Dossier Médical Centralisé Québec (Quebec Centralized Medical Record System)
 
-## To run the project
+## Project Overview
 
-You have to run the backend and the frontend in two separate terminals.
+This project aims to develop a centralized medical record system for the Quebec healthcare system. The software will allow users of the Quebec health system to have a centralized medical record, regardless of the doctor or healthcare facility they visit.
 
-Follow the instructions in the backend and frontend READMEs.
+## Context
 
-[backend README](backend/README.md)
+Currently, each doctor's office and hospital maintains its own patient records. In most cases, these records are never shared, preventing doctors from having a comprehensive view of a patient's health status. This system is designed to address this problem by centralizing patient medical records.
 
-[frontend README](frontend/README.md)
+## Key Features
 
-Once you have both running, you can access the web app at [http://localhost:5173](http://localhost:5173).
+- Centralized patient medical records
+- Access for healthcare providers to a patient's complete medical history
+- Record of patient visits across different healthcare facilities
+- Comprehensive view of known diagnoses
+- Information on other doctors treating the patient
 
-To log in, you can use the following credentials: (already in the database)
+## Benefits
 
-- username: `user`
-- password: `user`
+- Improved continuity of care
+- Enhanced decision-making for healthcare providers
+- Reduced redundancy in medical tests and procedures
+- Better coordination among different healthcare providers
 
-Once logged in, you can navigate through the website, click on any Inusrance Number in order to access the medical file.
-![home-page](./misc/images/sc1.png)
+## Technical Details
 
-On the medical file page, you can add a new medical visit or a new medical history, or you can delete them.
+[To be added: information about the technologies used, system architecture, etc.]
 
-![add-file](./misc/images/sc2.png)
+## Installation and Setup
+
+[To be added: instructions for setting up and running the system]
+
+## Usage
+
+[To be added: guidelines on how to use the system, both for healthcare providers and patients]
+
+## Contributing
+
+[To be added: guidelines for contributing to the project]
+
+## License
+
+[To be added: license information]
+
+## Contact
+
+[To be added: contact information for the project maintainers]
+
+---
+
+This project is part of the INF5153 - Software Engineering: Design course, Winter 2024 session.
