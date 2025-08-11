@@ -1,6 +1,6 @@
 # 🗂️🩺⚜️ Dossier Médical Centralisé Québec (Quebec Centralized Medical Record System)
 
-## Project Overview
+## 📖🧠 Project Overview
 
 This project aims to develop a centralized medical record system for the Quebec healthcare system. The software will allow users of the Quebec health system to have a centralized medical record, regardless of the doctor or healthcare facility they visit.
 
