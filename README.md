@@ -16,7 +16,7 @@ Currently, each doctor's office and hospital maintains its own patient records. 
 - Comprehensive view of known diagnoses
 - Information on other doctors treating the patient
 
-## Benefits
+## 🎯 Benefits
 
 - Improved continuity of care
 - Enhanced decision-making for healthcare providers
