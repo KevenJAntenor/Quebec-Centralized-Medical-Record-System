@@ -1,4 +1,4 @@
-# 🗂️🩺🇨🇦 Dossier Médical Centralisé Québec (Quebec Centralized Medical Record System)
+# 🗂️🩺⚜️ Dossier Médical Centralisé Québec (Quebec Centralized Medical Record System)
 
 ## Project Overview
 
