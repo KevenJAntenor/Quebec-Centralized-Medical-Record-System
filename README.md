@@ -8,7 +8,7 @@ This project aims to develop a centralized medical record system for the Quebec 
 
 Currently, each doctor's office and hospital maintains its own patient records. In most cases, these records are never shared, preventing doctors from having a comprehensive view of a patient's health status. This system is designed to address this problem by centralizing patient medical records.
 
-## Key Features
+##  Key Features
 
 - Centralized patient medical records
 - Access for healthcare providers to a patient's complete medical history
