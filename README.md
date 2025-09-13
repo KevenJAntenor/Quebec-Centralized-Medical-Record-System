@@ -21,5 +21,5 @@ Currently, each doctor's office and hospital maintains its own patient records. 
 - Improved continuity of care
 - Enhanced decision-making for healthcare providers
 - Reduced redundancy in medical tests and procedures
-- Better coordination among different healthcare provider
+- Better coordination among different healthcare providers
 
